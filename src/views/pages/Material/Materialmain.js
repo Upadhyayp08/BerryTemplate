@@ -41,10 +41,10 @@ function Materialmain() {
                 <TableCell>{row.email}</TableCell>
                 <TableCell>{row.pocName}</TableCell>
                 <TableCell>
-                  <IconButton color="primary" aria-label="edit" onClick={() => handleEdit(row.id)}>
+                  <IconButton color="primary" aria-label="edit">
                     <Edit />
                   </IconButton>
-                  <IconButton color="secondary" aria-label="delete" onClick={() => handleDelete(row.id)}>
+                  <IconButton color="secondary" aria-label="delete">
                     <Delete />
                   </IconButton>
                 </TableCell>

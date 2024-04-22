@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 // material-ui
@@ -37,7 +37,7 @@ import { IconLogout, IconSettings } from '@tabler/icons-react';
 const ProfileSection = () => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
