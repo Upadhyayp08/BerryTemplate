@@ -1,8 +1,8 @@
 // color variants
-@import 'themes-vars.module.scss';
+@import "themes-vars.module.scss";
 
 // third-party
-@import '~react-perfect-scrollbar/dist/css/styles.css';
+@import "~react-perfect-scrollbar/dist/css/styles.css";
 
 // ==============================|| LIGHT BOX ||============================== //
 .fullscreen .react-images__blanket {
@@ -125,4 +125,7 @@
   75% {
     transform: translateX(10px);
   }
+}
+.error {
+  color: red;
 }

@@ -1,67 +1,191 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
-import { Button, TextField, Grid, Box } from '@mui/material';
-import MainCard from 'ui-component/cards/MainCard';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup"; // Import Yup
+import { Button, TextField, Grid, Box } from "@mui/material";
+import MainCard from "ui-component/cards/MainCard";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createEmployee,
+  EmployeeById,
+  updateEmployee,
+} from "store/Employee/employeeAction";
 
-function Addemployee() {
+function AddEmployee() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true); // Add loading state
+  const employeebyid = useSelector((state) => state.employee.employeebyid);
+  const { id } = useParams();
+
+  // Validation schema
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is Required"),
+    emp_id: Yup.string().required("Employee ID is Required"),
+    designation: Yup.string().required("Designation is Required"),
+    phone: Yup.string()
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(10, "Must be exactly 10 digits")
+      .max(10, "Must be exactly 10 digits")
+      .required("Phone Number is Required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is Required"),
+    experience: Yup.number()
+      .typeError("You must specify a number")
+      .min(0, "Minimum value 0")
+      .required("Experience is Required"),
+    salary: Yup.number()
+      .typeError("You must specify a number")
+      .required("Salary is Required"),
+  });
+
+  useEffect(() => {
+    if (id) {
+      dispatch(EmployeeById(id)).then(() => {
+        setLoading(false); // Set loading to false once data is fetched
+      });
+    } else {
+      setLoading(false); // Set loading to false if no id is present
+    }
+  }, [id]); // Make sure to include id in the dependency array
+
+  console.log(employeebyid, "employeebyid");
 
   const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log(values); // Access form values
-      setSubmitting(false); // Set submitting state to false
-      navigate('/other-page'); // Redirect after submission
-    }, 1000);
+    if (id) {
+      dispatch(updateEmployee(values))
+        .then((res) => {
+          navigate("/employee");
+          setSubmitting(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      dispatch(createEmployee(values))
+        .then((res) => {
+          navigate("/employee");
+          setSubmitting(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading indicator while data is being fetched
+  }
 
   return (
     <MainCard title="Add Employee">
       <Formik
         initialValues={{
-          name: '',
-          id: '',
-          designation: '',
-          phone: '',
-          email: '',
-          experience: '',
-          salary: ''
+          id: id ? employeebyid.id : "",
+          name: id ? employeebyid.name : "",
+          emp_id: id ? employeebyid.emp_id : "",
+          designation: id ? employeebyid.designation : "",
+          phone: id ? employeebyid.phone : "",
+          email: id ? employeebyid.email : "",
+          experience: id ? employeebyid.experience : "",
+          salary: id ? employeebyid.salary : "",
         }}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form>
             <Grid container spacing={2}>
-              {/* First line: Name, ID, Designation */}
+              {/* Input fields with error messages */}
               <Grid item xs={12} sm={4}>
-                <Field name="name" as={TextField} label="Name" fullWidth variant="outlined" />
+                <Field
+                  name="name"
+                  as={TextField}
+                  label="Name"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.name && Boolean(errors.name)}
+                  helperText={<ErrorMessage name="name" />}
+                />
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Field name="id" as={TextField} label="ID" fullWidth variant="outlined" />
+                <Field
+                  name="emp_id"
+                  as={TextField}
+                  label="Employee ID"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.emp_id && Boolean(errors.emp_id)}
+                  helperText={<ErrorMessage name="emp_id" />}
+                />
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Field name="designation" as={TextField} label="Designation" fullWidth variant="outlined" />
+                <Field
+                  name="designation"
+                  as={TextField}
+                  label="Designation"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.designation && Boolean(errors.designation)}
+                  helperText={<ErrorMessage name="designation" />}
+                />
               </Grid>
 
-              {/* Second line: Phone, Email */}
               <Grid item xs={12} sm={6}>
-                <Field name="phone" as={TextField} label="Phone" fullWidth variant="outlined" />
+                <Field
+                  name="phone"
+                  as={TextField}
+                  label="Phone"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.phone && Boolean(errors.phone)}
+                  helperText={<ErrorMessage name="phone" />}
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field name="email" as={TextField} label="Email" fullWidth variant="outlined" />
+                <Field
+                  name="email"
+                  as={TextField}
+                  label="Email"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.email && Boolean(errors.email)}
+                  helperText={<ErrorMessage name="email" />}
+                />
               </Grid>
 
-              {/* Third line: Experience, Salary */}
               <Grid item xs={12} sm={6}>
-                <Field name="experience" as={TextField} label="Experience" fullWidth variant="outlined" />
+                <Field
+                  name="experience"
+                  as={TextField}
+                  label="Experience"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.experience && Boolean(errors.experience)}
+                  helperText={<ErrorMessage name="experience" />}
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field name="salary" as={TextField} label="Salary" fullWidth variant="outlined" />
+                <Field
+                  name="salary"
+                  as={TextField}
+                  label="Salary"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.salary && Boolean(errors.salary)}
+                  helperText={<ErrorMessage name="salary" />}
+                />
               </Grid>
 
               <Grid item xs={12}>
                 <Box mt={2}>
-                  <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                  >
                     Submit
                   </Button>
                 </Box>
@@ -74,4 +198,4 @@ function Addemployee() {
   );
 }
 
-export default Addemployee;
+export default AddEmployee;

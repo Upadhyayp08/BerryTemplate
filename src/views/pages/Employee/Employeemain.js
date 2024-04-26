@@ -1,28 +1,71 @@
-import React from 'react';
-import { Button, Table, TableHead, TableBody, TableRow, TableCell, IconButton } from '@mui/material';
-import { Edit, Delete } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
-import MainCard from 'ui-component/cards/MainCard';
+import React, { useState, useEffect } from "react";
+import {
+  Button,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  IconButton,
+} from "@mui/material";
+import { Edit, Delete } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import MainCard from "ui-component/cards/MainCard";
+import { deleteEmployee, getEmployee } from "store/Employee/employeeAction";
+import { useDispatch, useSelector } from "react-redux";
 
 function Employeemain() {
+  const employee = useSelector((state) => state.employee.employees);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/add-employee');
+    navigate("/add-employee");
   };
+
+  useEffect(() => {
+    dispatch(getEmployee());
+  }, []);
 
   // Sample data for the table
   const rows = [
-    { id: 1, supermarket: 'Supermarket 1', phone: '123-456-7890', email: 'supermarket1@example.com', pocName: 'John Doe' },
-    { id: 2, supermarket: 'Supermarket 2', phone: '987-654-3210', email: 'supermarket2@example.com', pocName: 'Jane Smith' }
+    {
+      id: 1,
+      supermarket: "Supermarket 1",
+      phone: "123-456-7890",
+      email: "supermarket1@example.com",
+      pocName: "John Doe",
+    },
+    {
+      id: 2,
+      supermarket: "Supermarket 2",
+      phone: "987-654-3210",
+      email: "supermarket2@example.com",
+      pocName: "Jane Smith",
+    },
     // Add more rows as needed
   ];
+
+  const handleDelete = (employee) => {
+    dispatch(deleteEmployee({ id: employee.id })).then((res) => {
+      dispatch(getEmployee());
+    });
+  };
+
+  const handleEdit = (employee) => {
+    navigate(`/add-employee/${employee.id}`);
+  };
 
   return (
     <>
       <MainCard
         title="Employee"
         secondary={
-          <Button variant="contained" color="primary" onClick={() => handleClick()}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleClick()}
+          >
             Add Employee
           </Button>
         }
@@ -30,26 +73,28 @@ function Employeemain() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Supermarket</TableCell>
+              <TableCell>Sr. No</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell>Phone</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>POC Name</TableCell>
+              <TableCell>Designation</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {employee.map((row, index) => (
               <TableRow key={row.id}>
-                <TableCell>{row.supermarket}</TableCell>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{row.name}</TableCell>
                 <TableCell>{row.phone}</TableCell>
                 <TableCell>{row.email}</TableCell>
-                <TableCell>{row.pocName}</TableCell>
+                <TableCell>{row.designation}</TableCell>
                 <TableCell>
                   <IconButton color="primary" aria-label="edit">
-                    <Edit />
+                    <Edit onClick={() => handleEdit(row)} />
                   </IconButton>
                   <IconButton color="secondary" aria-label="delete">
-                    <Delete />
+                    <Delete onClick={() => handleDelete(row)} />
                   </IconButton>
                 </TableCell>
               </TableRow>

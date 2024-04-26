@@ -1,66 +1,184 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
-import { Button, TextField, Grid, Box, MenuItem } from '@mui/material';
-import MainCard from 'ui-component/cards/MainCard';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup"; // Import Yup for validation
+import { Button, TextField, Grid, Box, MenuItem } from "@mui/material";
+import MainCard from "ui-component/cards/MainCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getMaterial } from "store/Material/materialAction";
+import {
+  createPurchase,
+  PurchaseById,
+  updatePurchase,
+} from "store/Purchase/purchaseAction";
 
-function Addpurchase() {
+function AddPurchase() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const materialData = useSelector((state) => state.material.materials);
+  const purchasebyid = useSelector((state) => state.purchase.purchasebyid);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true); // Add loading state
+  useEffect(() => {
+    dispatch(getMaterial());
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(PurchaseById(id)).then(() => {
+        setLoading(false); // Set loading to false once data is fetched
+      });
+    } else {
+      setLoading(false); // Set loading to false if no id is present
+    }
+  }, [id]); // Make sure to include id in the dependency array
+
+  // Validation Schema
+  const validationSchema = Yup.object().shape({
+    material: Yup.number().required("Material is required"),
+    quantity: Yup.number()
+      .required("Quantity is required")
+      .positive("Quantity must be positive")
+      .integer("Quantity must be an integer"),
+    unit: Yup.string().required("Unit is required"),
+    amount: Yup.number()
+      .required("Amount is required")
+      .positive("Amount must be positive"),
+    // comment: Yup.string()
+    //   .trim()
+    //   .max(200, "Comment must be no more than 200 characters"),
+  });
+
+  // const handleSubmit = (values, { setSubmitting }) => {
+  //   console.log(values);
+  //   dispatch(createPurchase(values)).then((res) => {
+  //     navigate("/purchase");
+  //   });
+  // };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    // Example: Perform form submission to your backend
-    // Simulate a delay (e.g., API call) using setTimeout
-    setTimeout(() => {
-      console.log(values); // Access form values
-      setSubmitting(false); // Set submitting state to false
-      // Redirect to another page after form submission
-      navigate('/other-page');
-    }, 1000); // Simulate a delay of 1 second
+    if (id) {
+      dispatch(updatePurchase(values)).then((res) => {
+        navigate("/purchase");
+      });
+    } else {
+      dispatch(createPurchase(values)).then((res) => {
+        navigate("/purchase");
+      });
+    }
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading indicator while data is being fetched
+  }
 
   return (
     <MainCard title="Add Purchase">
       <Formik
         initialValues={{
-          materialName: '',
-          quantity: '',
-          unit: '',
-          amount: '',
-          comments: ''
+          id: id ? purchasebyid.id : "",
+          material: id ? purchasebyid.material : "",
+          quantity: id ? purchasebyid.quantity : "",
+          unit: id ? purchasebyid.unit : "",
+          amount: id ? purchasebyid.amount : "",
+          comment: id ? purchasebyid.comment : "",
         }}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched, handleChange }) => (
           <Form>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                <Field component={TextField} type="text" name="materialName" label="Material Name" select fullWidth variant="outlined">
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  type="text"
+                  name="material"
+                  label="Material Name"
+                  onChange={handleChange}
+                  select
+                  fullWidth
+                  variant="outlined"
+                  error={touched.material && Boolean(errors.material)}
+                  helperText={touched.material && errors.material}
+                >
                   <MenuItem value="">Select Material</MenuItem>
-                  <MenuItem value="Material1">Material 1</MenuItem>
-                  <MenuItem value="Material2">Material 2</MenuItem>
-                  {/* Additional materials can be added here */}
+                  {materialData.map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
                 </Field>
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Field component={TextField} type="text" name="quantity" label="Quantity" fullWidth variant="outlined" />
+                <Field
+                  as={TextField}
+                  name="quantity"
+                  label="Quantity"
+                  onChange={handleChange}
+                  fullWidth
+                  variant="outlined"
+                  error={touched.quantity && Boolean(errors.quantity)}
+                  helperText={touched.quantity && errors.quantity}
+                />
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Field component={TextField} type="text" name="unit" label="Unit" select fullWidth variant="outlined">
+                <Field
+                  as={TextField}
+                  type="text"
+                  name="unit"
+                  label="Unit"
+                  select
+                  fullWidth
+                  onChange={handleChange}
+                  variant="outlined"
+                  error={touched.unit && Boolean(errors.unit)}
+                  helperText={touched.unit && errors.unit}
+                >
                   <MenuItem value="">Select Unit</MenuItem>
                   <MenuItem value="kg">Kg</MenuItem>
-                  <MenuItem value="pcs">Pieces</MenuItem>
+                  <MenuItem value="g">Gram</MenuItem>
+                  <MenuItem value="l">litre</MenuItem>
+                  <MenuItem value="ml">MilliLitre</MenuItem>
                   {/* Additional units can be added here */}
                 </Field>
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Field component={TextField} type="text" name="amount" label="Amount" fullWidth variant="outlined" />
+                <Field
+                  as={TextField}
+                  type="text"
+                  onChange={handleChange}
+                  name="amount"
+                  label="Amount"
+                  fullWidth
+                  variant="outlined"
+                  error={touched.amount && Boolean(errors.amount)}
+                  helperText={touched.amount && errors.amount}
+                />
               </Grid>
               <Grid item xs={12}>
-                <Field component={TextField} type="text" name="comments" label="Comments" fullWidth multiline variant="outlined" rows={4} />
+                <Field
+                  as={TextField}
+                  type="text"
+                  name="comment"
+                  label="Comment"
+                  fullWidth
+                  multiline
+                  onChange={handleChange}
+                  variant="outlined"
+                  rows={4}
+                  // error={touched.comment && Boolean(errors.comment)}
+                  // helperText={touched.comment && errors.comment}
+                />
               </Grid>
               <Grid item xs={12}>
                 <Box mt={2}>
-                  <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                  >
                     Submit
                   </Button>
                 </Box>
@@ -73,4 +191,4 @@ function Addpurchase() {
   );
 }
 
-export default Addpurchase;
+export default AddPurchase;
