@@ -15,7 +15,7 @@ const DeleteConfirmationDialog = ({ open, onClose, onConfirm }) => {
       onClose={onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      maxWidth="md" // Makes the dialog wider
+      maxWidth="sm" // Makes the dialog wider
       fullWidth
     >
       <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
