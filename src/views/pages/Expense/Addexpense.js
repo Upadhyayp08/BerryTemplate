@@ -208,6 +208,7 @@ import {
   ExpenseById,
   updateExpense,
 } from "store/Expense/expenseAction";
+import Loader from "ui-component/Loader";
 
 function AddExpense() {
   const employee = useSelector((state) => state.employee.employees);
@@ -258,7 +259,11 @@ function AddExpense() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (

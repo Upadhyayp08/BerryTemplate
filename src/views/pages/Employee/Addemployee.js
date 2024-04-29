@@ -10,6 +10,7 @@ import {
   EmployeeById,
   updateEmployee,
 } from "store/Employee/employeeAction";
+import Loader from "ui-component/Loader";
 
 function AddEmployee() {
   const navigate = useNavigate();
@@ -75,7 +76,11 @@ function AddEmployee() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading indicator while data is being fetched
+    return (
+      <div>
+        <Loader />
+      </div>
+    ); // Display a loading indicator while data is being fetched
   }
 
   return (

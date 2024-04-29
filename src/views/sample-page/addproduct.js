@@ -12,6 +12,7 @@ import {
   updateCustomer,
 } from "store/Customer/customerActions";
 import { GETBYID_CUSTOMER } from "store/Customer/customerActionType";
+import Loader from "ui-component/Loader";
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -73,7 +74,11 @@ function AddProduct() {
   });
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading indicator while data is being fetched
+    return (
+      <div>
+        <Loader />
+      </div>
+    ); // Display a loading indicator while data is being fetched
   }
 
   return (

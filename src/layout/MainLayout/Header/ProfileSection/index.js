@@ -36,6 +36,7 @@ import { IconLogout, IconSettings } from "@tabler/icons-react";
 
 const ProfileSection = () => {
   const theme = useTheme();
+  const user = JSON.parse(localStorage.getItem("user"));
   const customization = useSelector((state) => state.customization);
   const navigate = useNavigate();
 
@@ -166,7 +167,8 @@ const ProfileSection = () => {
                           variant="h4"
                           sx={{ fontWeight: 400 }}
                         >
-                          Johne Doe
+                          {/* Johne Doe */}
+                          {user.name}
                         </Typography>
                       </Stack>
                       {/* <Typography variant="subtitle2">Project Admin</Typography> */}
@@ -196,7 +198,7 @@ const ProfileSection = () => {
                       overflowX: "hidden",
                     }}
                   >
-                    <Box sx={{ p: 2 }}>
+                    <Box>
                       {/* <UpgradePlanCard /> */}
                       {/* <Divider /> */}
                       {/* <Card
@@ -253,12 +255,12 @@ const ProfileSection = () => {
                           [theme.breakpoints.down("md")]: {
                             minWidth: "100%",
                           },
-                          "& .MuiListItemButton-root": {
-                            mt: 0.5,
-                          },
+                          // "& .MuiListItemButton-root": {
+                          //   mt: 0.5,
+                          // },
                         }}
                       >
-                        <ListItemButton
+                        {/* <ListItemButton
                           sx={{
                             borderRadius: `${customization.borderRadius}px`,
                           }}
@@ -277,7 +279,7 @@ const ProfileSection = () => {
                               </Typography>
                             }
                           />
-                        </ListItemButton>
+                        </ListItemButton> */}
                         {/* <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 1}

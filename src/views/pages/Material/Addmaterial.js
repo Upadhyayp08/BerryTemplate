@@ -70,6 +70,7 @@ import {
   MaterialById,
   updateMaterial,
 } from "store/Material/materialAction";
+import Loader from "ui-component/Loader";
 
 function AddMaterial() {
   const navigate = useNavigate();
@@ -108,7 +109,11 @@ function AddMaterial() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading indicator while data is being fetched
+    return (
+      <div>
+        <Loader />
+      </div>
+    ); // Display a loading indicator while data is being fetched
   }
 
   return (

@@ -11,6 +11,7 @@ import {
   PurchaseById,
   updatePurchase,
 } from "store/Purchase/purchaseAction";
+import Loader from "ui-component/Loader";
 
 function AddPurchase() {
   const navigate = useNavigate();
@@ -69,7 +70,11 @@ function AddPurchase() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading indicator while data is being fetched
+    return (
+      <div>
+        <Loader />
+      </div>
+    ); // Display a loading indicator while data is being fetched
   }
 
   return (

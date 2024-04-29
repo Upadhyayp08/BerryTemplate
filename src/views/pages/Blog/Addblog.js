@@ -19,6 +19,7 @@ import { useNavigate, useParams } from "react-router";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../../../ui-component/cropImage";
 import { IconArrowUp, IconX } from "@tabler/icons-react";
+import Loader from "ui-component/Loader";
 
 const Addblog = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,11 @@ const Addblog = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (
