@@ -233,11 +233,11 @@ function AddExpense() {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Expense name is required"),
-    employee_id: Yup.string().required("Employee is required"),
-    quantity: Yup.number()
-      .required("Quantity is required")
-      .positive("Quantity must be positive"),
-    unit: Yup.string().required("Unit is required"),
+    // employee_id: Yup.string().required("Employee is required"),
+    // quantity: Yup.number()
+    //   .required("Quantity is required")
+    //   .positive("Quantity must be positive"),
+    // unit: Yup.string().required("Unit is required"),
     amount: Yup.number()
       .required("Amount is required")
       .positive("Amount must be positive"),

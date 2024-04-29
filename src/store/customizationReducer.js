@@ -5,7 +5,7 @@ import config from "config";
 import * as actionTypes from "./actions";
 
 export const initialState = {
-  isOpen: [], // for active default menu
+  isOpen: ["sample-page"], // for active default menu
   defaultId: "default",
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
@@ -15,6 +15,7 @@ export const initialState = {
 // ==============================|| CUSTOMIZATION REDUCER ||============================== //
 
 const customizationReducer = (state = initialState, action) => {
+  console.log(state);
   let id;
   switch (action.type) {
     case actionTypes.MENU_OPEN:

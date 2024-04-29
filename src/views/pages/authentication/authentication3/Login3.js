@@ -10,6 +10,8 @@ import AuthCardWrapper from "../AuthCardWrapper";
 import AuthLogin from "../auth-forms/AuthLogin";
 import Logo from "ui-component/Logo";
 import AuthFooter from "ui-component/cards/AuthFooter";
+import logo from "../../../../assets/images/logo.png";
+import favico from "../../../../assets/images/favico.png";
 
 // assets
 
@@ -65,15 +67,15 @@ const Login = () => {
                             gutterBottom
                             variant={matchDownSM ? "h3" : "h2"}
                           >
-                            Hi, Welcome Back
+                            LOGIN
                           </Typography>
-                          <Typography
+                          {/* <Typography
                             variant="caption"
                             fontSize="16px"
                             textAlign={matchDownSM ? "center" : "inherit"}
                           >
                             Enter your credentials to continue
-                          </Typography>
+                          </Typography> */}
                         </Stack>
                       </Grid>
                     </Grid>
@@ -81,10 +83,10 @@ const Login = () => {
                   <Grid item xs={12}>
                     <AuthLogin />
                   </Grid>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Divider />
-                  </Grid>
-                  <Grid item xs={12}>
+                  </Grid> */}
+                  {/* <Grid item xs={12}>
                     <Grid
                       item
                       container
@@ -101,7 +103,7 @@ const Login = () => {
                         Don&apos;t have an account?
                       </Typography>
                     </Grid>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </AuthCardWrapper>
             </Grid>

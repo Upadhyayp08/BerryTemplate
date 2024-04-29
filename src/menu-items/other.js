@@ -1,71 +1,88 @@
 // assets
-import { IconBrandChrome, IconHelp, IconBox, IconUser, IconCash, IconCamera, IconPencil } from '@tabler/icons-react';
+import {
+  IconBrandChrome,
+  IconHelp,
+  IconBox,
+  IconUser,
+  IconCash,
+  IconCamera,
+  IconPencil,
+} from "@tabler/icons-react";
 
 // constant
-const icons = { IconBrandChrome, IconHelp, IconBox, IconUser, IconCash, IconCamera, IconPencil };
+const icons = {
+  IconBrandChrome,
+  IconHelp,
+  IconBox,
+  IconUser,
+  IconCash,
+  IconCamera,
+  IconPencil,
+};
 
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
 
 const other = {
-  id: 'sample-docs-roadmap',
-  type: 'group',
+  id: "sample-docs-roadmap",
+  type: "group",
+  title: "Dashboard",
   children: [
     {
-      id: 'sample-page',
-      title: 'Customer',
-      type: 'item',
-      url: '/sample-page',
+      id: "sample-page",
+      title: "Customer",
+      type: "item",
+      url: "/",
       icon: icons.IconUser,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
-      id: 'material-page',
-      title: 'Material',
-      type: 'item',
-      url: '/material',
+      id: "material-page",
+      title: "Material",
+      type: "item",
+      url: "/material",
       icon: icons.IconBox,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
-      id: 'purchase-page',
-      title: 'Purchase',
-      type: 'item',
-      url: '/purchase',
+      id: "purchase-page",
+      title: "Purchase",
+      type: "item",
+      url: "/purchase",
       icon: icons.IconCash,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
-      id: 'employee-page',
-      title: 'Employee',
-      type: 'item',
-      url: '/employee',
+      id: "employee-page",
+      title: "Employee",
+      type: "item",
+      url: "/employee",
       icon: icons.IconCash,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
-      id: 'expense-page',
-      title: 'Expense',
-      type: 'item',
-      url: '/expense',
+      id: "expense-page",
+      title: "Expense",
+      type: "item",
+      url: "/expense",
       icon: icons.IconCash,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
-      id: 'blog-page',
-      title: 'Blog',
-      type: 'item',
-      url: '/blog',
+      id: "blog-page",
+      title: "Blog",
+      type: "item",
+      url: "/blog",
       icon: icons.IconPencil,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
-      id: 'album-page',
-      title: 'Album',
-      type: 'item',
-      url: '/album',
+      id: "album-page",
+      title: "Album",
+      type: "item",
+      url: "/album",
       icon: icons.IconCamera,
-      breadcrumbs: false
-    }
+      breadcrumbs: false,
+    },
     // {
     //   id: 'documentation',
     //   title: 'Documentation',
@@ -75,7 +92,7 @@ const other = {
     //   external: true,
     //   target: true
     // }
-  ]
+  ],
 };
 
 export default other;

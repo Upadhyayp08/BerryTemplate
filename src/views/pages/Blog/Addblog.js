@@ -1,32 +1,55 @@
 import React, { useState, useEffect } from "react";
 import MainCard from "ui-component/cards/MainCard";
-import { Grid, TextField, Button, Input } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Input,
+  Dialog,
+  DialogActions,
+  Slider,
+} from "@mui/material";
 import "react-quill/dist/quill.snow.css";
-import { IconArrowUp, IconX } from "@tabler/icons-react";
 import ReactQuill from "react-quill";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { BlogById, createBlog, updateBlog } from "store/Blog/blogActions";
 import { useNavigate, useParams } from "react-router";
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../../../ui-component/cropImage";
+import { IconArrowUp, IconX } from "@tabler/icons-react";
 
 const Addblog = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [inputKey, setInputKey] = useState(Date.now()); // State to handle input key for reset
   const blog = useSelector((state) => state.blog.blogbyid);
-  const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const [inputKey, setInputKey] = useState(Date.now());
+  const [loading, setLoading] = useState(true);
+  const [crop, setCrop] = useState({ x: 0, y: 0, aspect: 16 / 9 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
     if (id) {
-      dispatch(BlogById(id)).then(() => {
-        setLoading(false);
-      });
+      dispatch(BlogById(id)).then(() => setLoading(false));
     } else {
       setLoading(false);
     }
-  }, [id]);
+  }, [id, dispatch]);
+
+  const handleCropComplete = (croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const handleSaveCroppedImage = async (setFieldValue) => {
+    const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
+    setImageSrc(null); // Close cropping dialog
+    setFieldValue("image", croppedImage);
+    setFieldValue("imagePreview", URL.createObjectURL(croppedImage));
+  };
 
   const BlogSchema = Yup.object().shape({
     title: Yup.string().required("Blog Title is required"),
@@ -35,16 +58,6 @@ const Addblog = () => {
     image: Yup.mixed().required("An image is required"),
   });
 
-  // const handleSubmit = (values) => {
-  //   const formData = new FormData();
-  //   formData.append("title", values.title);
-  //   formData.append("shortdescription", values.shortdescription);
-  //   formData.append("description", values.description);
-  //   formData.append("image", values.image);
-  //   dispatch(createBlog(formData)).then((res) => {
-  //     navigate("/blog");
-  //   });
-  // };
   const handleSubmit = (values) => {
     const formData = new FormData();
     formData.append("id", id);
@@ -52,15 +65,9 @@ const Addblog = () => {
     formData.append("shortdescription", values.shortdescription);
     formData.append("description", values.description);
     formData.append("image", values.image);
-    const action = id ? updateBlog(formData) : createBlog(formData);
-    dispatch(action)
-      .then((res) => {
-        navigate("/blog");
-        // setSubmitting(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(id ? updateBlog(formData) : createBlog(formData))
+      .then(() => navigate("/blog"))
+      .catch((err) => console.log(err));
   };
 
   if (loading) {
@@ -98,11 +105,7 @@ const Addblog = () => {
                       onChange={(event) => {
                         const file = event.currentTarget.files[0];
                         if (file) {
-                          setFieldValue("image", file);
-                          setFieldValue(
-                            "imagePreview",
-                            URL.createObjectURL(file)
-                          );
+                          setImageSrc(URL.createObjectURL(file)); // Open cropper
                         }
                       }}
                     />
@@ -111,16 +114,37 @@ const Addblog = () => {
                       component="span"
                       style={{ border: "1px solid black" }}
                     >
-                      <IconArrowUp
-                        style={{ textAlign: "center", margin: "100px" }}
-                      />
+                      Upload Image
                     </Button>
-                    {touched.image && errors.image && (
-                      <div style={{ color: "red", marginTop: "10px" }}>
-                        {errors.image}
-                      </div>
-                    )}
                   </label>
+                )}
+                {imageSrc && (
+                  <Dialog
+                    open={Boolean(imageSrc)}
+                    onClose={() => setImageSrc(null)}
+                    maxWidth={false}
+                    fullWidth
+                    PaperProps={{
+                      style: { width: "50%", height: "80vh" },
+                    }}
+                  >
+                    <Cropper
+                      image={imageSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      onCropChange={setCrop}
+                      onCropComplete={handleCropComplete}
+                      onZoomChange={setZoom}
+                    />
+                    <DialogActions>
+                      <Button onClick={() => setImageSrc(null)}>Cancel</Button>
+                      <Button
+                        onClick={() => handleSaveCroppedImage(setFieldValue)}
+                      >
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                 )}
                 {values.imagePreview && (
                   <div style={{ marginTop: "20px" }}>
@@ -133,7 +157,7 @@ const Addblog = () => {
                       onClick={() => {
                         setFieldValue("image", null);
                         setFieldValue("imagePreview", null);
-                        setInputKey(Date.now()); // Reset key to force input re-render
+                        setInputKey(Date.now());
                       }}
                       style={{ color: "red", marginLeft: "10px" }}
                     >
@@ -179,31 +203,6 @@ const Addblog = () => {
                 <ReactQuill
                   value={values.description}
                   onChange={(value) => setFieldValue("description", value)}
-                  modules={{
-                    toolbar: [
-                      [{ header: "1" }, { header: "2" }, { font: [] }],
-                      [{ size: [] }],
-                      ["bold", "italic", "underline", "strike", "blockquote"],
-                      [{ list: "ordered" }, { list: "bullet" }],
-                      ["link", "image", "video"],
-                      ["clean"],
-                    ],
-                  }}
-                  formats={[
-                    "header",
-                    "font",
-                    "size",
-                    "bold",
-                    "italic",
-                    "underline",
-                    "strike",
-                    "blockquote",
-                    "list",
-                    "bullet",
-                    "link",
-                    "image",
-                    "video",
-                  ]}
                 />
                 {touched.description && errors.description && (
                   <div style={{ color: "red", marginTop: "10px" }}>

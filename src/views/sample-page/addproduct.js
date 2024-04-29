@@ -37,14 +37,14 @@ function AddProduct() {
       dispatch(updateCustomer(values)).then((res) => {
         console.log(res);
         dispatch(readCustomer()).then((res) => {
-          navigate("/sample-page");
+          navigate("/");
         });
       });
     } else {
       dispatch(createCustomer(values)).then((res) => {
         console.log(res);
         dispatch(readCustomer()).then((res) => {
-          navigate("/sample-page");
+          navigate("/");
         });
       });
     }
@@ -52,14 +52,14 @@ function AddProduct() {
 
   // Define validation schema using Yup
   const validationSchema = Yup.object().shape({
-    poc_name: Yup.string().required("POC Name is required"),
-    poc_phone: Yup.string()
-      .matches(/^[0-9]+$/, "Phone number must contain only digits")
-      .max(10, "Phone number must be at most 10 digits")
-      .required("POC Phone is required"),
-    poc_email: Yup.string()
-      .email("Invalid email")
-      .required("POC Email is required"),
+    // poc_name: Yup.string().required("POC Name is required"),
+    // poc_phone: Yup.string()
+    //   .matches(/^[0-9]+$/, "Phone number must contain only digits")
+    //   .max(10, "Phone number must be at most 10 digits")
+    //   .required("POC Phone is required"),
+    // poc_email: Yup.string()
+    //   .email("Invalid email")
+    //   .required("POC Email is required"),
     name: Yup.string().required("Customer Name is required"),
     phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must contain only digits")

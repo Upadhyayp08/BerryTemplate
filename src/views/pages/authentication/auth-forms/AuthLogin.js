@@ -36,6 +36,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import Google from "assets/images/icons/social-google.svg";
 import { useNavigate } from "react-router";
+import Toast from "layout/Toast";
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -45,6 +46,9 @@ const FirebaseLogin = ({ ...others }) => {
   const scriptedRef = useScriptRef();
   const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
   const customization = useSelector((state) => state.customization);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("info");
   const [checked, setChecked] = useState(true);
 
   const googleHandler = async () => {
@@ -60,10 +64,17 @@ const FirebaseLogin = ({ ...others }) => {
     event.preventDefault();
   };
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
   return (
     <>
       <Grid container direction="column" justifyContent="center" spacing={2}>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <AnimateButton>
             <Button
               disableElevation
@@ -89,9 +100,9 @@ const FirebaseLogin = ({ ...others }) => {
               Sign in with Google
             </Button>
           </AnimateButton>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
-          <Box
+          {/* <Box
             sx={{
               alignItems: "center",
               display: "flex",
@@ -118,7 +129,7 @@ const FirebaseLogin = ({ ...others }) => {
             </Button>
 
             <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
-          </Box>
+          </Box> */}
         </Grid>
         <Grid
           item
@@ -156,16 +167,22 @@ const FirebaseLogin = ({ ...others }) => {
                 values
               )
               .then((res) => {
-                console.log(res.data.response);
-                localStorage.setItem("token", res.data.response.token);
-                localStorage.setItem(
-                  "user",
-                  JSON.stringify(res.data.response.user)
-                );
-                navigate("/");
+                if (res.status === 200) {
+                  localStorage.setItem("token", res.data.response.token);
+                  localStorage.setItem(
+                    "user",
+                    JSON.stringify(res.data.response.user)
+                  );
+                  navigate("/");
+                } else {
+                  console.error("Unexpected status code:", res.status);
+                }
               })
               .catch((err) => {
-                console.error(err);
+                console.error(
+                  "Request failed with status code:",
+                  err.response.status
+                );
               });
           } catch (err) {
             console.error(err);
@@ -202,7 +219,7 @@ const FirebaseLogin = ({ ...others }) => {
                 name="email"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                label="Email Address / Username"
+                label="Email Address"
                 inputProps={{}}
               />
               {touched.email && errors.email && (
@@ -261,7 +278,7 @@ const FirebaseLogin = ({ ...others }) => {
               justifyContent="space-between"
               spacing={1}
             >
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={
                   <Checkbox
                     checked={checked}
@@ -271,7 +288,7 @@ const FirebaseLogin = ({ ...others }) => {
                   />
                 }
                 label="Remember me"
-              />
+              /> */}
               <Typography
                 variant="subtitle1"
                 color="secondary"
