@@ -4,8 +4,13 @@ import config from "config";
 // action - state management
 import * as actionTypes from "./actions";
 
+const getInitialMenu = () => {
+  const savedMenu = localStorage.getItem("isOpenMenu");
+  return savedMenu ? [savedMenu] : ["sample-page"];
+};
+
 export const initialState = {
-  isOpen: [""], // for active default menu
+  isOpen: getInitialMenu(), // for active default menu
   defaultId: "default",
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
@@ -38,6 +43,11 @@ const customizationReducer = (state = initialState, action) => {
       return {
         ...state,
         borderRadius: action.borderRadius,
+      };
+    case actionTypes.RESET_STATE:
+      return {
+        ...initialState,
+        isOpen: ["sample-page"], // Explicitly set to default page
       };
     default:
       return state;

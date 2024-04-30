@@ -107,6 +107,88 @@
 
 // export default Albummain;
 
+// import React, { useEffect } from "react";
+// import {
+//   Button,
+//   Grid,
+//   Card,
+//   CardContent,
+//   CardMedia,
+//   Typography,
+//   CardActionArea,
+// } from "@mui/material";
+// import { useNavigate } from "react-router-dom";
+// import MainCard from "ui-component/cards/MainCard";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getAlbum } from "store/Album/albumActions";
+
+// const Albummain = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const albums = useSelector((state) => state.album.albums);
+
+//   useEffect(() => {
+//     dispatch(getAlbum());
+//   }, []);
+
+//   const handleAlbumClick = (album) => {
+//     navigate(`/gallery/${album.id}`);
+//   };
+
+//   const handleAddAlbum = () => {
+//     navigate("/add-album");
+//   };
+
+//   return (
+//     <MainCard
+//       title="Album"
+//       secondary={
+//         <Button variant="contained" color="primary" onClick={handleAddAlbum}>
+//           Add Album
+//         </Button>
+//       }
+//     >
+//       <Grid container spacing={2}>
+//         {albums.map((album) => (
+//           <Grid item xs={12} sm={6} md={4} lg={3} key={album.id}>
+//             <Card
+//               sx={{
+//                 maxWidth: 345,
+//                 m: 2,
+//                 boxShadow: 5,
+//                 borderRadius: 2,
+//                 transition: "0.3s",
+//                 ":hover": {
+//                   transform: "scale(1.05)",
+//                   boxShadow: 10,
+//                 },
+//               }}
+//               onClick={() => handleAlbumClick(album)}
+//             >
+//               <CardActionArea>
+//                 <CardMedia
+//                   component="img"
+//                   height="140"
+//                   image={album?.gallery[0]?.image}
+//                   alt={album.name}
+//                 />
+//                 <CardContent>
+//                   <Typography gutterBottom variant="h5" component="div">
+//                     {album.name}
+//                   </Typography>
+//                   {/* Optional: Add a description or other elements here */}
+//                 </CardContent>
+//               </CardActionArea>
+//             </Card>
+//           </Grid>
+//         ))}
+//       </Grid>
+//     </MainCard>
+//   );
+// };
+
+// export default Albummain;
+
 import React, { useEffect } from "react";
 import {
   Button,
@@ -120,12 +202,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getAlbum } from "store/Album/albumActions";
+import { deleteAlbum, getAlbum } from "store/Album/albumActions";
 
 const Albummain = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const albums = useSelector((state) => state.album.albums);
+  console.log(albums);
 
   useEffect(() => {
     dispatch(getAlbum());
@@ -137,6 +220,15 @@ const Albummain = () => {
 
   const handleAddAlbum = () => {
     navigate("/add-album");
+  };
+
+  const handleDeleteAlbum = (albumId) => {
+    const formData = new FormData();
+    formData.append("id", albumId);
+    dispatch(deleteAlbum(formData)).then((res) => {
+      dispatch(getAlbum());
+    });
+    console.log("Delete album with ID:", albumId);
   };
 
   return (
@@ -169,14 +261,32 @@ const Albummain = () => {
                 <CardMedia
                   component="img"
                   height="140"
-                  image={album?.gallery[0]?.image}
+                  image={album ? album?.gallery[0]?.image : ""}
                   alt={album.name}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="div"
+                    sx={{ textAlign: "center" }}
+                  >
                     {album.name}
                   </Typography>
-                  {/* Optional: Add a description or other elements here */}
+                  <Grid item xs={12}>
+                    {" "}
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="error"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteAlbum(album.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </Grid>
                 </CardContent>
               </CardActionArea>
             </Card>
