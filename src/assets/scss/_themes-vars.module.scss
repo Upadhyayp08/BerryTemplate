@@ -2,18 +2,34 @@
 $paper: #ffffff;
 
 // primary
-$primaryLight: #eef2f6;
-$primaryMain: #2196f3;
-$primaryDark: #1e88e5;
-$primary200: #90caf9;
-$primary800: #1565c0;
+// $primaryLight: #eef2f6;
+// $primaryMain: #2196f3;
+// $primaryDark: #1e88e5;
+// $primary200: #90caf9;
+// $primary800: #1565c0;
 
-// secondary
-$secondaryLight: #ede7f6;
-$secondaryMain: #673ab7;
-$secondaryDark: #5e35b1;
-$secondary200: #b39ddb;
-$secondary800: #4527a0;
+// // secondary
+// $secondaryLight: #ede7f6;
+// $secondaryMain: #673ab7;
+// $secondaryDark: #5e35b1;
+// $secondary200: #b39ddb;
+// $secondary800: #4527a0;
+// // Mint Green Theme Primary Palette
+$primaryLight: #e8fdf2; // Mint green light
+$primaryMain: #53c889; // Medium sea green
+$primaryDark: #358058; // Dark green
+$primary200: #67f7ab; // Mint green lighter
+$primary800: #143021; // Dark jungle green
+
+// Modified Secondary Palette
+// $secondaryLight: #d1f4ff; // Very light (mostly white) cyan
+// $secondaryMain: #7fbcde; // Soft blue (like sky blue)
+// $secondaryDark: #558ba7; // Dark moderate cyan (like steel blue)
+$secondaryLight: #bae7ff;
+$secondaryMain: #4d9de0;
+$secondaryDark: #2952a3;
+$secondary200: #a2d7f7; // Light cyan blue (like sky blue lighter)
+$secondary800: #336477; // Dark cyan blue (like dark slate gray)
 
 // success Colors
 $successLight: #b9f6ca;

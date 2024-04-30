@@ -37,6 +37,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Google from "assets/images/icons/social-google.svg";
 import { useNavigate } from "react-router";
 import Toast from "layout/Toast";
+import Notification from "helper/Notification";
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -161,13 +162,18 @@ const FirebaseLogin = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            axios
+            const response = await axios
               .post(
                 "https://sahten.thebizzbuddy.com/public/api/admin/login",
                 values
               )
               .then((res) => {
+                console.log(res);
+                const {
+                  data: { message },
+                } = res;
                 if (res.status === 200) {
+                  Notification("success", message);
                   localStorage.setItem("token", res.data.response.token);
                   localStorage.setItem(
                     "user",
@@ -179,10 +185,7 @@ const FirebaseLogin = ({ ...others }) => {
                 }
               })
               .catch((err) => {
-                console.error(
-                  "Request failed with status code:",
-                  err?.response.status
-                );
+                console.error("Request failed with status code:", err);
               });
           } catch (err) {
             console.error(err);

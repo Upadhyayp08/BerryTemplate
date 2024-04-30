@@ -1,10 +1,15 @@
 import axios from "axios";
 import * as actionTypes from "./purchaseActionType";
 import API from "../../helper/API";
+import Notification from "helper/Notification";
 
 export const createPurchase = (customerData) => async (dispatch) => {
   try {
     const response = await API.post(`/purchase/store`, customerData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.CREATE_PURCHASE,
       payload: response.data,
@@ -17,6 +22,7 @@ export const createPurchase = (customerData) => async (dispatch) => {
 export const getPurchase = () => async (dispatch) => {
   try {
     const response = await API.post(`/purchase/index`);
+
     dispatch({
       type: actionTypes.GET_PURCHASE,
       payload: response.data.response,
@@ -29,6 +35,10 @@ export const getPurchase = () => async (dispatch) => {
 export const updatePurchase = (updatedData) => async (dispatch) => {
   try {
     const response = await API.post(`/purchase/update`, updatedData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.UPDATE_PURCHASE,
       payload: response.data,
@@ -40,7 +50,11 @@ export const updatePurchase = (updatedData) => async (dispatch) => {
 
 export const deletePurchase = (customerId) => async (dispatch) => {
   try {
-    await API.post(`/purchase/delete`, customerId);
+    const response = await API.post(`/purchase/delete`, customerId);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.DELETE_PURCHASE,
       payload: customerId,

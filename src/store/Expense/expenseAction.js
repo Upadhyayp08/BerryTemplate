@@ -1,10 +1,15 @@
 import axios from "axios";
 import * as actionTypes from "./expenseActionType";
 import API from "../../helper/API";
+import Notification from "helper/Notification";
 
 export const createExpense = (customerData) => async (dispatch) => {
   try {
     const response = await API.post(`/expense/store`, customerData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.CREATE_EXPENSE,
       payload: response.data,
@@ -17,6 +22,7 @@ export const createExpense = (customerData) => async (dispatch) => {
 export const getExpense = () => async (dispatch) => {
   try {
     const response = await API.post(`/expense/index`);
+
     dispatch({
       type: actionTypes.GET_EXPENSE,
       payload: response.data.response,
@@ -29,6 +35,10 @@ export const getExpense = () => async (dispatch) => {
 export const updateExpense = (updatedData) => async (dispatch) => {
   try {
     const response = await API.post(`/expense/update`, updatedData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.UPDATE_EXPENSE,
       payload: response.data,
@@ -40,7 +50,11 @@ export const updateExpense = (updatedData) => async (dispatch) => {
 
 export const deleteExpense = (customerId) => async (dispatch) => {
   try {
-    await API.post(`/expense/delete`, customerId);
+    const response = await API.post(`/expense/delete`, customerId);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.DELETE_EXPENSE,
       payload: customerId,

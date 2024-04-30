@@ -1,17 +1,17 @@
 import axios from "axios";
 import API from "helper/API";
 import Notification from "helper/Notification";
-import * as actionTypes from "./blogActionType";
+import * as actionTypes from "./albumActionType";
 
-export const createBlog = (customerData) => async (dispatch) => {
+export const createAlbum = (customerData) => async (dispatch) => {
   try {
-    const response = await API.post(`/blogs/store`, customerData);
+    const response = await API.post(`/gallery/store`, customerData);
     const {
       data: { message },
     } = response;
     Notification("success", message);
     dispatch({
-      type: actionTypes.CREATE_BLOG,
+      type: actionTypes.CREATE_ALBUM,
       payload: response.data,
     });
   } catch (error) {
@@ -19,12 +19,11 @@ export const createBlog = (customerData) => async (dispatch) => {
   }
 };
 
-export const getBlog = () => async (dispatch) => {
+export const getAlbum = () => async (dispatch) => {
   try {
-    const response = await API.post(`/blogs/index`);
-
+    const response = await API.post(`/gallery/index`);
     dispatch({
-      type: actionTypes.GET_BLOG,
+      type: actionTypes.GET_ALBUM,
       payload: response.data.response,
     });
   } catch (error) {
@@ -32,15 +31,15 @@ export const getBlog = () => async (dispatch) => {
   }
 };
 
-export const updateBlog = (updatedData) => async (dispatch) => {
+export const updateAlbum = (updatedData) => async (dispatch) => {
   try {
-    const response = await API.post(`/blogs/update`, updatedData);
+    const response = await API.post(`/gallery/update`, updatedData);
     const {
       data: { message },
     } = response;
     Notification("success", message);
     dispatch({
-      type: actionTypes.UPDATE_BLOG,
+      type: actionTypes.UPDATE_ALBUM,
       payload: response.data,
     });
   } catch (error) {
@@ -48,15 +47,15 @@ export const updateBlog = (updatedData) => async (dispatch) => {
   }
 };
 
-export const deleteBlog = (customerId) => async (dispatch) => {
+export const deleteAlbum = (customerId) => async (dispatch) => {
   try {
-    const response = await API.post(`/blogs/delete`, customerId);
+    const response = await API.post(`/gallery/delete`, customerId);
     const {
       data: { message },
     } = response;
     Notification("success", message);
     dispatch({
-      type: actionTypes.DELETE_BLOG,
+      type: actionTypes.DELETE_ALBUM,
       payload: customerId,
     });
   } catch (error) {
@@ -64,12 +63,12 @@ export const deleteBlog = (customerId) => async (dispatch) => {
   }
 };
 
-export const BlogById = (customerId) => async (dispatch) => {
+export const AlbumById = (customerId) => async (dispatch) => {
   try {
-    const response = await API.post(`/blogs/edit`, { id: customerId });
+    const response = await API.post(`/gallery/edit`, { id: customerId });
     console.log(response);
     dispatch({
-      type: actionTypes.GETBYID_BLOG,
+      type: actionTypes.GETBYID_ALBUM,
       payload: response.data.response,
     });
   } catch (error) {

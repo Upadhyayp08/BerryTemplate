@@ -1,10 +1,15 @@
 import axios from "axios";
 import API from "helper/API";
+import Notification from "helper/Notification";
 import * as actionTypes from "./customerActionType";
 
 export const createCustomer = (customerData) => async (dispatch) => {
   try {
     const response = await API.post(`/customers/store`, customerData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.CREATE_CUSTOMER,
       payload: response.data,
@@ -29,6 +34,10 @@ export const readCustomer = () => async (dispatch) => {
 export const updateCustomer = (updatedData) => async (dispatch) => {
   try {
     const response = await API.post(`/customers/update`, updatedData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.UPDATE_CUSTOMER,
       payload: response.data,
@@ -40,7 +49,11 @@ export const updateCustomer = (updatedData) => async (dispatch) => {
 
 export const deleteCustomer = (customerId) => async (dispatch) => {
   try {
-    await API.post(`/customers/delete`, customerId);
+    const response = await API.post(`/customers/delete`, customerId);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.DELETE_CUSTOMER,
       payload: customerId,
@@ -54,6 +67,7 @@ export const CustomerById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/customers/get-by-id`, { id: customerId });
     console.log(response);
+
     dispatch({
       type: actionTypes.GETBYID_CUSTOMER,
       payload: response.data.response,

@@ -134,6 +134,10 @@ const MainRoutes = {
       element: <Gallery />,
     },
     {
+      path: "gallery/:id",
+      element: <Gallery />,
+    },
+    {
       path: "album",
       element: <Albummain />,
     },

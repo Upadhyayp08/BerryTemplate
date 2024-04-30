@@ -1,10 +1,15 @@
 import axios from "axios";
 import * as actionTypes from "./employeeActionType";
 import API from "../../helper/API";
+import Notification from "helper/Notification";
 
 export const createEmployee = (customerData) => async (dispatch) => {
   try {
     const response = await API.post(`/employees/store`, customerData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.CREATE_EMPLOYEE,
       payload: response.data,
@@ -29,6 +34,10 @@ export const getEmployee = () => async (dispatch) => {
 export const updateEmployee = (updatedData) => async (dispatch) => {
   try {
     const response = await API.post(`/employees/update`, updatedData);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.UPDATE_EMPLOYEE,
       payload: response.data,
@@ -40,7 +49,11 @@ export const updateEmployee = (updatedData) => async (dispatch) => {
 
 export const deleteEmployee = (customerId) => async (dispatch) => {
   try {
-    await API.post(`/employees/delete`, customerId);
+    const response = await API.post(`/employees/delete`, customerId);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
     dispatch({
       type: actionTypes.DELETE_EMPLOYEE,
       payload: customerId,
