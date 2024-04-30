@@ -62,6 +62,21 @@ export const deleteAlbum = (customerId) => async (dispatch) => {
     console.log(error);
   }
 };
+export const deleteImage = (customerId) => async (dispatch) => {
+  try {
+    const response = await API.post(`/gallery/image-delete`, customerId);
+    const {
+      data: { message },
+    } = response;
+    Notification("success", message);
+    dispatch({
+      type: actionTypes.DELETE_IMAGE,
+      payload: customerId,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const AlbumById = (customerId) => async (dispatch) => {
   try {

@@ -42,6 +42,13 @@ const albumReducer = (state = initialState, action) => {
           (customer) => customer.id !== action.payload
         ),
       };
+    case actionTypes.DELETE_IMAGE:
+      return {
+        ...state,
+        albums: state.albums.filter(
+          (customer) => customer.id !== action.payload
+        ),
+      };
     default:
       return state;
   }

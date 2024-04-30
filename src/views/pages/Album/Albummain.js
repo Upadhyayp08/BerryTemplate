@@ -189,7 +189,7 @@
 
 // export default Albummain;
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Grid,
@@ -203,16 +203,22 @@ import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAlbum, getAlbum } from "store/Album/albumActions";
+import Loader from "ui-component/Loader";
 
 const Albummain = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const albums = useSelector((state) => state.album.albums);
+  const [loading, setLoading] = useState(true);
   console.log(albums);
 
   useEffect(() => {
-    dispatch(getAlbum());
+    dispatch(getAlbum()).then((res) => setLoading(false));
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   const handleAlbumClick = (album) => {
     navigate(`/gallery/${album.id}`);
