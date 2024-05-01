@@ -17,13 +17,6 @@ function Gallery() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
 
-  // const handleImageUpload = (event) => {
-  //   const files = Array.from(event.target.files);
-  //   const newImagePreviews = files.map((file) => URL.createObjectURL(file));
-
-  //   setSelectedImages((prev) => [...prev, ...files]);
-  //   setImagePreviews((prev) => [...prev, ...newImagePreviews]);
-  // };
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     const newImagePreviews = files.map((file) => URL.createObjectURL(file));
@@ -49,9 +42,9 @@ function Gallery() {
     dispatch(AlbumById({ id: id }));
   }, [id, dispatch]);
 
-  const handleDeleteImage = (id) => {
+  const handleDeleteImage = (galleryid) => {
     const formdata = new FormData();
-    formdata.append("id", id);
+    formdata.append("id", galleryid);
     dispatch(deleteImage(formdata)).then((res) =>
       dispatch(AlbumById({ id: id }))
     );

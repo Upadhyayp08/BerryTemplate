@@ -17,6 +17,10 @@ import Addblog from "views/pages/Blog/Addblog";
 import Albummain from "views/pages/Album/Albummain";
 import Addalbum from "views/pages/Album/Addalbum";
 import Gallery from "views/pages/Album/Gallery";
+import Salemain from "views/pages/Sale/Salemain";
+import Addsale from "views/pages/Sale/Addsale";
+import Stockmain from "views/pages/Stock/Stockmain";
+import Addstock from "views/pages/Stock/Addstock";
 
 // dashboard routing
 const DashboardDefault = Loadable(
@@ -144,6 +148,30 @@ const MainRoutes = {
     {
       path: "add-album",
       element: <Addalbum />,
+    },
+    {
+      path: "sale",
+      element: <Salemain />,
+    },
+    {
+      path: "add-sale",
+      element: <Addsale />,
+    },
+    {
+      path: "add-sale/:id",
+      element: <Addsale />,
+    },
+    {
+      path: "stock",
+      element: <Stockmain />,
+    },
+    {
+      path: "add-stock",
+      element: <Addstock />,
+    },
+    {
+      path: "add-stock/:id",
+      element: <Addstock />,
     },
   ],
 };

@@ -139,6 +139,7 @@ import { deleteCustomer, readCustomer } from "store/Customer/customerActions";
 import { connect, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
+import NoDataImage from "../../assets/images/NoData.png";
 
 const SamplePage = ({ readCustomer }) => {
   const customers = useSelector((state) => state.customer.customers);

@@ -9,6 +9,7 @@ import materialReducer from "./Material/materialReducer";
 import purchaseReducer from "./Purchase/purchaseReducer";
 import blogReducer from "./Blog/blogReducer";
 import albumReducer from "./Album/albumReducer";
+import saleReducer from "./Sale/saleReducer";
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   purchase: purchaseReducer,
   blog: blogReducer,
   album: albumReducer,
+  sale: saleReducer,
 });
 
 export default reducer;

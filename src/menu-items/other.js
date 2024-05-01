@@ -7,6 +7,8 @@ import {
   IconCash,
   IconCamera,
   IconPencil,
+  IconCurrencyDollar,
+  IconShoppingCart,
 } from "@tabler/icons-react";
 
 // constant
@@ -18,6 +20,8 @@ const icons = {
   IconCash,
   IconCamera,
   IconPencil,
+  IconCurrencyDollar,
+  IconShoppingCart,
 };
 
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
@@ -81,6 +85,22 @@ const other = {
       type: "item",
       url: "/album",
       icon: icons.IconCamera,
+      breadcrumbs: false,
+    },
+    {
+      id: "sale-page",
+      title: "Sale",
+      type: "item",
+      url: "/sale",
+      icon: icons.IconCurrencyDollar,
+      breadcrumbs: false,
+    },
+    {
+      id: "stock-page",
+      title: "Stock",
+      type: "item",
+      url: "/stock",
+      icon: icons.IconShoppingCart,
       breadcrumbs: false,
     },
     // {

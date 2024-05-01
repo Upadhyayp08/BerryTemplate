@@ -63,7 +63,7 @@ const Addblog = () => {
     const formData = new FormData();
     formData.append("id", id);
     formData.append("title", values.title);
-    formData.append("shortdescription", values.shortdescription);
+    formData.append("short_desc", values.shortdescription);
     formData.append("description", values.description);
     formData.append("image", values.image);
     dispatch(id ? updateBlog(formData) : createBlog(formData))
