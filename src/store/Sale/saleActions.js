@@ -81,7 +81,7 @@ export const deleteSale = (customerId) => async (dispatch) => {
 export const SaleById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/sells/edit`, { id: customerId });
-    console.log(response);
+
     dispatch({
       type: actionTypes.GETBYID_SALE,
       payload: response.data.response,

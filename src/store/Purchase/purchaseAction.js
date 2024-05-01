@@ -67,7 +67,7 @@ export const deletePurchase = (customerId) => async (dispatch) => {
 export const PurchaseById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/purchase/edit`, { id: customerId });
-    console.log(response);
+
     dispatch({
       type: actionTypes.GETBYID_PURCHASE,
       payload: response.data.response,

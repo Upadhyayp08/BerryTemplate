@@ -36,8 +36,7 @@ const Addsale = () => {
     { id: 2, name: "UnPaid" },
   ];
   const { id } = useParams();
-  console.log(id, "salebyid");
-  console.log(salebyid, "salebyid");
+
   useEffect(() => {
     if (id) {
       dispatch(SaleById(id)).then((res) => setLoading(false));

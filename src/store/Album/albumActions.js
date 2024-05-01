@@ -81,7 +81,7 @@ export const deleteImage = (customerId) => async (dispatch) => {
 export const AlbumById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/gallery/edit`, { id: customerId });
-    console.log(response);
+
     dispatch({
       type: actionTypes.GETBYID_ALBUM,
       payload: response.data.response,

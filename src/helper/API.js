@@ -31,9 +31,9 @@ API.interceptors.response.use(
     if (response && response.status === 401) {
       // Clear local storage or specific items like token
       //   Notification('error', 'Login First');
-      localStorage.clear();
+      // localStorage.clear();
       // window.location.href = "/free/pages/login/login3";
-      window.location.href = "/pages/login/login3";
+      // window.location.href = "/pages/login/login3";
     }
     return response;
   },
@@ -43,9 +43,9 @@ API.interceptors.response.use(
       console.log("Unauthorized error:", error);
 
       // Clearing local storage and redirecting to the login page
-      localStorage.clear();
+      // localStorage.clear();
       // window.location.href = "/free/pages/login/login3";
-      window.location.href = "/pages/login/login3";
+      // window.location.href = "/pages/login/login3";
 
       // Display a notification to the user
       Notification("error", "Please login to Continue");

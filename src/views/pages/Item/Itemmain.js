@@ -9,28 +9,26 @@ import {
   IconButton,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
+import { deleteExpense, getExpense } from "store/Expense/expenseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
-import { deleteSale, getSale, SaleById } from "store/Sale/saleActions";
+import { deleteItem, getItem } from "store/Item/itemActions";
 
-function Salemain() {
-  const sales = useSelector((state) => state.sale.sales);
-
+const Itemmain = () => {
+  const items = useSelector((state) => state.item.items);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedPurchase, setSelectedPurchase] = useState(null);
+  const [selectedExpense, setSelectedExpense] = useState(null);
 
   useEffect(() => {
-    dispatch(getSale());
+    dispatch(getItem());
   }, [dispatch]);
 
-  const handleOpenDialog = (purchase) => {
-    setSelectedPurchase(purchase);
+  const handleOpenDialog = (expense) => {
+    setSelectedExpense(expense);
     setOpenDialog(true);
   };
 
@@ -39,29 +37,29 @@ function Salemain() {
   };
 
   const handleConfirmDelete = () => {
-    if (selectedPurchase) {
-      dispatch(deleteSale({ id: selectedPurchase.id })).then(() => {
-        dispatch(getSale());
+    if (selectedExpense) {
+      dispatch(deleteItem({ id: selectedExpense.id })).then(() => {
+        dispatch(getItem());
         setOpenDialog(false);
       });
     }
   };
 
-  const handleEdit = (purchase) => {
-    navigate(`/add-sale/${purchase.id}`);
+  const handleEdit = (expense) => {
+    navigate(`/add-item/${expense.id}`);
   };
 
   return (
     <>
       <MainCard
-        title="Sales"
+        title="Item"
         secondary={
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate("/add-sale")}
+            onClick={() => navigate("/add-item")}
           >
-            Add Sale
+            Add Expense
           </Button>
         }
       >
@@ -69,30 +67,35 @@ function Salemain() {
           <TableHead>
             <TableRow>
               <TableCell>Sr. No</TableCell>
-              <TableCell>Customer</TableCell>
-              <TableCell>Invoice No.</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Item Code</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell>Unit</TableCell>
               <TableCell>Amount</TableCell>
-              <TableCell>Payment Status</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {sales.map((row, index) => (
-              <TableRow key={row.id}>
+            {items.map((expense, index) => (
+              <TableRow key={expense.id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{row.customer}</TableCell>
-                <TableCell>{row.invoice_no}</TableCell>
-                <TableCell>{row.amount}</TableCell>
-                <TableCell>{row.paid_status}</TableCell>
+                <TableCell>{expense.name}</TableCell>
+                <TableCell>{expense.item_code}</TableCell>
+                <TableCell>{expense.quantity}</TableCell>
+                <TableCell>{expense.unit}</TableCell>
+                <TableCell>{expense.amount}</TableCell>
                 <TableCell>
-                  <IconButton color="primary" onClick={() => handleEdit(row)}>
+                  <IconButton
+                    color="primary"
+                    onClick={() => handleEdit(expense)}
+                  >
                     <Edit />
                   </IconButton>
                   <IconButton
-                    color="secondary"
-                    onClick={() => handleOpenDialog(row)}
+                    style={{ color: "red" }}
+                    onClick={() => handleOpenDialog(expense)}
                   >
-                    <Delete sx={{ color: "red" }} />
+                    <Delete />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -109,6 +112,6 @@ function Salemain() {
       </MainCard>
     </>
   );
-}
+};
 
-export default Salemain;
+export default Itemmain;

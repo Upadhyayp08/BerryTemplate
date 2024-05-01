@@ -66,7 +66,6 @@ export const deleteCustomer = (customerId) => async (dispatch) => {
 export const CustomerById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/customers/get-by-id`, { id: customerId });
-    console.log(response);
 
     dispatch({
       type: actionTypes.GETBYID_CUSTOMER,

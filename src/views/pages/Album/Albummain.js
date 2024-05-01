@@ -210,7 +210,6 @@ const Albummain = () => {
   const navigate = useNavigate();
   const albums = useSelector((state) => state.album.albums);
   const [loading, setLoading] = useState(true);
-  console.log(albums);
 
   useEffect(() => {
     dispatch(getAlbum()).then((res) => setLoading(false));
@@ -234,7 +233,6 @@ const Albummain = () => {
     dispatch(deleteAlbum(formData)).then((res) => {
       dispatch(getAlbum());
     });
-    console.log("Delete album with ID:", albumId);
   };
 
   return (

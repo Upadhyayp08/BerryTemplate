@@ -66,7 +66,7 @@ export const deleteMATERIAL = (customerId) => async (dispatch) => {
 export const MaterialById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/materials/edit`, { id: customerId });
-    console.log(response);
+
     dispatch({
       type: actionTypes.GETBYID_MATERIAL,
       payload: response.data.response,

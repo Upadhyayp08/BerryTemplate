@@ -87,7 +87,6 @@ function Addstock() {
   });
 
   const onSubmit = (values) => {
-    console.log("Form values:", values);
     // You can perform any additional actions such as submitting the data to an API
   };
 

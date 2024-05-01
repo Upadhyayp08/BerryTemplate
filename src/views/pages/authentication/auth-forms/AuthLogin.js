@@ -168,7 +168,6 @@ const FirebaseLogin = ({ ...others }) => {
                 values
               )
               .then((res) => {
-                console.log(res);
                 const {
                   data: { message },
                 } = res;

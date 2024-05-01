@@ -20,7 +20,6 @@ function AddProduct() {
   const [loading, setLoading] = useState(true); // Add loading state
   const { id } = useParams();
   const customerbyid = useSelector((state) => state.customer.customerbyid);
-  console.log(customerbyid);
 
   useEffect(() => {
     if (id) {
@@ -33,17 +32,14 @@ function AddProduct() {
   }, [id]); // Make sure to include id in the dependency array
 
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
     if (id) {
       dispatch(updateCustomer(values)).then((res) => {
-        console.log(res);
         dispatch(readCustomer()).then((res) => {
           navigate("/");
         });
       });
     } else {
       dispatch(createCustomer(values)).then((res) => {
-        console.log(res);
         dispatch(readCustomer()).then((res) => {
           navigate("/");
         });

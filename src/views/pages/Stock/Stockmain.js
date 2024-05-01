@@ -19,7 +19,6 @@ import { deleteSale, getSale, SaleById } from "store/Sale/saleActions";
 function Stockmain() {
   const sales = useSelector((state) => state.sale.sales);
 
-  console.log(sales);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();

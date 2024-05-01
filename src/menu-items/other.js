@@ -103,6 +103,14 @@ const other = {
       icon: icons.IconShoppingCart,
       breadcrumbs: false,
     },
+    {
+      id: "item-page",
+      title: "Item",
+      type: "item",
+      url: "/item",
+      icon: icons.IconShoppingCart,
+      breadcrumbs: false,
+    },
     // {
     //   id: 'documentation',
     //   title: 'Documentation',

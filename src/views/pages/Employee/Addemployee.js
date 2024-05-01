@@ -51,8 +51,6 @@ function AddEmployee() {
     }
   }, [id]); // Make sure to include id in the dependency array
 
-  console.log(employeebyid, "employeebyid");
-
   const handleSubmit = (values, { setSubmitting }) => {
     if (id) {
       dispatch(updateEmployee(values))

@@ -66,7 +66,7 @@ export const deleteEmployee = (customerId) => async (dispatch) => {
 export const EmployeeById = (customerId) => async (dispatch) => {
   try {
     const response = await API.post(`/employees/edit`, { id: customerId });
-    console.log(response);
+
     dispatch({
       type: actionTypes.GETBYID_EMPLOYEE,
       payload: response.data.response,

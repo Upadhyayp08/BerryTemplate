@@ -21,6 +21,8 @@ import Salemain from "views/pages/Sale/Salemain";
 import Addsale from "views/pages/Sale/Addsale";
 import Stockmain from "views/pages/Stock/Stockmain";
 import Addstock from "views/pages/Stock/Addstock";
+import Itemmain from "views/pages/Item/Itemmain";
+import Additem from "views/pages/Item/Additem";
 
 // dashboard routing
 const DashboardDefault = Loadable(
@@ -172,6 +174,18 @@ const MainRoutes = {
     {
       path: "add-stock/:id",
       element: <Addstock />,
+    },
+    {
+      path: "item",
+      element: <Itemmain />,
+    },
+    {
+      path: "add-item",
+      element: <Additem />,
+    },
+    {
+      path: "add-item/:id",
+      element: <Additem />,
     },
   ],
 };

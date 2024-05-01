@@ -61,7 +61,7 @@ const NavItem = ({ item, level }) => {
 
   const itemHandler = (id) => {
     dispatch({ type: MENU_OPEN, id });
-    console.log(id);
+
     localStorage.setItem("isOpenMenu", id);
     if (matchesSM) dispatch({ type: SET_MENU, opened: false });
   };
@@ -78,8 +78,6 @@ const NavItem = ({ item, level }) => {
     }
     // eslint-disable-next-line
   }, [pathname]);
-
-  console.log(pathname);
 
   return (
     <ListItemButton
