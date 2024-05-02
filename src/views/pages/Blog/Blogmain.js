@@ -783,7 +783,7 @@ const Blogmain = () => {
                   variant="contained"
                   color="primary"
                   onClick={() => handleEdit(blog.id)}
-                  sx={{ flexGrow: 1, marginRight: "8px" }}
+                  sx={{ flexGrow: 1, marginRight: "8px", width: "100px" }}
                 >
                   Edit
                 </Button>
@@ -792,6 +792,7 @@ const Blogmain = () => {
                   onClick={() => openDeleteDialog(blog.id)}
                   sx={{
                     flexGrow: 1,
+                    width: "100px",
                     backgroundColor: "red",
                     ":hover": {
                       backgroundColor: "rgba(255, 0, 0, 0.8)",

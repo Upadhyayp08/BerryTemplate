@@ -117,9 +117,15 @@ const Addblog = () => {
                     <Button
                       variant="filled"
                       component="span"
-                      style={{ border: "1px solid black" }}
+                      // style={{ border: "1px solid black" }}
+                      style={{
+                        width: "200px",
+                        height: "200px",
+                        border: "1px solid black",
+                      }}
                     >
-                      Upload Image
+                      {/* Upload Image */}
+                      <IconArrowUp />
                     </Button>
                   </label>
                 )}
@@ -156,7 +162,7 @@ const Addblog = () => {
                     <img
                       src={values.imagePreview}
                       alt="Preview"
-                      style={{ maxWidth: "100%", maxHeight: "300px" }}
+                      style={{ width: "200px", height: "200px" }}
                     />
                     <Button
                       onClick={() => {
@@ -206,6 +212,8 @@ const Addblog = () => {
 
               <Grid item xs={12}>
                 <ReactQuill
+                  // row={3}
+                  style={{ height: "240px" }}
                   value={values.description}
                   onChange={(value) => setFieldValue("description", value)}
                 />
@@ -216,7 +224,7 @@ const Addblog = () => {
                 )}
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item xs={12} sx={{ marginTop: "50px" }}>
                 <Button type="submit" variant="contained" color="primary">
                   Submit Blog
                 </Button>

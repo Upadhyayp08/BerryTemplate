@@ -1,7 +1,7 @@
 // material-ui
 import { useTheme } from "@mui/material/styles";
 import logo from "../assets/images/logo.png";
-import favico from "../assets/images/favico.png";
+import favico from "../assets/images/faviconew.png";
 
 /**
  * if you want to use image instead of <svg> uncomment following.

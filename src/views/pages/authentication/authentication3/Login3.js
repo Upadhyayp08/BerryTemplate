@@ -11,7 +11,7 @@ import AuthLogin from "../auth-forms/AuthLogin";
 import Logo from "ui-component/Logo";
 import AuthFooter from "ui-component/cards/AuthFooter";
 import logo from "../../../../assets/images/logo.png";
-import favico from "../../../../assets/images/favico.png";
+import favico from "../../../../assets/images/faviconew.png";
 
 // assets
 
