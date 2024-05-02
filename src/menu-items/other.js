@@ -9,6 +9,7 @@ import {
   IconPencil,
   IconCurrencyDollar,
   IconShoppingCart,
+  IconUserFilled,
 } from "@tabler/icons-react";
 
 // constant
@@ -17,6 +18,7 @@ const icons = {
   IconHelp,
   IconBox,
   IconUser,
+  IconUserFilled,
   IconCash,
   IconCamera,
   IconPencil,
@@ -60,7 +62,7 @@ const other = {
       title: "Employee",
       type: "item",
       url: "/employee",
-      icon: icons.IconCash,
+      icon: icons.IconUserFilled,
       breadcrumbs: false,
     },
     {
@@ -96,14 +98,6 @@ const other = {
       breadcrumbs: false,
     },
     {
-      id: "stock-page",
-      title: "Stock",
-      type: "item",
-      url: "/stock",
-      icon: icons.IconShoppingCart,
-      breadcrumbs: false,
-    },
-    {
       id: "item-page",
       title: "Item",
       type: "item",
@@ -111,6 +105,15 @@ const other = {
       icon: icons.IconShoppingCart,
       breadcrumbs: false,
     },
+    {
+      id: "stock-page",
+      title: "Stock",
+      type: "item",
+      url: "/stock",
+      icon: icons.IconShoppingCart,
+      breadcrumbs: false,
+    },
+
     // {
     //   id: 'documentation',
     //   title: 'Documentation',

@@ -15,9 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import { deleteSale, getSale, SaleById } from "store/Sale/saleActions";
+import { deleteStock, getStock } from "store/Stock/stockActions";
 
 function Stockmain() {
   const sales = useSelector((state) => state.sale.sales);
+  const stock = useSelector((state) => state.stock.stocks);
+  console.log(stock);
 
   const navigate = useNavigate();
 
@@ -26,7 +29,7 @@ function Stockmain() {
   const [selectedPurchase, setSelectedPurchase] = useState(null);
 
   useEffect(() => {
-    dispatch(getSale());
+    dispatch(getStock());
   }, [dispatch]);
 
   const handleOpenDialog = (purchase) => {
@@ -40,8 +43,8 @@ function Stockmain() {
 
   const handleConfirmDelete = () => {
     if (selectedPurchase) {
-      dispatch(deleteSale({ id: selectedPurchase.id })).then(() => {
-        dispatch(getSale());
+      dispatch(deleteStock({ id: selectedPurchase.id })).then(() => {
+        dispatch(getStock());
         setOpenDialog(false);
       });
     }
@@ -69,21 +72,21 @@ function Stockmain() {
           <TableHead>
             <TableRow>
               <TableCell>Sr. No</TableCell>
-              <TableCell>Customer</TableCell>
-              <TableCell>Invoice No.</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Payment Status</TableCell>
+              <TableCell>Item</TableCell>
+              <TableCell>Stock</TableCell>
+              {/* <TableCell>Amount</TableCell>
+              <TableCell>Payment Status</TableCell> */}
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {sales.map((row, index) => (
+            {stock.map((row, index) => (
               <TableRow key={row.id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{row.customer}</TableCell>
-                <TableCell>{row.invoice_no}</TableCell>
-                <TableCell>{row.amount}</TableCell>
-                <TableCell>{row.paid_status}</TableCell>
+                <TableCell>{row.Item}</TableCell>
+                <TableCell>{row.stock}</TableCell>
+                {/* <TableCell>{row.amount}</TableCell>
+                <TableCell>{row.paid_status}</TableCell> */}
                 <TableCell>
                   <IconButton color="primary" onClick={() => handleEdit(row)}>
                     <Edit />

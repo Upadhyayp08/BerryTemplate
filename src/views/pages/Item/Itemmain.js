@@ -59,7 +59,7 @@ const Itemmain = () => {
             color="primary"
             onClick={() => navigate("/add-item")}
           >
-            Add Expense
+            Add Item
           </Button>
         }
       >
