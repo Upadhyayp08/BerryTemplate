@@ -47,7 +47,7 @@
 //   };
 
 //   const handleEdit = (customer) => {
-//     navigate(`/add-product/${customer.id}`);
+//     navigate(`/add-customer/${customer.id}`);
 //   };
 
 //   return (
@@ -58,7 +58,7 @@
 //           <Button
 //             variant="contained"
 //             color="primary"
-//             onClick={() => navigate("/add-product")}
+//             onClick={() => navigate("/add-customer")}
 //           >
 //             Add Customer
 //           </Button>
@@ -165,7 +165,7 @@ const SamplePage = ({ readCustomer }) => {
   };
 
   const handleEdit = (customer) => {
-    navigate(`/add-product/${customer.id}`);
+    navigate(`/add-customer/${customer.id}`);
   };
 
   return (
@@ -176,7 +176,7 @@ const SamplePage = ({ readCustomer }) => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate("/add-product")}
+            onClick={() => navigate("/add-customer")}
           >
             Add Customer
           </Button>
@@ -189,9 +189,15 @@ const SamplePage = ({ readCustomer }) => {
               justifyContent: "center",
               alignItems: "center",
               height: "50vh",
+              flexDirection: "column", // Added to stack elements vertically
             }}
           >
-            <img src={NoDataImage} alt="No Data" />
+            <div>
+              <img src={NoDataImage} alt="No Data" />
+            </div>
+            <div>
+              <h1>No Data Found</h1>
+            </div>
           </div>
         ) : (
           <Table>

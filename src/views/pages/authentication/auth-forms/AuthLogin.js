@@ -178,7 +178,7 @@ const FirebaseLogin = ({ ...others }) => {
                     "user",
                     JSON.stringify(res.data.response.user)
                   );
-                  localStorage.setItem("isOpenMenu", "sample-page");
+                  localStorage.setItem("isOpenMenu", "dashboard");
                   navigate("/");
                 } else {
                   console.error("Unexpected status code:", res.status);

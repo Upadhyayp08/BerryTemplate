@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense, getExpense } from "store/Expense/expenseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import { deleteItem, getItem } from "store/Item/itemActions";
+import NoDataImage from "../../../assets/images/NoData.png";
 
 const Itemmain = () => {
   const items = useSelector((state) => state.item.items);
@@ -63,45 +64,65 @@ const Itemmain = () => {
           </Button>
         }
       >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr. No</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Item Code</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Unit</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {items.map((expense, index) => (
-              <TableRow key={expense.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{expense.name}</TableCell>
-                <TableCell>{expense.item_code}</TableCell>
-                <TableCell>{expense.quantity}</TableCell>
-                <TableCell>{expense.unit}</TableCell>
-                <TableCell>{expense.amount}</TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEdit(expense)}
-                  >
-                    <Edit />
-                  </IconButton>
-                  <IconButton
-                    style={{ color: "red" }}
-                    onClick={() => handleOpenDialog(expense)}
-                  >
-                    <Delete />
-                  </IconButton>
-                </TableCell>
+        {items.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              flexDirection: "column", // Added to stack elements vertically
+            }}
+          >
+            <div>
+              <img src={NoDataImage} alt="No Data" />
+            </div>
+            <div>
+              <h1>No Data Found</h1>
+            </div>
+          </div>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sr. No</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Item Code</TableCell>
+                <TableCell>Quantity</TableCell>
+                <TableCell>Unit</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {items.map((expense, index) => (
+                <TableRow key={expense.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{expense.name}</TableCell>
+                  <TableCell>{expense.item_code}</TableCell>
+                  <TableCell>{expense.quantity}</TableCell>
+                  <TableCell>{expense.unit}</TableCell>
+                  <TableCell>{expense.amount}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleEdit(expense)}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      style={{ color: "red" }}
+                      onClick={() => handleOpenDialog(expense)}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+
         {openDialog && (
           <DeleteConfirmationDialog
             open={openDialog}

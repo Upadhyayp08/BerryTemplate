@@ -125,6 +125,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
+import NoDataImage from "../../../assets/images/NoData.png";
 
 function Purchasemain() {
   const purchases = useSelector((state) => state.purchase.purchases);
@@ -173,40 +174,60 @@ function Purchasemain() {
           </Button>
         }
       >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr. No</TableCell>
-              <TableCell>Material</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Unit</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {purchases.map((row, index) => (
-              <TableRow key={row.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{row.material}</TableCell>
-                <TableCell>{row.quantity}</TableCell>
-                <TableCell>{row.unit}</TableCell>
-                <TableCell>{row.amount}</TableCell>
-                <TableCell>
-                  <IconButton color="primary" onClick={() => handleEdit(row)}>
-                    <Edit />
-                  </IconButton>
-                  <IconButton
-                    color="secondary"
-                    onClick={() => handleOpenDialog(row)}
-                  >
-                    <Delete sx={{ color: "red" }} />
-                  </IconButton>
-                </TableCell>
+        {purchases.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              flexDirection: "column", // Added to stack elements vertically
+            }}
+          >
+            <div>
+              <img src={NoDataImage} alt="No Data" />
+            </div>
+            <div>
+              <h1>No Data Found</h1>
+            </div>
+          </div>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sr. No</TableCell>
+                <TableCell>Material</TableCell>
+                <TableCell>Quantity</TableCell>
+                <TableCell>Unit</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {purchases.map((row, index) => (
+                <TableRow key={row.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{row.material}</TableCell>
+                  <TableCell>{row.quantity}</TableCell>
+                  <TableCell>{row.unit}</TableCell>
+                  <TableCell>{row.amount}</TableCell>
+                  <TableCell>
+                    <IconButton color="primary" onClick={() => handleEdit(row)}>
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleOpenDialog(row)}
+                    >
+                      <Delete sx={{ color: "red" }} />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+
         {openDialog && (
           <DeleteConfirmationDialog
             open={openDialog}

@@ -35,13 +35,13 @@ function AddProduct() {
     if (id) {
       dispatch(updateCustomer(values)).then((res) => {
         dispatch(readCustomer()).then((res) => {
-          navigate("/");
+          navigate("/customer");
         });
       });
     } else {
       dispatch(createCustomer(values)).then((res) => {
         dispatch(readCustomer()).then((res) => {
-          navigate("/");
+          navigate("/customer");
         });
       });
     }

@@ -118,6 +118,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteMATERIAL, getMaterial } from "store/Material/materialAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
+import NoDataImage from "../../../assets/images/NoData.png";
 
 function Materialmain() {
   const materials = useSelector((state) => state.material.materials);
@@ -166,37 +167,57 @@ function Materialmain() {
           </Button>
         }
       >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr. No</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {materials.map((material, index) => (
-              <TableRow key={material.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{material.name}</TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEdit(material)}
-                  >
-                    <Edit />
-                  </IconButton>
-                  <IconButton
-                    color="secondary"
-                    onClick={() => handleOpenDialog(material)}
-                  >
-                    <Delete sx={{ color: "red" }} />
-                  </IconButton>
-                </TableCell>
+        {materials.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              flexDirection: "column", // Added to stack elements vertically
+            }}
+          >
+            <div>
+              <img src={NoDataImage} alt="No Data" />
+            </div>
+            <div>
+              <h1>No Data Found</h1>
+            </div>
+          </div>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sr. No</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {materials.map((material, index) => (
+                <TableRow key={material.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{material.name}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleEdit(material)}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleOpenDialog(material)}
+                    >
+                      <Delete sx={{ color: "red" }} />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+
         {openDialog && (
           <DeleteConfirmationDialog
             open={openDialog}

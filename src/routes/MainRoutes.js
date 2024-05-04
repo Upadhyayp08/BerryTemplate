@@ -45,34 +45,34 @@ const MainRoutes = {
   path: "/",
   element: <MainLayout />,
   children: [
-    // {
-    //   path: "/",
-    //   element: <DashboardDefault />,
-    // },
-    // {
-    //   path: "dashboard",
-    //   children: [
-    //     {
-    //       path: "default",
-    //       element: <DashboardDefault />,
-    //     },
-    //   ],
-    // },
+    {
+      path: "/",
+      element: <DashboardDefault />,
+    },
+    {
+      path: "dashboard",
+      children: [
+        {
+          path: "default",
+          element: <DashboardDefault />,
+        },
+      ],
+    },
 
     // {
     //   path: "sample-page",
     //   element: <SamplePage />,
     // },
     {
-      path: "/",
+      path: "/customer",
       element: <SamplePage />,
     },
     {
-      path: "add-product",
+      path: "add-customer",
       element: <Addproduct />,
     },
     {
-      path: "add-product/:id",
+      path: "add-customer/:id",
       element: <Addproduct />,
     },
     {

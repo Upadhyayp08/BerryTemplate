@@ -59298,10 +59298,10 @@
             type: "group",
             children: [
               {
-                id: "sample-page",
+                id: "customer-page",
                 title: "Customer",
                 type: "item",
-                url: "/sample-page",
+                url: "/customer",
                 icon: ro.IconUser,
                 breadcrumbs: !1,
               },
@@ -63338,7 +63338,7 @@
             children: [{ path: "default", element: (0, c.jsx)(Qa, {}) }],
           },
           { path: "sample-page", element: (0, c.jsx)(Ja, {}) },
-          { path: "add-product", element: (0, c.jsx)(sa, {}) },
+          { path: "add-customer", element: (0, c.jsx)(sa, {}) },
           { path: "material", element: (0, c.jsx)(ya, {}) },
           { path: "add-material", element: (0, c.jsx)(ga, {}) },
           { path: "purchase", element: (0, c.jsx)(ba, {}) },

@@ -6,7 +6,7 @@ import * as actionTypes from "./actions";
 
 const getInitialMenu = () => {
   const savedMenu = localStorage.getItem("isOpenMenu");
-  return savedMenu ? [savedMenu] : ["sample-page"];
+  return savedMenu ? [savedMenu] : ["dashboard"];
 };
 
 export const initialState = {
@@ -24,6 +24,7 @@ const customizationReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.MENU_OPEN:
       id = action.id;
+      console.log(id);
       return {
         ...state,
         isOpen: [id],
@@ -46,7 +47,7 @@ const customizationReducer = (state = initialState, action) => {
     case actionTypes.RESET_STATE:
       return {
         ...initialState,
-        isOpen: ["sample-page"], // Explicitly set to default page
+        isOpen: ["dashboard"], // Explicitly set to default page
       };
     default:
       return state;

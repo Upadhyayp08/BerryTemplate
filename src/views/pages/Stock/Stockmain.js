@@ -16,6 +16,7 @@ import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import { deleteSale, getSale, SaleById } from "store/Sale/saleActions";
 import { deleteStock, getStock } from "store/Stock/stockActions";
+import NoDataImage from "../../../assets/images/NoData.png";
 
 function Stockmain() {
   const sales = useSelector((state) => state.sale.sales);
@@ -68,40 +69,60 @@ function Stockmain() {
           </Button>
         }
       >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr. No</TableCell>
-              <TableCell>Item</TableCell>
-              <TableCell>Stock</TableCell>
-              {/* <TableCell>Amount</TableCell>
+        {stock.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              flexDirection: "column", // Added to stack elements vertically
+            }}
+          >
+            <div>
+              <img src={NoDataImage} alt="No Data" />
+            </div>
+            <div>
+              <h1>No Data Found</h1>
+            </div>
+          </div>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sr. No</TableCell>
+                <TableCell>Item</TableCell>
+                <TableCell>Stock</TableCell>
+                {/* <TableCell>Amount</TableCell>
               <TableCell>Payment Status</TableCell> */}
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stock.map((row, index) => (
-              <TableRow key={row.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{row.Item}</TableCell>
-                <TableCell>{row.stock}</TableCell>
-                {/* <TableCell>{row.amount}</TableCell>
-                <TableCell>{row.paid_status}</TableCell> */}
-                <TableCell>
-                  <IconButton color="primary" onClick={() => handleEdit(row)}>
-                    <Edit />
-                  </IconButton>
-                  <IconButton
-                    color="secondary"
-                    onClick={() => handleOpenDialog(row)}
-                  >
-                    <Delete sx={{ color: "red" }} />
-                  </IconButton>
-                </TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {stock.map((row, index) => (
+                <TableRow key={row.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{row.Item}</TableCell>
+                  <TableCell>{row.stock}</TableCell>
+                  {/* <TableCell>{row.amount}</TableCell>
+                <TableCell>{row.paid_status}</TableCell> */}
+                  <TableCell>
+                    <IconButton color="primary" onClick={() => handleEdit(row)}>
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleOpenDialog(row)}
+                    >
+                      <Delete sx={{ color: "red" }} />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+
         {openDialog && (
           <DeleteConfirmationDialog
             open={openDialog}

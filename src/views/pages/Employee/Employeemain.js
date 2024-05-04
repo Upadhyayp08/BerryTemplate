@@ -127,6 +127,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { deleteEmployee, getEmployee } from "store/Employee/employeeAction";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
+import NoDataImage from "../../../assets/images/NoData.png";
 
 function Employeemain() {
   const employees = useSelector((state) => state.employee.employees);
@@ -175,43 +176,63 @@ function Employeemain() {
           </Button>
         }
       >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr. No</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Phone</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Designation</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {employees.map((employee, index) => (
-              <TableRow key={employee.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{employee.name}</TableCell>
-                <TableCell>{employee.phone}</TableCell>
-                <TableCell>{employee.email}</TableCell>
-                <TableCell>{employee.designation}</TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEdit(employee)}
-                  >
-                    <Edit />
-                  </IconButton>
-                  <IconButton
-                    color="secondary"
-                    onClick={() => handleOpenDialog(employee)}
-                  >
-                    <Delete sx={{ color: "red" }} />
-                  </IconButton>
-                </TableCell>
+        {employees.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              flexDirection: "column", // Added to stack elements vertically
+            }}
+          >
+            <div>
+              <img src={NoDataImage} alt="No Data" />
+            </div>
+            <div>
+              <h1>No Data Found</h1>
+            </div>
+          </div>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sr. No</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Phone</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Designation</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {employees.map((employee, index) => (
+                <TableRow key={employee.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{employee.name}</TableCell>
+                  <TableCell>{employee.phone}</TableCell>
+                  <TableCell>{employee.email}</TableCell>
+                  <TableCell>{employee.designation}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleEdit(employee)}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleOpenDialog(employee)}
+                    >
+                      <Delete sx={{ color: "red" }} />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+
         {openDialog && (
           <DeleteConfirmationDialog
             open={openDialog}
