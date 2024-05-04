@@ -213,7 +213,7 @@ const FirebaseLogin = ({ ...others }) => {
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-email-login">
-                Email Address / Username
+                Email Address
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email-login"

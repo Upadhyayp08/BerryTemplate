@@ -44,12 +44,12 @@ const Login = () => {
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Grid item sx={{ mb: 3 }}>
+                  <Grid item>
                     <Link to="#">
                       <Logo />
                     </Link>
                   </Grid>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Grid
                       container
                       direction={matchDownSM ? "column-reverse" : "row"}
@@ -69,17 +69,17 @@ const Login = () => {
                           >
                             LOGIN
                           </Typography>
-                          {/* <Typography
+                          <Typography
                             variant="caption"
                             fontSize="16px"
                             textAlign={matchDownSM ? "center" : "inherit"}
                           >
                             Enter your credentials to continue
-                          </Typography> */}
+                          </Typography>
                         </Stack>
                       </Grid>
                     </Grid>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12}>
                     <AuthLogin />
                   </Grid>
