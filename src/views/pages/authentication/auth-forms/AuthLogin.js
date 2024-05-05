@@ -296,6 +296,7 @@ const FirebaseLogin = ({ ...others }) => {
                 variant="subtitle1"
                 color="secondary"
                 sx={{ textDecoration: "none", cursor: "pointer" }}
+                onClick={() => navigate("/forget-password")}
               >
                 Forgot Password?
               </Typography>
