@@ -186,6 +186,13 @@ const FirebaseLogin = ({ ...others }) => {
               })
               .catch((err) => {
                 console.error("Request failed with status code:", err);
+                const {
+                  response: {
+                    data: { response },
+                  },
+                } = err;
+                Notification("error", response);
+                console.log(response);
               });
           } catch (err) {
             console.error(err);

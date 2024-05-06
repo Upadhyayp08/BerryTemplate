@@ -78,7 +78,7 @@ function AddProduct() {
   }
 
   return (
-    <MainCard title="Add Product">
+    <MainCard title="Add Customer">
       <Formik
         initialValues={{
           id: id ? customerbyid.id : "",
