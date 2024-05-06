@@ -101,7 +101,7 @@ function Salemain() {
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{row.customer}</TableCell>
                   <TableCell>{row.invoice_no}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
+                  <TableCell>L£{row.amount}</TableCell>
                   <TableCell>{row.paid_status}</TableCell>
                   <TableCell>
                     <IconButton color="primary" onClick={() => handleEdit(row)}>

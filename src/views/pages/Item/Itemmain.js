@@ -102,7 +102,7 @@ const Itemmain = () => {
                   <TableCell>{expense.item_code}</TableCell>
                   <TableCell>{expense.quantity}</TableCell>
                   <TableCell>{expense.unit}</TableCell>
-                  <TableCell>{expense.amount}</TableCell>
+                  <TableCell>L£{expense.amount}</TableCell>
                   <TableCell>
                     <IconButton
                       color="primary"

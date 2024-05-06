@@ -210,7 +210,7 @@ function Purchasemain() {
                   <TableCell>{row.material}</TableCell>
                   <TableCell>{row.quantity}</TableCell>
                   <TableCell>{row.unit}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
+                  <TableCell>L£{row.amount}</TableCell>
                   <TableCell>
                     <IconButton color="primary" onClick={() => handleEdit(row)}>
                       <Edit />

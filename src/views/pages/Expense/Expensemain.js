@@ -99,7 +99,7 @@ const Expensemain = () => {
                   <TableCell>{expense.name}</TableCell>
                   <TableCell>{expense.quantity}</TableCell>
                   <TableCell>{expense.unit}</TableCell>
-                  <TableCell>{expense.amount}</TableCell>
+                  <TableCell>L£{expense.amount}</TableCell>
                   <TableCell>
                     <IconButton
                       color="primary"
