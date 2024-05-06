@@ -145,6 +145,7 @@ function AddPurchase() {
                   <MenuItem value="g">Gram</MenuItem>
                   <MenuItem value="l">litre</MenuItem>
                   <MenuItem value="ml">MilliLitre</MenuItem>
+                  <MenuItem value="pcs">Pieces</MenuItem>
                   {/* Additional units can be added here */}
                 </Field>
               </Grid>

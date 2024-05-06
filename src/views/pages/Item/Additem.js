@@ -147,9 +147,11 @@ function Additem() {
                   <MenuItem value="">
                     <em>Select Unit</em>
                   </MenuItem>
-                  <MenuItem value="kg">Kilograms</MenuItem>
+                  <MenuItem value="kg">Kg</MenuItem>
+                  <MenuItem value="g">Gram</MenuItem>
+                  <MenuItem value="l">litre</MenuItem>
+                  <MenuItem value="ml">MilliLitre</MenuItem>
                   <MenuItem value="pcs">Pieces</MenuItem>
-                  <MenuItem value="boxes">Boxes</MenuItem>
                 </Select>
                 <FormHelperText>
                   {formik.touched.unit && formik.errors.unit}
