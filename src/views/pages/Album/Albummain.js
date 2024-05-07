@@ -280,7 +280,7 @@ const Albummain = () => {
                     boxShadow: 10,
                   },
                 }}
-                onClick={() => handleAlbumClick(album)}
+                // onClick={() => handleAlbumClick(album)}
               >
                 <CardActionArea>
                   <CardMedia
@@ -298,19 +298,30 @@ const Albummain = () => {
                     >
                       {album.name}
                     </Typography>
-                    <Grid item xs={12}>
-                      {" "}
-                      <Button
-                        fullWidth
-                        variant="contained"
-                        color="error"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteAlbum(album.id);
-                        }}
-                      >
-                        Delete
-                      </Button>
+                    <Grid container spacing={2}>
+                      <Grid item lg={6}>
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          color="error"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteAlbum(album.id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </Grid>
+                      <Grid item lg={6}>
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          onClick={() => handleAlbumClick(album)}
+                        >
+                          View
+                        </Button>
+                      </Grid>
                     </Grid>
                   </CardContent>
                 </CardActionArea>

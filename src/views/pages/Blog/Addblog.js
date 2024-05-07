@@ -19,7 +19,7 @@ import { BlogById, createBlog, updateBlog } from "store/Blog/blogActions";
 import { useNavigate, useParams } from "react-router";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../../../ui-component/cropImage";
-import { IconX, IconUpload } from "@tabler/icons-react";
+import { IconX, IconUpload, IconCloudUpload } from "@tabler/icons-react";
 import Loader from "ui-component/Loader";
 
 const Addblog = () => {
@@ -120,45 +120,21 @@ const Addblog = () => {
                       component="span"
                       // style={{ border: "1px solid black" }}
                       style={{
-                        width: "200px",
-                        height: "200px",
-                        border: "1px solid black",
+                        // width: "200px",
+                        // height: "200px",
+                        width: "300px", // Adjust the width to fit 1:1.5 aspect ratio
+                        height: "200px", // Adjust the height to fit 1:1.5 aspect ratio
+                        border: "1px dashed black",
+                        backgroundColor: "whitesmoke",
                       }}
                     >
                       {/* Upload Image */}
                       {/* <IconUpload /> */}
-                      <IconUpload />
+                      <IconCloudUpload color="#4d9de0" />
                     </Button>
                   </label>
                 )}
-                {/* {imageSrc && (
-                  <Dialog
-                    open={Boolean(imageSrc)}
-                    onClose={() => setImageSrc(null)}
-                    maxWidth={false}
-                    fullWidth
-                    PaperProps={{
-                      style: { width: "50%", height: "80vh" },
-                    }}
-                  >
-                    <Cropper
-                      image={imageSrc}
-                      crop={crop}
-                      zoom={zoom}
-                      onCropChange={setCrop}
-                      onCropComplete={handleCropComplete}
-                      onZoomChange={setZoom}
-                    />
-                    <DialogActions>
-                      <Button onClick={() => setImageSrc(null)}>Cancel</Button>
-                      <Button
-                        onClick={() => handleSaveCroppedImage(setFieldValue)}
-                      >
-                        Save
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                )} */}
+
                 {imageSrc && (
                   <Dialog
                     open={Boolean(imageSrc)}
@@ -183,8 +159,9 @@ const Addblog = () => {
                       onCropComplete={handleCropComplete}
                       onZoomChange={setZoom}
                       cropShape="rect" // Optional: set the crop shape to rectangle
-                      aspectRatio={1} // Optional: set aspect ratio if needed
-                      style={{ width: "100%", height: "100%" }}
+                      // aspectRatio={1} // Optional: set aspect ratio if needed
+                      aspectRatio={3 / 2}
+                      style={{ width: "300px", height: "200px" }}
                     />
                     <DialogActions>
                       <Button onClick={() => setImageSrc(null)}>Cancel</Button>
@@ -202,10 +179,8 @@ const Addblog = () => {
                     // style={{ marginTop: "20px" }}
                     style={{
                       position: "relative",
-                      width: "200px",
-                      height: "200px",
-                      // border: "1px solid black",
-                      // borderRadius: "4px",
+                      width: "300px", // Adjust the width to fit 1:1.5 aspect ratio
+                      height: "200px", // Adjust the height to fit 1:1.5 aspect ratio
                     }}
                   >
                     <img
