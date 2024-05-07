@@ -105,7 +105,7 @@ function AddEmployee() {
                 <Field
                   name="name"
                   as={TextField}
-                  label="Name"
+                  label="Name*"
                   fullWidth
                   variant="outlined"
                   error={touched.name && Boolean(errors.name)}
@@ -116,7 +116,7 @@ function AddEmployee() {
                 <Field
                   name="emp_id"
                   as={TextField}
-                  label="Employee ID"
+                  label="Employee ID*"
                   fullWidth
                   variant="outlined"
                   error={touched.emp_id && Boolean(errors.emp_id)}
@@ -127,7 +127,7 @@ function AddEmployee() {
                 <Field
                   name="designation"
                   as={TextField}
-                  label="Designation"
+                  label="Designation*"
                   fullWidth
                   variant="outlined"
                   error={touched.designation && Boolean(errors.designation)}
@@ -139,7 +139,7 @@ function AddEmployee() {
                 <Field
                   name="phone"
                   as={TextField}
-                  label="Phone"
+                  label="Phone*"
                   fullWidth
                   variant="outlined"
                   error={touched.phone && Boolean(errors.phone)}
@@ -150,7 +150,7 @@ function AddEmployee() {
                 <Field
                   name="email"
                   as={TextField}
-                  label="Email"
+                  label="Email*"
                   fullWidth
                   variant="outlined"
                   error={touched.email && Boolean(errors.email)}
@@ -162,7 +162,7 @@ function AddEmployee() {
                 <Field
                   name="experience"
                   as={TextField}
-                  label="Experience"
+                  label="Experience*"
                   fullWidth
                   variant="outlined"
                   error={touched.experience && Boolean(errors.experience)}
@@ -173,7 +173,7 @@ function AddEmployee() {
                 <Field
                   name="salary"
                   as={TextField}
-                  label="Salary"
+                  label="Salary*"
                   fullWidth
                   variant="outlined"
                   error={touched.salary && Boolean(errors.salary)}

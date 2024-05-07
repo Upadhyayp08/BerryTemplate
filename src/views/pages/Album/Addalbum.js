@@ -350,7 +350,7 @@ const AddAlbum = () => {
                 <Field
                   name="name"
                   as={TextField}
-                  label="Album Name"
+                  label="Album Name*"
                   variant="outlined"
                   fullWidth
                   error={touched.name && Boolean(errors.name)}

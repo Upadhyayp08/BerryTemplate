@@ -232,7 +232,7 @@ const Addblog = () => {
                   <Field
                     name="title"
                     as={TextField}
-                    label="Title"
+                    label="Title*"
                     variant="outlined"
                     fullWidth
                     error={touched.title && Boolean(errors.title)}
@@ -243,7 +243,7 @@ const Addblog = () => {
                   <Field
                     name="shortdescription"
                     as={TextField}
-                    label="Short description"
+                    label="Short description*"
                     multiline
                     rows={3}
                     variant="outlined"

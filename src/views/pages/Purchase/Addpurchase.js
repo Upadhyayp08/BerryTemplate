@@ -99,7 +99,7 @@ function AddPurchase() {
                   as={TextField}
                   type="text"
                   name="material"
-                  label="Material Name"
+                  label="Material Name*"
                   onChange={handleChange}
                   select
                   fullWidth
@@ -119,7 +119,7 @@ function AddPurchase() {
                 <Field
                   as={TextField}
                   name="quantity"
-                  label="Quantity"
+                  label="Quantity*"
                   onChange={handleChange}
                   fullWidth
                   variant="outlined"
@@ -132,7 +132,7 @@ function AddPurchase() {
                   as={TextField}
                   type="text"
                   name="unit"
-                  label="Unit"
+                  label="Unit*"
                   select
                   fullWidth
                   onChange={handleChange}
@@ -155,7 +155,7 @@ function AddPurchase() {
                   type="text"
                   onChange={handleChange}
                   name="amount"
-                  label="Amount"
+                  label="Amount*"
                   fullWidth
                   variant="outlined"
                   error={touched.amount && Boolean(errors.amount)}

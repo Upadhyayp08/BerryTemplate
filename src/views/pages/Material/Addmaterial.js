@@ -1,63 +1,3 @@
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Formik, Form, Field } from "formik";
-// import { Button, TextField, Grid, Box } from "@mui/material";
-// import MainCard from "ui-component/cards/MainCard";
-
-// function Addmaterial() {
-//   const navigate = useNavigate();
-
-//   const handleSubmit = (values, { setSubmitting }) => {
-//     // Example: Perform form submission to your backend
-//     // Simulate a delay (e.g., API call) using setTimeout
-//     setTimeout(() => {
-//       console.log(values); // Access form values
-//       setSubmitting(false); // Set submitting state to false
-//       // Redirect to another page after form submission
-//       navigate("/other-page");
-//     }, 1000); // Simulate a delay of 1 second
-//   };
-
-//   return (
-//     <MainCard title="Add Material">
-//       <Formik
-//         initialValues={{
-//           name: "",
-//         }}
-//         onSubmit={handleSubmit}
-//       >
-//         {({ isSubmitting }) => (
-//           <Form>
-//             <Grid container spacing={2}>
-//               <Grid item xs={12} sm={12}>
-//                 <Field
-//                   name="name"
-//                   as={TextField}
-//                   label="Name"
-//                   fullWidth
-//                   variant="outlined"
-//                 />
-//               </Grid>
-//             </Grid>
-//             <Box mt={2} alignContent="center">
-//               <Button
-//                 type="submit"
-//                 variant="contained"
-//                 color="primary"
-//                 disabled={isSubmitting}
-//               >
-//                 Submit
-//               </Button>
-//             </Box>
-//           </Form>
-//         )}
-//       </Formik>
-//     </MainCard>
-//   );
-// }
-
-// export default Addmaterial;
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -133,7 +73,7 @@ function AddMaterial() {
                 <Field
                   name="name"
                   as={TextField}
-                  label="Name"
+                  label="Name*"
                   fullWidth
                   variant="outlined"
                   error={touched.name && Boolean(errors.name)}

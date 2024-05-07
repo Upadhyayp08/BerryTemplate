@@ -140,7 +140,7 @@ function AddProduct() {
                 <Field
                   name="name"
                   as={TextField}
-                  label="Customer Name"
+                  label="Customer Name*"
                   fullWidth
                   onChange={handleChange}
                   variant="outlined"
@@ -153,7 +153,7 @@ function AddProduct() {
                 <Field
                   name="website"
                   as={TextField}
-                  label="Customer Website"
+                  label="Customer Website*"
                   onChange={handleChange}
                   fullWidth
                   variant="outlined"
@@ -166,7 +166,7 @@ function AddProduct() {
                 <Field
                   name="phone"
                   as={TextField}
-                  label="Customer Phone"
+                  label="Customer Phone*"
                   onChange={handleChange}
                   fullWidth
                   variant="outlined"
@@ -179,7 +179,7 @@ function AddProduct() {
                 <Field
                   name="email"
                   as={TextField}
-                  label="Customer Email"
+                  label="Customer Email*"
                   onChange={handleChange}
                   fullWidth
                   variant="outlined"
@@ -192,7 +192,7 @@ function AddProduct() {
                 <Field
                   name="address"
                   as={TextField}
-                  label="Customer Address"
+                  label="Customer Address*"
                   fullWidth
                   multiline
                   variant="outlined"

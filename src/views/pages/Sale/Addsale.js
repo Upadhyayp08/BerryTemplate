@@ -120,7 +120,7 @@ const Addsale = () => {
               style={formControlStyle}
               error={touched.customer_id && !!errors.customer_id}
             >
-              <InputLabel>Customer Name</InputLabel>
+              <InputLabel>Customer Name*</InputLabel>
               <Field
                 name="customer_id"
                 as={Select}
@@ -161,7 +161,7 @@ const Addsale = () => {
                           }
                           style={formControlStyle}
                         >
-                          <InputLabel>Item</InputLabel>
+                          <InputLabel>Item*</InputLabel>
                           <Field
                             name={`item.${index}.item`}
                             as={Select}
@@ -190,7 +190,7 @@ const Addsale = () => {
                           value={item.qty}
                           onChange={handleChange}
                           type="number"
-                          label="Quantity"
+                          label="Quantity*"
                           error={
                             touched.item?.[index]?.qty &&
                             !!errors.item?.[index]?.qty
@@ -200,7 +200,7 @@ const Addsale = () => {
                               ? errors.item?.[index]?.qty
                               : " "
                           }
-                          InputLabelProps={{ shrink: true }}
+                          // InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={2} lg={1}>
@@ -233,7 +233,7 @@ const Addsale = () => {
                   name="invoice_no"
                   value={values.invoice_no}
                   onChange={handleChange}
-                  label="Invoice No"
+                  label="Invoice No*"
                   error={touched.invoice_no && !!errors.invoice_no}
                   helperText={touched.invoice_no ? errors.invoice_no : " "}
                   margin="normal"
@@ -265,7 +265,7 @@ const Addsale = () => {
                   disabled={!!id}
                   onChange={handleChange}
                   type="number"
-                  label="Amount"
+                  label="Amount*"
                   error={touched.amount && !!errors.amount}
                   helperText={touched.amount ? errors.amount : " "}
                   margin="normal"
@@ -279,7 +279,7 @@ const Addsale = () => {
                   error={touched.paid_status && !!errors.paid_status}
                   style={formControlStyle}
                 >
-                  <InputLabel>Status</InputLabel>
+                  <InputLabel>Status*</InputLabel>
                   <Field
                     name="paid_status"
                     as={Select}

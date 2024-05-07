@@ -288,7 +288,7 @@ function AddExpense() {
                 <Field
                   name="name"
                   as={TextField}
-                  label="Expense Name"
+                  label="Expense Name*"
                   fullWidth
                   variant="outlined"
                   helperText={touched.name && errors.name}
@@ -320,7 +320,7 @@ function AddExpense() {
                   as={TextField}
                   type="text"
                   name="type"
-                  label="Type"
+                  label="Type*"
                   select
                   fullWidth
                   variant="outlined"
@@ -366,7 +366,7 @@ function AddExpense() {
                 <Field
                   name="amount"
                   as={TextField}
-                  label="Amount"
+                  label="Amount*"
                   fullWidth
                   variant="outlined"
                   helperText={touched.amount && errors.amount}

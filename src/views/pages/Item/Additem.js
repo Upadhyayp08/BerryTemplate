@@ -88,7 +88,7 @@ function Additem() {
                 margin="normal"
                 id="name"
                 name="name"
-                label="Item Name"
+                label="Item Name*"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
@@ -102,7 +102,7 @@ function Additem() {
                 margin="normal"
                 id="item_code"
                 name="item_code"
-                label="Item Code"
+                label="Item Code*"
                 value={formik.values.item_code}
                 onChange={formik.handleChange}
                 error={
@@ -119,7 +119,7 @@ function Additem() {
                 margin="normal"
                 id="quantity"
                 name="quantity"
-                label="Quantity per Pack"
+                label="Quantity per Pack*"
                 value={formik.values.quantity}
                 onChange={formik.handleChange}
                 error={
@@ -140,7 +140,7 @@ function Additem() {
                   id="unit"
                   name="unit"
                   value={formik.values.unit}
-                  label="Unit"
+                  label="Unit*"
                   onChange={formik.handleChange}
                   error={formik.touched.unit && Boolean(formik.errors.unit)}
                 >
@@ -164,7 +164,7 @@ function Additem() {
                 margin="normal"
                 id="amount"
                 name="amount"
-                label="Amount Per Pack"
+                label="Amount Per Pack*"
                 value={formik.values.amount}
                 onChange={formik.handleChange}
                 error={formik.touched.amount && Boolean(formik.errors.amount)}

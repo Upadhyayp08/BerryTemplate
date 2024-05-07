@@ -53,7 +53,7 @@ function Addstock() {
               fullWidth
               id="item_id"
               name="item_id"
-              label="Item Name"
+              label="Item Name*"
               variant="outlined"
               select
               value={formik.values.item_id}
@@ -80,7 +80,7 @@ function Addstock() {
               fullWidth
               id="stock"
               name="stock"
-              label="Stock"
+              label="Stock*"
               variant="outlined"
               value={formik.values.stock}
               onChange={formik.handleChange}
