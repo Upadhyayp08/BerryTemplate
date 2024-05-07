@@ -8,6 +8,7 @@ import {
   Dialog,
   DialogActions,
   Slider,
+  IconButton,
 } from "@mui/material";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
@@ -18,7 +19,7 @@ import { BlogById, createBlog, updateBlog } from "store/Blog/blogActions";
 import { useNavigate, useParams } from "react-router";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../../../ui-component/cropImage";
-import { IconArrowUp, IconX } from "@tabler/icons-react";
+import { IconX, IconUpload } from "@tabler/icons-react";
 import Loader from "ui-component/Loader";
 
 const Addblog = () => {
@@ -125,11 +126,12 @@ const Addblog = () => {
                       }}
                     >
                       {/* Upload Image */}
-                      <IconArrowUp />
+                      {/* <IconUpload /> */}
+                      <IconUpload />
                     </Button>
                   </label>
                 )}
-                {imageSrc && (
+                {/* {imageSrc && (
                   <Dialog
                     open={Boolean(imageSrc)}
                     onClose={() => setImageSrc(null)}
@@ -156,15 +158,71 @@ const Addblog = () => {
                       </Button>
                     </DialogActions>
                   </Dialog>
+                )} */}
+                {imageSrc && (
+                  <Dialog
+                    open={Boolean(imageSrc)}
+                    onClose={() => setImageSrc(null)}
+                    maxWidth={false}
+                    fullWidth
+                    PaperProps={{
+                      style: {
+                        width: "600px",
+                        maxWidth: "none",
+                        // height: "80vh",
+                        height: "600px",
+                        maxHeight: "none",
+                      },
+                    }}
+                  >
+                    <Cropper
+                      image={imageSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      onCropChange={setCrop}
+                      onCropComplete={handleCropComplete}
+                      onZoomChange={setZoom}
+                      cropShape="rect" // Optional: set the crop shape to rectangle
+                      aspectRatio={1} // Optional: set aspect ratio if needed
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                    <DialogActions>
+                      <Button onClick={() => setImageSrc(null)}>Cancel</Button>
+                      <Button
+                        onClick={() => handleSaveCroppedImage(setFieldValue)}
+                      >
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                 )}
+
                 {values.imagePreview && (
-                  <div style={{ marginTop: "20px" }}>
+                  <div
+                    // style={{ marginTop: "20px" }}
+                    style={{
+                      position: "relative",
+                      width: "200px",
+                      height: "200px",
+                      // border: "1px solid black",
+                      // borderRadius: "4px",
+                    }}
+                  >
                     <img
                       src={values.imagePreview}
                       alt="Preview"
-                      style={{ width: "200px", height: "200px" }}
+                      // style={{
+                      //   width: "200px",
+                      //   height: "200px",
+                      //   border: "1px solid black",
+                      // }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover", // Ensures the image covers the div without distorting aspect ratio
+                      }}
                     />
-                    <Button
+                    {/* <Button
                       onClick={() => {
                         setFieldValue("image", null);
                         setFieldValue("imagePreview", null);
@@ -173,7 +231,23 @@ const Addblog = () => {
                       style={{ color: "red", marginLeft: "10px" }}
                     >
                       <IconX />
-                    </Button>
+                    </Button> */}
+                    <IconButton
+                      // onClick={() => handleRemoveImage(setFieldValue)}
+                      onClick={() => {
+                        setFieldValue("image", null);
+                        setFieldValue("imagePreview", null);
+                        setInputKey(Date.now());
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        color: "red",
+                      }}
+                    >
+                      {/* <CloseIcon /> */}x
+                    </IconButton>
                   </div>
                 )}
               </Grid>

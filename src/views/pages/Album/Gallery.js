@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import MainCard from "ui-component/cards/MainCard";
-import { IconArrowUp, IconHttpDelete } from "@tabler/icons-react";
+import { IconUpload, IconHttpDelete } from "@tabler/icons-react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AlbumById, deleteImage, updateAlbum } from "store/Album/albumActions";
@@ -179,7 +179,7 @@ function Gallery() {
                   borderRadius: "15px",
                 }}
               >
-                <IconArrowUp />
+                <IconUpload />
               </Button>
             </label>
           </Grid>
@@ -195,7 +195,7 @@ export default Gallery;
 // import { Grid, Input, Button, CardContent } from "@mui/material";
 // import Card from "@mui/material/Card";
 // import CardMedia from "@mui/material/CardMedia";
-// import { IconArrowUp, IconHttpDelete } from "@tabler/icons-react"; // Import the delete icon
+// import { IconUpload, IconHttpDelete } from "@tabler/icons-react"; // Import the delete icon
 // import { useNavigate, useParams } from "react-router";
 // import { useDispatch, useSelector } from "react-redux";
 // import { AlbumById, deleteImage, updateAlbum } from "store/Album/albumActions";
@@ -289,7 +289,7 @@ export default Gallery;
 //               borderRadius: "15px",
 //             }}
 //           >
-//             <IconArrowUp />
+//             <IconUpload />
 //           </Button>
 //         </label>
 //       </Grid>

@@ -1,6 +1,6 @@
 // import React from "react";
 // import { Grid, Button, Input, TextField } from "@mui/material";
-// import { IconArrowUp } from "@tabler/icons-react";
+// import { IconUpload } from "@tabler/icons-react";
 // import MainCard from "ui-component/cards/MainCard";
 // function Addalbum() {
 //   return (
@@ -19,7 +19,7 @@
 //               style={{ border: "1px solid black" }}
 //             >
 //               {/* Upload Image */}
-//               <IconArrowUp style={{ textAlign: "center", margin: "100px" }} />
+//               <IconUpload style={{ textAlign: "center", margin: "100px" }} />
 //             </Button>
 //           </label>
 //         </Grid>
@@ -35,7 +35,7 @@
 
 // import React, { useState } from "react";
 // import { Grid, Button, Input, TextField, IconButton } from "@mui/material";
-// import { IconArrowUp } from "@tabler/icons-react";
+// import { IconUpload } from "@tabler/icons-react";
 // import CloseIcon from "@mui/icons-material/Close";
 // import MainCard from "ui-component/cards/MainCard";
 // import { Formik, Form, Field } from "formik";
@@ -119,7 +119,7 @@
 //                         padding: "100px",
 //                       }}
 //                     >
-//                       <IconArrowUp />
+//                       <IconUpload />
 //                     </Button>
 //                   </label>
 //                 ) : (
@@ -192,7 +192,7 @@
 
 import React, { useState } from "react";
 import { Grid, Button, Input, TextField, IconButton } from "@mui/material";
-import { IconArrowUp } from "@tabler/icons-react";
+import { IconUpload } from "@tabler/icons-react";
 import CloseIcon from "@mui/icons-material/Close";
 import MainCard from "ui-component/cards/MainCard";
 import { Formik, Form, Field } from "formik";
@@ -276,7 +276,7 @@ function AddAlbum() {
                           borderRadius: "4px",
                         }}
                       >
-                        <IconArrowUp />
+                        <IconUpload />
                       </Button>
                     </label>
                   ) : (

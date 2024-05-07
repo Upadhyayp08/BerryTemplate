@@ -23,6 +23,7 @@ import { getMaterial } from "store/Material/materialAction";
 import { useNavigate, useParams } from "react-router";
 import { createSale, SaleById, updateSale } from "store/Sale/saleActions";
 import Loader from "ui-component/Loader";
+import { getItem } from "store/Item/itemActions";
 
 const Addsale = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Addsale = () => {
   const [loading, setLoading] = useState(true); // Add loading state
   const customers = useSelector((state) => state.customer.customers);
   const materials = useSelector((state) => state.material.materials);
+  const items = useSelector((state) => state.item.items);
   const salebyid = useSelector((state) => state.sale.salebyid);
   const statusOptions = [
     { id: 1, name: "Paid" },
@@ -45,14 +47,17 @@ const Addsale = () => {
     }
     dispatch(readCustomer());
     dispatch(getMaterial());
+    dispatch(getItem());
   }, []);
+
+  const currentDate = new Date().toISOString().split("T")[0]; // Get current date
 
   const initialValues = {
     id: id ? salebyid.id : "",
     customer_id: id ? salebyid.customer : "",
     item: id ? salebyid.item : [{ item: "", qty: "" }],
     invoice_no: id ? salebyid.invoice_no : "",
-    date: id ? salebyid.date : "",
+    date: id ? salebyid.date : currentDate,
     amount: id ? salebyid.amount : "",
     paid_status: id ? salebyid.paid_status : "",
   };
@@ -163,7 +168,7 @@ const Addsale = () => {
                             onChange={handleChange}
                             label="Item"
                           >
-                            {materials.map((option, i) => (
+                            {items.map((option, i) => (
                               <MenuItem key={i} value={option.id}>
                                 {option.name}
                               </MenuItem>
