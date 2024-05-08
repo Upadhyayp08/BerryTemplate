@@ -78,7 +78,7 @@ function AddPurchase() {
   }
 
   return (
-    <MainCard title="Add Purchase">
+    <MainCard title={id ? "Edit Purchase" : "Add Purchase"}>
       <Formik
         initialValues={{
           id: id ? purchasebyid.id : "",

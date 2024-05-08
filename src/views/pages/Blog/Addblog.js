@@ -94,7 +94,7 @@ const Addblog = () => {
     >
       {({ setFieldValue, values, errors, touched }) => (
         <Form>
-          <MainCard title="Add Blog">
+          <MainCard title={id ? "Edit Blog" : "Add Blog"}>
             <Grid container spacing={2}>
               <Grid item xs={6} sx={{ marginBottom: "20px" }}>
                 {!values.imagePreview && (

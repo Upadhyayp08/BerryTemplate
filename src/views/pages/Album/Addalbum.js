@@ -236,7 +236,7 @@ const AddAlbum = () => {
     >
       {({ setFieldValue, values, errors, touched }) => (
         <Form>
-          <MainCard title="Add Album">
+          <MainCard title={"Add Album"}>
             <Grid container spacing={2}>
               <Grid item xs={6} sx={{ marginBottom: "20px" }}>
                 {!values.imagePreview && (

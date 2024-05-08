@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense, getExpense } from "store/Expense/expenseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 const Expensemain = () => {
   const expenses = useSelector((state) => state.expense.expenses);
@@ -22,9 +23,10 @@ const Expensemain = () => {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getExpense());
+    dispatch(getExpense()).then((res) => setLoading(false));
   }, [dispatch]);
 
   const handleOpenDialog = (expense) => {
@@ -48,6 +50,14 @@ const Expensemain = () => {
   const handleEdit = (expense) => {
     navigate(`/add-expense/${expense.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

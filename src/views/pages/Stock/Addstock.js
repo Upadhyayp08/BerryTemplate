@@ -7,10 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { getItem, ItemById, updateItem } from "store/Item/itemActions";
 import { createStock, StockById } from "store/Stock/stockActions";
+import Loader from "ui-component/Loader";
 
 function Addstock() {
   const items = useSelector((state) => state.item.items);
   const stock = useSelector((state) => state.stock.stockbyid);
+  const [loading, setLoading] = useState(true);
   console.log(items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ function Addstock() {
 
   useEffect(() => {
     if (id) {
-      dispatch(StockById(id));
+      dispatch(StockById(id)).then((res) => setLoading(false));
     }
     dispatch(getItem());
   }, [dispatch]);
@@ -44,8 +46,16 @@ function Addstock() {
     enableReinitialize: true,
   });
 
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
+
   return (
-    <MainCard title="Add Stock">
+    <MainCard title={id ? "Edit Stock" : "Add Stock"}>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={8}>

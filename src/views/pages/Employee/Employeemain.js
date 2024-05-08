@@ -128,6 +128,7 @@ import { deleteEmployee, getEmployee } from "store/Employee/employeeAction";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 function Employeemain() {
   const employees = useSelector((state) => state.employee.employees);
@@ -135,9 +136,10 @@ function Employeemain() {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getEmployee());
+    dispatch(getEmployee()).then((Res) => setLoading(false));
   }, [dispatch]);
 
   const handleOpenDialog = (employee) => {
@@ -161,6 +163,14 @@ function Employeemain() {
   const handleEdit = (employee) => {
     navigate(`/add-employee/${employee.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

@@ -126,6 +126,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 function Purchasemain() {
   const purchases = useSelector((state) => state.purchase.purchases);
@@ -133,9 +134,10 @@ function Purchasemain() {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedPurchase, setSelectedPurchase] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getPurchase());
+    dispatch(getPurchase()).then((res) => setLoading(false));
   }, [dispatch]);
 
   const handleOpenDialog = (purchase) => {
@@ -159,6 +161,14 @@ function Purchasemain() {
   const handleEdit = (purchase) => {
     navigate(`/add-purchase/${purchase.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

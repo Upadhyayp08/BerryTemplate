@@ -82,7 +82,7 @@ function AddEmployee() {
   }
 
   return (
-    <MainCard title="Add Employee">
+    <MainCard title={id ? "Edit Employee" : "Add Employee"}>
       <Formik
         initialValues={{
           id: id ? employeebyid.id : "",

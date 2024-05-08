@@ -57,7 +57,7 @@ function AddMaterial() {
   }
 
   return (
-    <MainCard title="Add Material">
+    <MainCard title={id ? "Edit Material" : "Add Material"}>
       <Formik
         initialValues={{
           id: id ? materialbyid.id : "",

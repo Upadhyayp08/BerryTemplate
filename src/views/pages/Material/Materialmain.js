@@ -119,6 +119,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteMATERIAL, getMaterial } from "store/Material/materialAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 function Materialmain() {
   const materials = useSelector((state) => state.material.materials);
@@ -126,9 +127,10 @@ function Materialmain() {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getMaterial());
+    dispatch(getMaterial()).then((res) => setLoading(false));
   }, [dispatch]);
 
   const handleOpenDialog = (material) => {
@@ -152,6 +154,14 @@ function Materialmain() {
   const handleEdit = (material) => {
     navigate(`/add-material/${material.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

@@ -16,6 +16,7 @@ import { deleteExpense, getExpense } from "store/Expense/expenseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import { deleteItem, getItem } from "store/Item/itemActions";
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 const Itemmain = () => {
   const items = useSelector((state) => state.item.items);
@@ -23,9 +24,10 @@ const Itemmain = () => {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getItem());
+    dispatch(getItem()).then((res) => setLoading(false));
   }, [dispatch]);
 
   const handleOpenDialog = (expense) => {
@@ -49,6 +51,14 @@ const Itemmain = () => {
   const handleEdit = (expense) => {
     navigate(`/add-item/${expense.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

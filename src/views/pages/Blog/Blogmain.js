@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteBlog, getBlog } from "store/Blog/blogActions";
 import DeleteConfirmationDialog from "../../../ui-component/DeleteConfirmationDialog"; // Import the confirmation dialog component
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 const Blogmain = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,10 @@ const Blogmain = () => {
   const blogs = useSelector((state) => state.blog.blogs);
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getBlog());
+    dispatch(getBlog()).then((Res) => setLoading(false));
   }, [dispatch]);
 
   const handleAddClick = () => {
@@ -52,6 +54,14 @@ const Blogmain = () => {
     setOpenDialog(false);
     setDeleteId(null);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <MainCard

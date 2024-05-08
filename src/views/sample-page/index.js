@@ -134,6 +134,7 @@ import { connect, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 const SamplePage = ({ readCustomer }) => {
   const customers = useSelector((state) => state.customer.customers);
@@ -141,9 +142,10 @@ const SamplePage = ({ readCustomer }) => {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    readCustomer();
+    readCustomer().then((res) => setLoading(false));
   }, [readCustomer]);
 
   const handleOpenDialog = (customer) => {
@@ -167,6 +169,14 @@ const SamplePage = ({ readCustomer }) => {
   const handleEdit = (customer) => {
     navigate(`/add-customer/${customer.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

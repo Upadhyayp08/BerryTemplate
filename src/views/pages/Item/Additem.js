@@ -78,7 +78,7 @@ function Additem() {
     );
   }
   return (
-    <MainCard title="Add Item">
+    <MainCard title={id ? "Edit Item" : "Add Item"}>
       <Box>
         <form onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>

@@ -17,6 +17,7 @@ import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import { deleteSale, getSale, SaleById } from "store/Sale/saleActions";
 import { deleteStock, getStock } from "store/Stock/stockActions";
 import NoDataImage from "../../../assets/images/NoData.png";
+import Loader from "ui-component/Loader";
 
 function Stockmain() {
   const sales = useSelector((state) => state.sale.sales);
@@ -28,9 +29,10 @@ function Stockmain() {
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedPurchase, setSelectedPurchase] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getStock());
+    dispatch(getStock()).then((res) => setLoading(false));
   }, [dispatch]);
 
   const handleOpenDialog = (purchase) => {
@@ -54,6 +56,14 @@ function Stockmain() {
   const handleEdit = (purchase) => {
     navigate(`/add-stock/${purchase.id}`);
   };
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

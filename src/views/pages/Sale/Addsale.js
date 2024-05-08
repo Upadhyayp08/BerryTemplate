@@ -91,7 +91,7 @@ const Addsale = () => {
   }
 
   return (
-    <MainCard title="Add Sale">
+    <MainCard title={id ? "Edit Sale" : "Add Sale"}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

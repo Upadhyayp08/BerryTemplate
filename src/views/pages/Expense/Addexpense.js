@@ -267,7 +267,7 @@ function AddExpense() {
   }
 
   return (
-    <MainCard title="Add Expense">
+    <MainCard title={id ? "Edit Expense" : "Add Expense"}>
       <Formik
         initialValues={{
           name: id ? expense.name : "",
