@@ -30,9 +30,10 @@ import Transitions from "ui-component/extended/Transitions";
 // import User1 from 'assets/images/users/user-round.svg';
 
 // assets
-import { IconLogout, IconSettings } from "@tabler/icons-react";
+import { IconLogout, IconPassword, IconSettings } from "@tabler/icons-react";
 import { RESET_STATE } from "store/actions";
 import LogOutConfirmationDialog from "ui-component/LogOutConfirmationDialog";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -45,6 +46,7 @@ const ProfileSection = () => {
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false);
   /**
    * anchorRef is used on different componets and specifying one type leads to other components throwing an error
    * */
@@ -60,6 +62,14 @@ const ProfileSection = () => {
       return;
     }
     setOpen(false);
+  };
+
+  const handleOpenChangePassword = () => {
+    setChangePasswordOpen(true);
+  };
+
+  const handleCloseChangePassword = () => {
+    setChangePasswordOpen(false);
   };
 
   const handleListItemClick = (event, index, route = "") => {
@@ -208,6 +218,21 @@ const ProfileSection = () => {
                         }}
                       >
                         <ListItemButton
+                          selected={selectedIndex === 3}
+                          onClick={handleOpenChangePassword}
+                        >
+                          <ListItemIcon>
+                            <IconPassword stroke={1.5} size="1.3rem" />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={
+                              <Typography variant="body2">
+                                Change Password
+                              </Typography>
+                            }
+                          />
+                        </ListItemButton>
+                        <ListItemButton
                           sx={{
                             borderRadius: `${customization.borderRadius}px`,
                           }}
@@ -233,6 +258,11 @@ const ProfileSection = () => {
           </Transitions>
         )}
       </Popper>
+      <ChangePasswordModal
+        open={changePasswordOpen}
+        onClose={handleCloseChangePassword}
+      />
+
       <LogOutConfirmationDialog
         open={logoutDialogOpen}
         onClose={() => setLogoutDialogOpen(false)}
