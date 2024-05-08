@@ -21,21 +21,40 @@ import { gridSpacing } from "store/constant";
 import { useDispatch, useSelector } from "react-redux";
 import MainCard from "ui-component/cards/MainCard";
 import { readCustomer } from "store/Customer/customerActions";
+import API from "helper/API";
+import Loader from "ui-component/Loader";
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);
+  const [dataFetched, setDataFetched] = useState({});
   const dispatch = useDispatch();
   const customers = useSelector((state) => state.customer.customers);
   useEffect(() => {
-    setLoading(false);
+    // setLoading(false);
+    fetchData();
   }, []);
 
+  const fetchData = () => {
+    API.post("/dashboard").then(
+      (res) => setDataFetched(res.data.response),
+      setLoading(false)
+    );
+  };
   useEffect(() => {
     dispatch(readCustomer());
   }, []);
 
+  console.log(dataFetched);
+  const { data, stock, total } = dataFetched;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   return (
     // <Grid container spacing={gridSpacing}>
     //   <Grid item xs={12}>
@@ -75,47 +94,61 @@ const Dashboard = () => {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Grid item xs={12} marginBottom={3}>
-                <TotalIncomeDarkCard />
+                <TotalIncomeDarkCard
+                  total={total?.monthly_purchase}
+                  Header={"Monthly Purchase"}
+                />
               </Grid>
               <Grid item xs={12}>
-                <TotalIncomeDarkCard />
+                <TotalIncomeDarkCard
+                  total={total?.monthly_expense}
+                  Header={"Monthly Expense"}
+                />
               </Grid>
             </Grid>
             <Grid item xs={6}>
               <Grid item xs={12} marginBottom={3}>
-                <TotalIncomeDarkCard />
+                <TotalIncomeDarkCard
+                  total={total?.monthly_sell}
+                  Header={"Monthly Sell"}
+                />
               </Grid>
               <Grid item xs={12}>
-                <TotalIncomeDarkCard />
+                <TotalIncomeDarkCard
+                  total={total?.monthly_income}
+                  Header={"Monthly Income"}
+                />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={4}>
-          <EarningCard isLoading={isLoading} />
+          <EarningCard
+            isLoading={isLoading}
+            total={total?.yearly_income}
+            Header={"Yearly Income"}
+          />
         </Grid>
       </Grid>
       <Grid marginBottom={3}>
-        <TotalGrowthBarChart isLoading={isLoading} />
+        <TotalGrowthBarChart isLoading={isLoading} data={data} />
       </Grid>
       <Grid>
         <MainCard title="Stocks">
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>POC Name</TableCell>
+                <TableCell>Sr. No</TableCell>
+                <TableCell>Item</TableCell>
+                <TableCell>Stock</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.map((row) => (
+              {stock?.map((row, index) => (
                 <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.phone}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.poc_name}</TableCell>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{row.Item}</TableCell>
+                  <TableCell>{row.stock}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
