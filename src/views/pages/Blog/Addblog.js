@@ -197,7 +197,16 @@ const Addblog = () => {
                         objectFit: "cover", // Ensures the image covers the div without distorting aspect ratio
                       }}
                     />
-
+                    {/* <Button
+                      onClick={() => {
+                        setFieldValue("image", null);
+                        setFieldValue("imagePreview", null);
+                        setInputKey(Date.now());
+                      }}
+                      style={{ color: "red", marginLeft: "10px" }}
+                    >
+                      <IconX />
+                    </Button> */}
                     <IconButton
                       // onClick={() => handleRemoveImage(setFieldValue)}
                       onClick={() => {

@@ -303,6 +303,16 @@ const Albummain = () => {
                         <Button
                           fullWidth
                           variant="contained"
+                          color="primary"
+                          onClick={() => handleAlbumClick(album)}
+                        >
+                          View
+                        </Button>
+                      </Grid>
+                      <Grid item lg={6}>
+                        <Button
+                          fullWidth
+                          variant="contained"
                           color="error"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -310,16 +320,6 @@ const Albummain = () => {
                           }}
                         >
                           Delete
-                        </Button>
-                      </Grid>
-                      <Grid item lg={6}>
-                        <Button
-                          fullWidth
-                          variant="contained"
-                          color="primary"
-                          onClick={() => handleAlbumClick(album)}
-                        >
-                          View
                         </Button>
                       </Grid>
                     </Grid>
