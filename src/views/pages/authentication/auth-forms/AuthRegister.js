@@ -106,8 +106,13 @@ const FirebaseRegister = ({ ...others }) => {
                   }
                 })
                 .catch((err) => {
-                  console.error(err);
-                  const { message } = err;
+                  console.log(err);
+                  // const { message } = err;
+                  const {
+                    response: {
+                      data: { message },
+                    },
+                  } = err;
                   console.log(message);
                   Notification("error", message);
                 });
