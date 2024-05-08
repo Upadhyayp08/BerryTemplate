@@ -4,7 +4,11 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import MainCard from "ui-component/cards/MainCard";
-import { IconUpload, IconHttpDelete } from "@tabler/icons-react";
+import {
+  IconUpload,
+  IconHttpDelete,
+  IconCloudUpload,
+} from "@tabler/icons-react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AlbumById, deleteImage, updateAlbum } from "store/Album/albumActions";
@@ -184,16 +188,17 @@ function Gallery() {
                 onChange={handleImageUpload}
               />
               <Button
-                variant="contained"
+                // variant="contained"
                 component="span"
                 style={{
-                  border: "1px solid black",
+                  border: "1px dashed black",
                   width: "254px",
                   height: "160px",
                   borderRadius: "15px",
+                  backgroundColor: "whitesmoke",
                 }}
               >
-                <IconUpload />
+                <IconCloudUpload />
               </Button>
             </label>
           </Grid>
