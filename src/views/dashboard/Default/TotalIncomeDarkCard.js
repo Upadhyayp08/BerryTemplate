@@ -84,6 +84,7 @@ const TotalIncomeDarkCard = ({ isLoading, total, Header }) => {
                   primary={
                     <Typography variant="h4" sx={{ color: "#fff" }}>
                       {/* $203k */}
+                      L£ {""}
                       {total}
                     </Typography>
                   }

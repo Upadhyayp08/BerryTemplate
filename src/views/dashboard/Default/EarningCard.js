@@ -154,6 +154,7 @@ const EarningCard = ({ isLoading, total, Header }) => {
                       }}
                     >
                       {/* $500.00 */}
+                      L£{""}
                       {total}
                     </Typography>
                   </Grid>

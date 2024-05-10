@@ -21,6 +21,8 @@ function Addstock() {
   useEffect(() => {
     if (id) {
       dispatch(StockById(id)).then((res) => setLoading(false));
+    } else {
+      setLoading(false);
     }
     dispatch(getItem());
   }, [dispatch]);
