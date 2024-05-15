@@ -46,7 +46,6 @@ const Dashboard = () => {
     dispatch(readCustomer());
   }, []);
 
-  console.log(dataFetched);
   const { data, stock, total } = dataFetched;
   if (isLoading) {
     return (
@@ -134,21 +133,21 @@ const Dashboard = () => {
         <TotalGrowthBarChart isLoading={isLoading} data={data} />
       </Grid>
       <Grid>
-        <MainCard title="Stocks">
-          <Table>
+        <MainCard title="Stock">
+          <Table sx={{ alignContent: "center" }}>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Item</TableCell>
-                <TableCell>Stock</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Item</TableCell>
+                <TableCell align="center">Available Stock</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {stock?.map((row, index) => (
-                <TableRow key={row.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.Item}</TableCell>
-                  <TableCell>{row.stock}</TableCell>
+                <TableRow key={row.id} style={{ textAlign: "center" }}>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{row.Item}</TableCell>
+                  <TableCell align="center">{row.stock}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

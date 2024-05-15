@@ -95,25 +95,25 @@ const Itemmain = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Item Code</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Unit</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Item Code</TableCell>
+                <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Unit</TableCell>
+                <TableCell align="center">Amount</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((expense, index) => (
                 <TableRow key={expense.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{expense.name}</TableCell>
-                  <TableCell>{expense.item_code}</TableCell>
-                  <TableCell>{expense.quantity}</TableCell>
-                  <TableCell>{expense.unit}</TableCell>
-                  <TableCell>L£{expense.amount}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{expense.name}</TableCell>
+                  <TableCell align="center">{expense.item_code}</TableCell>
+                  <TableCell align="center">{expense.quantity}</TableCell>
+                  <TableCell align="center">{expense.unit}</TableCell>
+                  <TableCell align="center">L£{expense.amount}</TableCell>
+                  <TableCell align="center">
                     <IconButton
                       color="primary"
                       onClick={() => handleEdit(expense)}

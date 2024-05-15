@@ -57,7 +57,6 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
 const EarningCard = ({ isLoading, total, Header }) => {
-  console.log(total, Header);
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState(null);

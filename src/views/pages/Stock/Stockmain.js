@@ -22,7 +22,6 @@ import Loader from "ui-component/Loader";
 function Stockmain() {
   const sales = useSelector((state) => state.sale.sales);
   const stock = useSelector((state) => state.stock.stocks);
-  console.log(stock);
 
   const navigate = useNavigate();
 
@@ -100,23 +99,23 @@ function Stockmain() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Item</TableCell>
-                <TableCell>Stock</TableCell>
-                {/* <TableCell>Amount</TableCell>
-              <TableCell>Payment Status</TableCell> */}
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Item</TableCell>
+                <TableCell align="center">Available Stock</TableCell>
+                {/* <TableCell align="center">Amount</TableCell>
+              <TableCell align="center">Payment Status</TableCell> */}
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {stock.map((row, index) => (
                 <TableRow key={row.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.Item}</TableCell>
-                  <TableCell>{row.stock}</TableCell>
-                  {/* <TableCell>{row.amount}</TableCell>
-                <TableCell>{row.paid_status}</TableCell> */}
-                  <TableCell>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{row.Item}</TableCell>
+                  <TableCell align="center">{row.stock}</TableCell>
+                  {/* <TableCell align="center">{row.amount}</TableCell>
+                <TableCell align="center">{row.paid_status}</TableCell> */}
+                  <TableCell align="center">
                     <IconButton color="primary" onClick={() => handleEdit(row)}>
                       <Edit />
                     </IconButton>

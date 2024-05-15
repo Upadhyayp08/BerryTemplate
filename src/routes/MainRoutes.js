@@ -58,11 +58,6 @@ const MainRoutes = {
         },
       ],
     },
-
-    // {
-    //   path: "sample-page",
-    //   element: <SamplePage />,
-    // },
     {
       path: "/customer",
       element: <SamplePage />,

@@ -73,23 +73,23 @@
 //         <Table>
 //           <TableHead>
 //             <TableRow>
-//               <TableCell>Sr. No</TableCell>
-//               <TableCell>Name</TableCell>
-//               <TableCell>Phone</TableCell>
-//               <TableCell>Email</TableCell>
-//               <TableCell>Designation</TableCell>
-//               <TableCell>Actions</TableCell>
+//               <TableCell align="center">Sr. No</TableCell>
+//               <TableCell align="center">Name</TableCell>
+//               <TableCell align="center">Phone</TableCell>
+//               <TableCell align="center">Email</TableCell>
+//               <TableCell align="center">Designation</TableCell>
+//               <TableCell align="center">Actions</TableCell>
 //             </TableRow>
 //           </TableHead>
 //           <TableBody>
 //             {employee.map((row, index) => (
 //               <TableRow key={row.id}>
-//                 <TableCell>{index + 1}</TableCell>
-//                 <TableCell>{row.name}</TableCell>
-//                 <TableCell>{row.phone}</TableCell>
-//                 <TableCell>{row.email}</TableCell>
-//                 <TableCell>{row.designation}</TableCell>
-//                 <TableCell>
+//                 <TableCell align="center">{index + 1}</TableCell>
+//                 <TableCell align="center">{row.name}</TableCell>
+//                 <TableCell align="center">{row.phone}</TableCell>
+//                 <TableCell align="center">{row.email}</TableCell>
+//                 <TableCell align="center">{row.designation}</TableCell>
+//                 <TableCell align="center">
 //                   <IconButton color="primary" aria-label="edit">
 //                     <Edit onClick={() => handleEdit(row)} />
 //                   </IconButton>
@@ -207,23 +207,23 @@ function Employeemain() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Designation</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Phone</TableCell>
+                <TableCell align="center">Email</TableCell>
+                <TableCell align="center">Designation</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {employees.map((employee, index) => (
                 <TableRow key={employee.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{employee.name}</TableCell>
-                  <TableCell>{employee.phone}</TableCell>
-                  <TableCell>{employee.email}</TableCell>
-                  <TableCell>{employee.designation}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{employee.name}</TableCell>
+                  <TableCell align="center">{employee.phone}</TableCell>
+                  <TableCell align="center">{employee.email}</TableCell>
+                  <TableCell align="center">{employee.designation}</TableCell>
+                  <TableCell align="center">
                     <IconButton
                       color="primary"
                       onClick={() => handleEdit(employee)}

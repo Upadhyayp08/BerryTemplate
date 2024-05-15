@@ -113,7 +113,7 @@ const FirebaseRegister = ({ ...others }) => {
                       data: { message },
                     },
                   } = err;
-                  console.log(message);
+
                   Notification("error", message);
                 });
               setSubmitting(false);

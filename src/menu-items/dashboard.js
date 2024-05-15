@@ -1,8 +1,8 @@
 // assets
-import { IconDashboard } from "@tabler/icons-react";
+import { IconDashboard, IconGraph } from "@tabler/icons-react";
 
 // constant
-const icons = { IconDashboard };
+const icons = { IconDashboard, IconGraph };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -16,7 +16,7 @@ const dashboard = {
       title: "Dashboard",
       type: "item",
       url: "/dashboard/default",
-      icon: icons.IconDashboard,
+      icon: icons.IconGraph,
       breadcrumbs: false,
     },
   ],

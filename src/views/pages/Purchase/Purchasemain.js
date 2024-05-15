@@ -71,23 +71,23 @@
 //         <Table>
 //           <TableHead>
 //             <TableRow>
-//               <TableCell>Sr. No</TableCell>
-//               <TableCell>Material</TableCell>
-//               <TableCell>Quantity</TableCell>
-//               <TableCell>Unit</TableCell>
-//               <TableCell>Amount</TableCell>
-//               <TableCell>Actions</TableCell>
+//               <TableCell align="center">Sr. No</TableCell>
+//               <TableCell align="center">Material</TableCell>
+//               <TableCell align="center">Quantity</TableCell>
+//               <TableCell align="center">Unit</TableCell>
+//               <TableCell align="center">Amount</TableCell>
+//               <TableCell align="center">Actions</TableCell>
 //             </TableRow>
 //           </TableHead>
 //           <TableBody>
 //             {purchase.map((row, index) => (
 //               <TableRow key={row.id}>
-//                 <TableCell>{index + 1}</TableCell>
-//                 <TableCell>{row.material}</TableCell>
-//                 <TableCell>{row.quantity}</TableCell>
-//                 <TableCell>{row.unit}</TableCell>
-//                 <TableCell>{row.amount}</TableCell>
-//                 <TableCell>
+//                 <TableCell align="center">{index + 1}</TableCell>
+//                 <TableCell align="center">{row.material}</TableCell>
+//                 <TableCell align="center">{row.quantity}</TableCell>
+//                 <TableCell align="center">{row.unit}</TableCell>
+//                 <TableCell align="center">{row.amount}</TableCell>
+//                 <TableCell align="center">
 //                   <IconButton color="primary" aria-label="edit">
 //                     <Edit onClick={() => handleEdit(row)} />
 //                   </IconButton>
@@ -205,23 +205,23 @@ function Purchasemain() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Material</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Unit</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Material</TableCell>
+                <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Unit</TableCell>
+                <TableCell align="center">Amount</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {purchases.map((row, index) => (
                 <TableRow key={row.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.material}</TableCell>
-                  <TableCell>{row.quantity}</TableCell>
-                  <TableCell>{row.unit}</TableCell>
-                  <TableCell>L£{row.amount}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{row.material}</TableCell>
+                  <TableCell align="center">{row.quantity}</TableCell>
+                  <TableCell align="center">{row.unit}</TableCell>
+                  <TableCell align="center">L£{row.amount}</TableCell>
+                  <TableCell align="center">
                     <IconButton color="primary" onClick={() => handleEdit(row)}>
                       <Edit />
                     </IconButton>

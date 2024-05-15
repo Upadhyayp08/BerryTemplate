@@ -97,23 +97,23 @@ function Salemain() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell>Invoice No.</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Payment Status</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Customer</TableCell>
+                <TableCell align="center">Invoice No.</TableCell>
+                <TableCell align="center">Amount</TableCell>
+                <TableCell align="center">Payment Status</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {sales.map((row, index) => (
                 <TableRow key={row.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.customer}</TableCell>
-                  <TableCell>{row.invoice_no}</TableCell>
-                  <TableCell>L£{row.amount}</TableCell>
-                  <TableCell>{row.paid_status}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{row.customer}</TableCell>
+                  <TableCell align="center">{row.invoice_no}</TableCell>
+                  <TableCell align="center">L£{row.amount}</TableCell>
+                  <TableCell align="center">{row.paid_status}</TableCell>
+                  <TableCell align="center">
                     <IconButton color="primary" onClick={() => handleEdit(row)}>
                       <Edit />
                     </IconButton>

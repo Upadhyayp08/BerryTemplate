@@ -13,7 +13,7 @@ function Addstock() {
   const items = useSelector((state) => state.item.items);
   const stock = useSelector((state) => state.stock.stockbyid);
   const [loading, setLoading] = useState(true);
-  console.log(items);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();

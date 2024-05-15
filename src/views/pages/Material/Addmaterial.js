@@ -81,7 +81,7 @@ function AddMaterial() {
                 />
               </Grid>
             </Grid>
-            <Box mt={2} display="flex" justifyContent="center">
+            <Box mt={2} display="flex">
               <Button
                 type="submit"
                 variant="contained"

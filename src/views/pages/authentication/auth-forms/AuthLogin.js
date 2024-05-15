@@ -192,7 +192,6 @@ const FirebaseLogin = ({ ...others }) => {
                   },
                 } = err;
                 Notification("error", response);
-                console.log(response);
               });
           } catch (err) {
             console.error(err);

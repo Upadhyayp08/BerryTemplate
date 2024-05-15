@@ -70,17 +70,17 @@
 //         <Table>
 //           <TableHead>
 //             <TableRow>
-//               <TableCell>Sr. No</TableCell>
-//               <TableCell>Name</TableCell>
-//               <TableCell>Actions</TableCell>
+//               <TableCell align="center">Sr. No</TableCell>
+//               <TableCell align="center">Name</TableCell>
+//               <TableCell align="center">Actions</TableCell>
 //             </TableRow>
 //           </TableHead>
 //           <TableBody>
 //             {material.map((row, index) => (
 //               <TableRow key={row.id}>
-//                 <TableCell>{index + 1}</TableCell>
-//                 <TableCell>{row.name}</TableCell>
-//                 <TableCell>
+//                 <TableCell align="center">{index + 1}</TableCell>
+//                 <TableCell align="center">{row.name}</TableCell>
+//                 <TableCell align="center">
 //                   <IconButton color="primary" aria-label="edit">
 //                     <Edit onClick={() => handleEdit(row)} />
 //                   </IconButton>
@@ -198,17 +198,17 @@ function Materialmain() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Sr. No</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Sr. No</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {materials.map((material, index) => (
                 <TableRow key={material.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{material.name}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{material.name}</TableCell>
+                  <TableCell align="center">
                     <IconButton
                       color="primary"
                       onClick={() => handleEdit(material)}

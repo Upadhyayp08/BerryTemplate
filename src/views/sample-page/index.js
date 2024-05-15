@@ -67,21 +67,21 @@
 //         <Table>
 //           <TableHead>
 //             <TableRow>
-//               <TableCell>Name</TableCell>
-//               <TableCell>Phone</TableCell>
-//               <TableCell>Email</TableCell>
-//               <TableCell>POC Name</TableCell>
-//               <TableCell>Actions</TableCell>
+//               <TableCell align="center">Name</TableCell>
+//               <TableCell align="center">Phone</TableCell>
+//               <TableCell align="center">Email</TableCell>
+//               <TableCell align="center">POC Name</TableCell>
+//               <TableCell align="center">Actions</TableCell>
 //             </TableRow>
 //           </TableHead>
 //           <TableBody>
 //             {customers.map((row) => (
 //               <TableRow key={row.id}>
-//                 <TableCell>{row.name}</TableCell>
-//                 <TableCell>{row.phone}</TableCell>
-//                 <TableCell>{row.email}</TableCell>
-//                 <TableCell>{row.poc_name}</TableCell>
-//                 <TableCell>
+//                 <TableCell align="center">{row.name}</TableCell>
+//                 <TableCell align="center">{row.phone}</TableCell>
+//                 <TableCell align="center">{row.email}</TableCell>
+//                 <TableCell align="center">{row.poc_name}</TableCell>
+//                 <TableCell align="center">
 //                   <IconButton color="primary" onClick={() => handleEdit(row)}>
 //                     <Edit />
 //                   </IconButton>
@@ -213,21 +213,21 @@ const SamplePage = ({ readCustomer }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>POC Name</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Phone</TableCell>
+                <TableCell align="center">Email</TableCell>
+                <TableCell align="center">POC Name</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {customers.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.phone}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.poc_name}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{row.name}</TableCell>
+                  <TableCell align="center">{row.phone}</TableCell>
+                  <TableCell align="center">{row.email}</TableCell>
+                  <TableCell align="center">{row.poc_name}</TableCell>
+                  <TableCell align="center">
                     <IconButton color="primary" onClick={() => handleEdit(row)}>
                       <Edit />
                     </IconButton>

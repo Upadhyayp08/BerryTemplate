@@ -253,13 +253,12 @@ const ChangePasswordModal = ({ open, onClose }) => {
   });
 
   const handleSubmit = (values) => {
-    console.log(values);
     API.post("/change/password", values)
       .then((res) => {
         const {
           data: { statusCode, message, response },
         } = res;
-        console.log(res);
+
         if (statusCode === 200) {
           Notification("success", message);
           localStorage.clear();
