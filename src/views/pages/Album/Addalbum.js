@@ -263,7 +263,7 @@ const AddAlbum = () => {
                       style={{
                         width: "300px",
                         height: "200px",
-                        border: "1px dashed black",
+                        border: "1px dashed rgb(175, 175, 175)",
                         backgroundColor: "whitesmoke",
                       }}
                     >

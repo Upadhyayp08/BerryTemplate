@@ -215,6 +215,7 @@ const Addsale = () => {
                     </Grid>
                   ))}
                   <Button
+                    disabled={!!id}
                     startIcon={<AddCircleOutlineIcon />}
                     onClick={() => push({ item: "", qty: "" })}
                   >

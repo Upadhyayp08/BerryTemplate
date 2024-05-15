@@ -123,7 +123,7 @@ const Blogmain = () => {
                       dangerouslySetInnerHTML={{
                         __html: blog.shortdescription
                           .split(" ")
-                          .slice(0, 6)
+                          .slice(0, 10)
                           .join(" ")
                           .concat("..."),
                       }}

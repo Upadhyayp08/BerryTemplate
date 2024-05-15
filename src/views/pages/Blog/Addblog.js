@@ -124,7 +124,9 @@ const Addblog = () => {
                         // height: "200px",
                         width: "300px", // Adjust the width to fit 1:1.5 aspect ratio
                         height: "200px", // Adjust the height to fit 1:1.5 aspect ratio
-                        border: "1px dashed black",
+                        // border: "1px dashed #808080",
+                        border: "1px dashed rgb(175, 175, 175)",
+                        // color: "grey",
                         backgroundColor: "whitesmoke",
                       }}
                     >

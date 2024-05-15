@@ -396,7 +396,7 @@ function Gallery() {
               <Button
                 component="span"
                 style={{
-                  border: "1px dashed black",
+                  border: "1px dashed rgb(175, 175, 175)",
                   width: "100%",
                   height: "160px", // Set fixed height
                   borderRadius: "15px",
