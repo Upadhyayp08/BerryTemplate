@@ -121,7 +121,11 @@ const Blogmain = () => {
                       variant="body2"
                       color="text.secondary"
                       dangerouslySetInnerHTML={{
-                        __html: blog.shortdescription,
+                        __html: blog.shortdescription
+                          .split(" ")
+                          .slice(0, 6)
+                          .join(" ")
+                          .concat("..."),
                       }}
                     />
                   </CardContent>

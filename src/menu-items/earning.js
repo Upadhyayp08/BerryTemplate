@@ -11,24 +11,31 @@ const icons = {
 
 const earning = {
   id: "earning",
-  title: "Earning",
+  // title: "Earning",
   type: "group",
   children: [
     {
-      id: "customer-page",
-      title: "Customer",
-      type: "item",
-      url: "/customer",
-      icon: icons.IconUser,
-      breadcrumbs: false,
-    },
-    {
-      id: "sale-page",
-      title: "Sales",
-      type: "item",
-      url: "/sale",
-      icon: icons.IconCurrencyDollar,
-      breadcrumbs: false,
+      id: "earning",
+      title: "Earning",
+      type: "collapse",
+      children: [
+        {
+          id: "customer-page",
+          title: "Customer",
+          type: "item",
+          url: "/customer",
+          icon: icons.IconUser,
+          breadcrumbs: false,
+        },
+        {
+          id: "sale-page",
+          title: "Sales",
+          type: "item",
+          url: "/sale",
+          icon: icons.IconCurrencyDollar,
+          breadcrumbs: false,
+        },
+      ],
     },
   ],
 };

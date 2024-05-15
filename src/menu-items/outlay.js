@@ -6,6 +6,7 @@ import {
   IconCash,
   IconMoneybag,
   IconUserCircle,
+  IconWallet,
 } from "@tabler/icons-react";
 
 // constant
@@ -16,46 +17,55 @@ const icons = {
   IconCash,
   IconMoneybag,
   IconUserCircle,
+  IconWallet,
 };
 
 // ==============================|s| DASHBOARD MENU ITEMS ||============================== //
 
 const outlay = {
   id: "outlay",
-  title: "Outlay",
+  // title: "Outlay",
   type: "group",
   children: [
     {
-      id: "material-page",
-      title: "Material",
-      type: "item",
-      url: "/material",
-      icon: icons.IconBox,
-      breadcrumbs: false,
-    },
-    {
-      id: "purchase-page",
-      title: "Purchase",
-      type: "item",
-      url: "/purchase",
-      icon: icons.IconCash,
-      breadcrumbs: false,
-    },
-    {
-      id: "employee-page",
-      title: "Employee",
-      type: "item",
-      url: "/employee",
-      icon: icons.IconUserCircle,
-      breadcrumbs: false,
-    },
-    {
-      id: "expense-page",
-      title: "Expense",
-      type: "item",
-      url: "/expense",
-      icon: icons.IconMoneybag,
-      breadcrumbs: false,
+      id: "outlay",
+      title: "Outlay",
+      type: "collapse",
+      // icon: icons.IconWallet,
+      children: [
+        {
+          id: "material-page",
+          title: "Material",
+          type: "item",
+          url: "/material",
+          icon: icons.IconBox,
+          breadcrumbs: false,
+        },
+        {
+          id: "purchase-page",
+          title: "Purchase",
+          type: "item",
+          url: "/purchase",
+          icon: icons.IconCash,
+          breadcrumbs: false,
+        },
+        {
+          id: "employee-page",
+          title: "Employee",
+          type: "item",
+          url: "/employee",
+          icon: icons.IconUserCircle,
+          breadcrumbs: false,
+        },
+        {
+          id: "expense-page",
+          title: "Expense",
+          type: "item",
+          url: "/expense",
+          icon: icons.IconMoneybag,
+          breadcrumbs: false,
+        },
+      ],
     },
   ],
 };

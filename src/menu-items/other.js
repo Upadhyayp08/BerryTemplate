@@ -35,23 +35,30 @@ const icons = {
 const other = {
   id: "sample-docs-roadmap",
   type: "group",
-  title: "Others",
+  // title: "Others",
   children: [
     {
-      id: "blog-page",
-      title: "Blog",
-      type: "item",
-      url: "/blog",
-      icon: icons.IconPencil,
-      breadcrumbs: false,
-    },
-    {
-      id: "album-page",
-      title: "Album",
-      type: "item",
-      url: "/album",
-      icon: icons.IconCamera,
-      breadcrumbs: false,
+      id: "others",
+      title: "Others",
+      type: "collapse",
+      children: [
+        {
+          id: "blog-page",
+          title: "Blog",
+          type: "item",
+          url: "/blog",
+          icon: icons.IconPencil,
+          breadcrumbs: false,
+        },
+        {
+          id: "album-page",
+          title: "Album",
+          type: "item",
+          url: "/album",
+          icon: icons.IconCamera,
+          breadcrumbs: false,
+        },
+      ],
     },
   ],
 };
