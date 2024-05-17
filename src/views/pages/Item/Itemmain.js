@@ -48,7 +48,7 @@ const Itemmain = () => {
   const handleConfirmDelete = () => {
     if (selectedExpense) {
       dispatch(deleteItem({ id: selectedExpense.id })).then(() => {
-        dispatch(getItem());
+        dispatch(getItem({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }

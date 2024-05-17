@@ -47,7 +47,7 @@ function Materialmain() {
   const handleConfirmDelete = () => {
     if (selectedMaterial) {
       dispatch(deleteMATERIAL({ id: selectedMaterial.id })).then(() => {
-        dispatch(getMaterial());
+        dispatch(getMaterial({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }

@@ -52,7 +52,7 @@ function Stockmain() {
   const handleConfirmDelete = () => {
     if (selectedPurchase) {
       dispatch(deleteStock({ id: selectedPurchase.id })).then(() => {
-        dispatch(getStock());
+        dispatch(getStock({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }

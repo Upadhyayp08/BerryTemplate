@@ -47,7 +47,7 @@ const Expensemain = () => {
   const handleConfirmDelete = () => {
     if (selectedExpense) {
       dispatch(deleteExpense({ id: selectedExpense.id })).then(() => {
-        dispatch(getExpense());
+        dispatch(getExpense({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }

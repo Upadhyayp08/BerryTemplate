@@ -160,7 +160,7 @@ function Purchasemain() {
   const handleConfirmDelete = () => {
     if (selectedPurchase) {
       dispatch(deletePurchase({ id: selectedPurchase.id })).then(() => {
-        dispatch(getPurchase());
+        dispatch(getPurchase({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }

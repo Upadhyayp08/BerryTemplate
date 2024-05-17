@@ -50,7 +50,7 @@ function Salemain() {
   const handleConfirmDelete = () => {
     if (selectedPurchase) {
       dispatch(deleteSale({ id: selectedPurchase.id })).then(() => {
-        dispatch(getSale());
+        dispatch(getSale({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }

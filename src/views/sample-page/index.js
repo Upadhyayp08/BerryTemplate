@@ -166,7 +166,7 @@ const SamplePage = ({ readCustomer }) => {
   const handleConfirmDelete = () => {
     if (selectedCustomer) {
       dispatch(deleteCustomer({ id: selectedCustomer.id })).then(() => {
-        readCustomer();
+        readCustomer({ page: 1, page_size: 5 });
         setOpenDialog(false);
       });
     }

@@ -160,7 +160,7 @@ function Employeemain() {
   const handleConfirmDelete = () => {
     if (selectedEmployee) {
       dispatch(deleteEmployee({ id: selectedEmployee.id })).then(() => {
-        dispatch(getEmployee());
+        dispatch(getEmployee({ page: 1, page_size: 5 }));
         setOpenDialog(false);
       });
     }
