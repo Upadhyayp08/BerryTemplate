@@ -277,7 +277,7 @@ const Addblog = () => {
 
               <Grid item xs={12} sx={{ marginTop: "50px" }}>
                 <Button type="submit" variant="contained" color="primary">
-                  Submit Blog
+                  Submit
                 </Button>
               </Grid>
             </Grid>

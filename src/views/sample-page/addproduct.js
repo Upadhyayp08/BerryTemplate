@@ -52,7 +52,7 @@ function AddProduct() {
     // poc_name: Yup.string().required("POC Name is required"),
     poc_phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must contain only digits")
-      .max(10, "Phone number must be at most 10 digits"),
+      .max(9, "Phone number must be at most 9 digits"),
     // .required("POC Phone is required"),
     // poc_email: Yup.string()
     //   .email("Invalid email")
@@ -60,7 +60,7 @@ function AddProduct() {
     name: Yup.string().required("Customer Name is required"),
     phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must contain only digits")
-      .max(10, "Phone number must be at most 10 digits")
+      .max(9, "Phone number must be at most 9 digits")
       .required("Customer Phone is required"),
     email: Yup.string()
       .email("Invalid email")

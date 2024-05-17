@@ -92,7 +92,7 @@ const Blogmain = () => {
       ) : (
         <Grid container spacing={2}>
           {blogs.map((blog) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={blog.id}>
+            <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
               <Card
                 sx={{
                   maxWidth: 345, // Use maxWidth for better responsiveness
@@ -123,7 +123,7 @@ const Blogmain = () => {
                       dangerouslySetInnerHTML={{
                         __html: blog.shortdescription
                           .split(" ")
-                          .slice(0, 10)
+                          .slice(0, 6)
                           .join(" ")
                           .concat("..."),
                       }}

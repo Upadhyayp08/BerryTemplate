@@ -17,7 +17,7 @@ const purchaseReducer = (state = initialState, action) => {
     case actionTypes.GET_PURCHASE:
       return {
         ...state,
-        purchases: [...action.payload],
+        purchases: action.payload,
       };
     case actionTypes.GETBYID_PURCHASE:
       return {

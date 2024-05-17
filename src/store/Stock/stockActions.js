@@ -19,9 +19,11 @@ export const createStock = (customerData) => async (dispatch) => {
   }
 };
 
-export const getStock = () => async (dispatch) => {
+export const getStock = (data) => async (dispatch) => {
   try {
-    const response = await API.post(`/stocks/index`);
+    const response = await API.post(
+      `/stocks/index?page=${data ? data.page : ""}&page_size=${data ? data.page_size : ""}`
+    );
 
     dispatch({
       type: actionTypes.GET_STOCK,

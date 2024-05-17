@@ -17,7 +17,7 @@ const materialReducer = (state = initialState, action) => {
     case actionTypes.GET_MATERIAL:
       return {
         ...state,
-        materials: [...action.payload],
+        materials: action.payload,
       };
     case actionTypes.GETBYID_MATERIAL:
       return {

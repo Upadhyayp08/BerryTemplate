@@ -19,9 +19,11 @@ export const createCustomer = (customerData) => async (dispatch) => {
   }
 };
 
-export const readCustomer = () => async (dispatch) => {
+export const readCustomer = (data) => async (dispatch) => {
   try {
-    const response = await API.post(`/customers/index`);
+    const response = await API.post(
+      `/customers/index?page=${data ? data.page : ""}&page_size=${data ? data.page_size : ""}`
+    );
     dispatch({
       type: actionTypes.READ_CUSTOMER,
       payload: response.data.response,

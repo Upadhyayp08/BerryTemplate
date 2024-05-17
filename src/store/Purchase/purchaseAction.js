@@ -19,18 +19,22 @@ export const createPurchase = (customerData) => async (dispatch) => {
   }
 };
 
-export const getPurchase = () => async (dispatch) => {
-  try {
-    const response = await API.post(`/purchase/index`);
+export const getPurchase =
+  ({ page, page_size }) =>
+  async (dispatch) => {
+    try {
+      const response = await API.post(
+        `/purchase/index?page=${page}&page_size=${page_size}`
+      );
 
-    dispatch({
-      type: actionTypes.GET_PURCHASE,
-      payload: response.data.response,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+      dispatch({
+        type: actionTypes.GET_PURCHASE,
+        payload: response.data.response,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 export const updatePurchase = (updatedData) => async (dispatch) => {
   try {

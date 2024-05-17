@@ -19,9 +19,11 @@ export const createExpense = (customerData) => async (dispatch) => {
   }
 };
 
-export const getExpense = () => async (dispatch) => {
+export const getExpense = (data) => async (dispatch) => {
   try {
-    const response = await API.post(`/expense/index`);
+    const response = await API.post(
+      `/expense/index?page=${data ? data.page : ""}&page_size=${data ? data.page_size : ""}`
+    );
 
     dispatch({
       type: actionTypes.GET_EXPENSE,

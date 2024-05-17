@@ -118,6 +118,7 @@ import {
   TableRow,
   TableCell,
   IconButton,
+  TablePagination,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -135,10 +136,16 @@ function Purchasemain() {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    dispatch(getPurchase()).then((res) => setLoading(false));
-  }, [dispatch]);
+    dispatch(getPurchase({ page, page_size: rowsPerPage })).then((res) =>
+      setLoading(false)
+    );
+  }, [dispatch, page, rowsPerPage]);
+
+  console.log(purchases);
 
   const handleOpenDialog = (purchase) => {
     setSelectedPurchase(purchase);
@@ -160,6 +167,15 @@ function Purchasemain() {
 
   const handleEdit = (purchase) => {
     navigate(`/add-purchase/${purchase.id}`);
+  };
+
+  const handleChangePage = (_, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   if (loading) {
@@ -184,7 +200,7 @@ function Purchasemain() {
           </Button>
         }
       >
-        {purchases.length === 0 ? (
+        {purchases.data.length === 0 ? (
           <div
             style={{
               display: "flex",
@@ -202,40 +218,58 @@ function Purchasemain() {
             </div>
           </div>
         ) : (
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Sr. No</TableCell>
-                <TableCell align="center">Material</TableCell>
-                <TableCell align="center">Quantity</TableCell>
-                <TableCell align="center">Unit</TableCell>
-                <TableCell align="center">Amount</TableCell>
-                <TableCell align="center">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {purchases.map((row, index) => (
-                <TableRow key={row.id}>
-                  <TableCell align="center">{index + 1}</TableCell>
-                  <TableCell align="center">{row.material}</TableCell>
-                  <TableCell align="center">{row.quantity}</TableCell>
-                  <TableCell align="center">{row.unit}</TableCell>
-                  <TableCell align="center">L£{row.amount}</TableCell>
-                  <TableCell align="center">
-                    <IconButton color="primary" onClick={() => handleEdit(row)}>
-                      <Edit />
-                    </IconButton>
-                    <IconButton
-                      color="secondary"
-                      onClick={() => handleOpenDialog(row)}
-                    >
-                      <Delete sx={{ color: "red" }} />
-                    </IconButton>
-                  </TableCell>
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Sr. No</TableCell>
+                  <TableCell align="center">Material</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="center">Unit</TableCell>
+                  <TableCell align="center">Amount</TableCell>
+                  <TableCell align="center">Actions</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {purchases.data.map((row, index) => (
+                  <TableRow key={row.id}>
+                    <TableCell align="center">{index + 1}</TableCell>
+                    <TableCell align="center">{row.material}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="center">{row.unit}</TableCell>
+                    <TableCell align="center">L£{row.amount}</TableCell>
+                    <TableCell align="center">
+                      <IconButton
+                        color="primary"
+                        onClick={() => handleEdit(row)}
+                      >
+                        <Edit />
+                      </IconButton>
+                      <IconButton
+                        color="secondary"
+                        onClick={() => handleOpenDialog(row)}
+                      >
+                        <Delete sx={{ color: "red" }} />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              sx={{ px: 2, textAlign: "right" }}
+              page={page}
+              component="div"
+              className="page"
+              rowsPerPage={rowsPerPage}
+              count={purchases?.total}
+              onPageChange={handleChangePage}
+              rowsPerPageOptions={[5, 10, 25]}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              nextIconButtonProps={{ "aria-label": "Next Page" }}
+              backIconButtonProps={{ "aria-label": "Previous Page" }}
+            />
+          </>
         )}
 
         {openDialog && (

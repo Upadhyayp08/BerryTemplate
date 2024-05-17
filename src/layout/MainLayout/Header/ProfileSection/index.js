@@ -34,6 +34,7 @@ import { IconLogout, IconPassword, IconSettings } from "@tabler/icons-react";
 import { RESET_STATE } from "store/actions";
 import LogOutConfirmationDialog from "ui-component/LogOutConfirmationDialog";
 import ChangePasswordModal from "./ChangePasswordModal";
+import Notification from "helper/Notification";
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -52,6 +53,7 @@ const ProfileSection = () => {
    * */
   const anchorRef = useRef(null);
   const handleLogout = async () => {
+    Notification("success", "Logged out successfully");
     localStorage.clear();
     dispatch({ type: RESET_STATE });
     navigate("/pages/login/login3");

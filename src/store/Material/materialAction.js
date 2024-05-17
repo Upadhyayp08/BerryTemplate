@@ -19,9 +19,12 @@ export const createMaterial = (customerData) => async (dispatch) => {
   }
 };
 
-export const getMaterial = () => async (dispatch) => {
+export const getMaterial = (data) => async (dispatch) => {
   try {
-    const response = await API.post(`/materials/index`);
+    const response = await API.post(
+      `/materials/index?page=${data?.page ? data.page : ""}&page_size=${data?.page_size ? data.page_size : ""}`
+    );
+    console.log(response);
     dispatch({
       type: actionTypes.GET_MATERIAL,
       payload: response.data.response,

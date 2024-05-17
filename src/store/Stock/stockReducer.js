@@ -18,7 +18,7 @@ const stockReducer = (state = initialState, action) => {
       // You can implement logic to read a specific customer if needed
       return {
         ...state,
-        stocks: [...action.payload],
+        stocks: action.payload,
       };
     case actionTypes.GETBYID_STOCK:
       // You can implement logic to read a specific customer if needed

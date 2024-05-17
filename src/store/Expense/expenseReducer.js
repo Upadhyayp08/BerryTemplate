@@ -18,7 +18,7 @@ const expenseReducer = (state = initialState, action) => {
       // You can implement logic to read a specific customer if needed
       return {
         ...state,
-        expenses: [...action.payload],
+        expenses: action.payload,
       };
     case actionTypes.GETBYID_EXPENSE:
       // You can implement logic to read a specific customer if needed

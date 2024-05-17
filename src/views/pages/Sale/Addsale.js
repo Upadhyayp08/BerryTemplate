@@ -168,7 +168,7 @@ const Addsale = () => {
                             onChange={handleChange}
                             label="Item"
                           >
-                            {items.map((option, i) => (
+                            {items?.map((option, i) => (
                               <MenuItem key={i} value={option.id}>
                                 {option.name}
                               </MenuItem>

@@ -308,7 +308,7 @@ function AddExpense() {
                   error={touched.employee_id && Boolean(errors.employee_id)}
                 >
                   <MenuItem value="">Select Employee</MenuItem>
-                  {employee.map((item) => (
+                  {employee?.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
                       {item.name}
                     </MenuItem>

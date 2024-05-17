@@ -7,6 +7,7 @@ import {
   TableRow,
   TableCell,
   IconButton,
+  TablePagination,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -24,10 +25,14 @@ const Expensemain = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    dispatch(getExpense()).then((res) => setLoading(false));
-  }, [dispatch]);
+    dispatch(getExpense({ page: page + 1, page_size: rowsPerPage })).then(
+      (res) => setLoading(false)
+    );
+  }, [dispatch, page, rowsPerPage]);
 
   const handleOpenDialog = (expense) => {
     setSelectedExpense(expense);
@@ -49,6 +54,15 @@ const Expensemain = () => {
 
   const handleEdit = (expense) => {
     navigate(`/add-expense/${expense.id}`);
+  };
+
+  const handleChangePage = (_, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   if (loading) {
@@ -73,7 +87,7 @@ const Expensemain = () => {
           </Button>
         }
       >
-        {expenses.length === 0 ? (
+        {expenses?.total === 0 ? (
           <div
             style={{
               display: "flex",
@@ -91,43 +105,58 @@ const Expensemain = () => {
             </div>
           </div>
         ) : (
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Sr. No</TableCell>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Quantity</TableCell>
-                <TableCell align="center">Unit</TableCell>
-                <TableCell align="center">Amount</TableCell>
-                <TableCell align="center">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {expenses.map((expense, index) => (
-                <TableRow key={expense.id}>
-                  <TableCell align="center">{index + 1}</TableCell>
-                  <TableCell align="center">{expense.name}</TableCell>
-                  <TableCell align="center">{expense.quantity}</TableCell>
-                  <TableCell align="center">{expense.unit}</TableCell>
-                  <TableCell align="center">L£{expense.amount}</TableCell>
-                  <TableCell align="center">
-                    <IconButton
-                      color="primary"
-                      onClick={() => handleEdit(expense)}
-                    >
-                      <Edit />
-                    </IconButton>
-                    <IconButton
-                      style={{ color: "red" }}
-                      onClick={() => handleOpenDialog(expense)}
-                    >
-                      <Delete />
-                    </IconButton>
-                  </TableCell>
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Sr. No</TableCell>
+                  <TableCell align="center">Name</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="center">Unit</TableCell>
+                  <TableCell align="center">Amount</TableCell>
+                  <TableCell align="center">Actions</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {expenses?.data?.map((expense, index) => (
+                  <TableRow key={expense.id}>
+                    <TableCell align="center">{index + 1}</TableCell>
+                    <TableCell align="center">{expense.name}</TableCell>
+                    <TableCell align="center">{expense.quantity}</TableCell>
+                    <TableCell align="center">{expense.unit}</TableCell>
+                    <TableCell align="center">L£{expense.amount}</TableCell>
+                    <TableCell align="center">
+                      <IconButton
+                        color="primary"
+                        onClick={() => handleEdit(expense)}
+                      >
+                        <Edit />
+                      </IconButton>
+                      <IconButton
+                        style={{ color: "red" }}
+                        onClick={() => handleOpenDialog(expense)}
+                      >
+                        <Delete />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              sx={{ px: 2, textAlign: "right" }}
+              page={page}
+              component="div"
+              className="page"
+              rowsPerPage={rowsPerPage}
+              count={expenses.total}
+              onPageChange={handleChangePage}
+              rowsPerPageOptions={[5, 10, 25]}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              nextIconButtonProps={{ "aria-label": "Next Page" }}
+              backIconButtonProps={{ "aria-label": "Previous Page" }}
+            />
+          </>
         )}
 
         {openDialog && (

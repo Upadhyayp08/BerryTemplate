@@ -19,9 +19,11 @@ export const createEmployee = (customerData) => async (dispatch) => {
   }
 };
 
-export const getEmployee = () => async (dispatch) => {
+export const getEmployee = (data) => async (dispatch) => {
   try {
-    const response = await API.post(`/employees/index`);
+    const response = await API.post(
+      `/employees/index?page=${data ? data.page : ""}&page_size=${data ? data.page_size : ""}`
+    );
     dispatch({
       type: actionTypes.GET_EMPLOYEE,
       payload: response.data.response,

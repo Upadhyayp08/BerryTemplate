@@ -18,7 +18,7 @@ const customerReducer = (state = initialState, action) => {
       // You can implement logic to read a specific customer if needed
       return {
         ...state,
-        customers: [...action.payload],
+        customers: action.payload,
       };
     case actionTypes.GETBYID_CUSTOMER:
       // You can implement logic to read a specific customer if needed

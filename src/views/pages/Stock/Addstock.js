@@ -77,7 +77,7 @@ function Addstock() {
               <MenuItem value="" disabled>
                 Select Items
               </MenuItem>
-              {items.map((item, index) => (
+              {items?.map((item, index) => (
                 <MenuItem key={index} value={item.id}>
                   {item.name}
                 </MenuItem>
