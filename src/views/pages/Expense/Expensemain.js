@@ -126,8 +126,12 @@ const Expensemain = () => {
                   <TableRow key={expense.id}>
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{expense.name}</TableCell>
-                    <TableCell align="center">{expense.quantity}</TableCell>
-                    <TableCell align="center">{expense.unit}</TableCell>
+                    <TableCell align="center">
+                      {expense.quantity ? expense.quantity : "N/A"}
+                    </TableCell>
+                    <TableCell align="center">
+                      {expense.unit ? expense.unit : "N/A"}
+                    </TableCell>
                     <TableCell align="center">L£{expense.amount}</TableCell>
                     <TableCell align="center">
                       <IconButton
