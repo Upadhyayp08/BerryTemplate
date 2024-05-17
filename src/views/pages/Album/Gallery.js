@@ -293,7 +293,12 @@ function Gallery() {
       <MainCard
         title={gallerys.name}
         secondary={
-          <Button variant="contained" color="primary" onClick={handleUpload}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleUpload}
+            sx={{ color: "white" }}
+          >
             Save
           </Button>
         }

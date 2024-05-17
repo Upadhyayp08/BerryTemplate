@@ -81,6 +81,9 @@ const Itemmain = () => {
         secondary={
           <Button
             variant="contained"
+            sx={{
+              color: "white", // Set font color to white
+            }}
             color="primary"
             onClick={() => navigate("/add-item")}
           >

@@ -67,7 +67,12 @@ const Blogmain = () => {
     <MainCard
       title="Blogs"
       secondary={
-        <Button variant="contained" color="primary" onClick={handleAddClick}>
+        <Button
+          sx={{ color: "white" }}
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+        >
           Add Blog
         </Button>
       }
@@ -138,7 +143,12 @@ const Blogmain = () => {
                     variant="contained"
                     color="primary"
                     onClick={() => handleEdit(blog.id)}
-                    sx={{ flexGrow: 1, marginRight: "8px", width: "100px" }}
+                    sx={{
+                      flexGrow: 1,
+                      marginRight: "8px",
+                      width: "100px",
+                      color: "white",
+                    }}
                   >
                     Edit
                   </Button>
@@ -149,6 +159,7 @@ const Blogmain = () => {
                       flexGrow: 1,
                       width: "100px",
                       backgroundColor: "red",
+                      color: "white",
                       ":hover": {
                         backgroundColor: "rgba(255, 0, 0, 0.8)",
                       },

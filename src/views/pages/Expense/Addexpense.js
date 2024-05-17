@@ -219,7 +219,8 @@ function AddExpense() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getEmployee());
+    setLoading(true);
+    dispatch(getEmployee()).then((res) => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -308,11 +309,12 @@ function AddExpense() {
                   error={touched.employee_id && Boolean(errors.employee_id)}
                 >
                   <MenuItem value="">Select Employee</MenuItem>
-                  {employee?.map((item) => (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  ))}
+                  {employee.length > 0 &&
+                    employee?.map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
                 </Field>
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -392,6 +394,9 @@ function AddExpense() {
                     type="submit"
                     variant="contained"
                     color="primary"
+                    sx={{
+                      color: "white", // Set font color to white
+                    }}
                     disabled={isSubmitting}
                   >
                     Submit

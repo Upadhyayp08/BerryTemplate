@@ -225,10 +225,13 @@ function AddPurchase() {
   const { id } = useParams();
 
   const fetchMaterials = () => {
+    setLoading(true);
     try {
       dispatch(getMaterial());
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching materials:", error);
+      setLoading(false);
     }
   };
 
@@ -316,11 +319,12 @@ function AddPurchase() {
                   helperText={touched.material && errors.material}
                 >
                   <MenuItem value="">Select Material</MenuItem>
-                  {materialData?.map((item) => (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  ))}
+                  {materialData.length > 0 &&
+                    materialData?.map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
                 </Field>
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -389,6 +393,9 @@ function AddPurchase() {
                 <Box mt={2}>
                   <Button
                     type="submit"
+                    sx={{
+                      color: "white", // Set font color to white
+                    }}
                     variant="contained"
                     color="primary"
                     disabled={isSubmitting}

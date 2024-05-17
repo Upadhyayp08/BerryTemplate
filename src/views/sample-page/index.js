@@ -201,6 +201,9 @@ const SamplePage = ({ readCustomer }) => {
           <Button
             variant="contained"
             color="primary"
+            sx={{
+              color: "white", // Set font color to white
+            }}
             onClick={() => navigate("/add-customer")}
           >
             Add Customer

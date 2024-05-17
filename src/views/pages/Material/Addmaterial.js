@@ -85,6 +85,9 @@ function AddMaterial() {
               <Button
                 type="submit"
                 variant="contained"
+                sx={{
+                  color: "white", // Set font color to white
+                }}
                 color="primary"
                 disabled={isSubmitting}
               >

@@ -83,6 +83,9 @@ function Materialmain() {
             variant="contained"
             color="primary"
             onClick={() => navigate("/add-material")}
+            sx={{
+              color: "white", // Set font color to white
+            }}
           >
             Add Material
           </Button>

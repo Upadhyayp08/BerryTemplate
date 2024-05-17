@@ -360,7 +360,12 @@ const AddAlbum = () => {
             </Grid>
 
             <Grid item xs={12} sx={{ marginTop: "25px" }}>
-              <Button type="submit" variant="contained" color="primary">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{ color: "white" }}
+              >
                 Save Album
               </Button>
             </Grid>

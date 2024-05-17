@@ -87,6 +87,9 @@ function Stockmain() {
           <Button
             variant="contained"
             color="primary"
+            sx={{
+              color: "white", // Set font color to white
+            }}
             onClick={() => navigate("/add-stock")}
           >
             Add Stock

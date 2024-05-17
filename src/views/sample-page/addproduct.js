@@ -207,6 +207,9 @@ function AddProduct() {
             <Box mt={2}>
               <Button
                 type="submit"
+                sx={{
+                  color: "white", // Set font color to white
+                }}
                 variant="contained"
                 color="primary"
                 disabled={isSubmitting}

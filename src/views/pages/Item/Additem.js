@@ -173,7 +173,15 @@ function Additem() {
             </Grid>
           </Grid>
 
-          <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+          <Button
+            type="submit"
+            variant="contained"
+            // sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              color: "white", // Set font color to white
+            }}
+          >
             Add Item
           </Button>
         </form>

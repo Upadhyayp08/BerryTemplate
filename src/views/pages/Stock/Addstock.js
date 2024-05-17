@@ -104,9 +104,12 @@ function Addstock() {
         </Grid>
         <Button
           type="submit"
+          sx={{
+            color: "white", // Set font color to white
+            marginTop: "15px",
+          }}
           variant="contained"
           color="primary"
-          sx={{ marginTop: "15px" }}
         >
           Submit
         </Button>

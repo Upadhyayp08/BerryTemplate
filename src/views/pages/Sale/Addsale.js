@@ -45,9 +45,11 @@ const Addsale = () => {
     } else {
       setLoading(false);
     }
+    setLoading(true);
     dispatch(readCustomer());
     dispatch(getMaterial());
     dispatch(getItem());
+    setLoading(false);
   }, []);
 
   const currentDate = new Date().toISOString().split("T")[0]; // Get current date
@@ -130,11 +132,12 @@ const Addsale = () => {
                 <MenuItem selected value={""}>
                   Select a Customer
                 </MenuItem>
-                {customers.map((option, index) => (
-                  <MenuItem key={index} value={option.id}>
-                    {option.name}
-                  </MenuItem>
-                ))}
+                {customers.length > 0 &&
+                  customers.map((option, index) => (
+                    <MenuItem key={index} value={option.id}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
               </Field>
               <FormHelperText>
                 {touched.customer_id && errors.customer_id
@@ -168,11 +171,12 @@ const Addsale = () => {
                             onChange={handleChange}
                             label="Item"
                           >
-                            {items?.map((option, i) => (
-                              <MenuItem key={i} value={option.id}>
-                                {option.name}
-                              </MenuItem>
-                            ))}
+                            {items.length > 0 &&
+                              items?.map((option, i) => (
+                                <MenuItem key={i} value={option.id}>
+                                  {option.name}
+                                </MenuItem>
+                              ))}
                           </Field>
                           <FormHelperText>
                             {touched.item?.[index]?.item &&
@@ -305,6 +309,9 @@ const Addsale = () => {
             <Button
               type="submit"
               variant="contained"
+              sx={{
+                color: "white", // Set font color to white
+              }}
               color="primary"
               disabled={isSubmitting}
             >

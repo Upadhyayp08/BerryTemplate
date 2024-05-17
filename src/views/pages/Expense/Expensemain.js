@@ -82,6 +82,9 @@ const Expensemain = () => {
           <Button
             variant="contained"
             color="primary"
+            sx={{
+              color: "white", // Set font color to white
+            }}
             onClick={() => navigate("/add-expense")}
           >
             Add Expense

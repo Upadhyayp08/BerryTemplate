@@ -196,6 +196,9 @@ function Employeemain() {
         secondary={
           <Button
             variant="contained"
+            sx={{
+              color: "white", // Set font color to white
+            }}
             color="primary"
             onClick={() => navigate("/add-employee")}
           >
