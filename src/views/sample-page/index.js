@@ -89,7 +89,7 @@
 //                     color="secondary"
 //                     onClick={() => handleOpenDialog(row)}
 //                   >
-//                     <Delete sx={{ color: "red" }} />
+//                     <IconTrash style={{ color: "red" }} />
 //                   </IconButton>
 //                 </TableCell>
 //               </TableRow>
@@ -133,6 +133,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { deleteCustomer, readCustomer } from "store/Customer/customerActions";
 import { connect, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../assets/images/NoData.png";
 import Loader from "ui-component/Loader";
@@ -249,13 +250,13 @@ const SamplePage = ({ readCustomer }) => {
                         color="primary"
                         onClick={() => handleEdit(row)}
                       >
-                        <Edit />
+                        <IconEdit />
                       </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleOpenDialog(row)}
                       >
-                        <Delete sx={{ color: "red" }} />
+                        <IconTrash style={{ color: "red" }} />
                       </IconButton>
                     </TableCell>
                   </TableRow>

@@ -124,6 +124,7 @@ import { Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
@@ -243,13 +244,13 @@ function Purchasemain() {
                         color="primary"
                         onClick={() => handleEdit(row)}
                       >
-                        <Edit />
+                        <IconEdit />
                       </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleOpenDialog(row)}
                       >
-                        <Delete sx={{ color: "red" }} />
+                        <IconTrash style={{ color: "red" }} />
                       </IconButton>
                     </TableCell>
                   </TableRow>

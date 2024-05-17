@@ -15,6 +15,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePurchase, getPurchase } from "store/Purchase/purchaseAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { deleteSale, getSale, SaleById } from "store/Sale/saleActions";
 import { deleteStock, getStock } from "store/Stock/stockActions";
 import NoDataImage from "../../../assets/images/NoData.png";
@@ -135,13 +136,13 @@ function Stockmain() {
                         color="primary"
                         onClick={() => handleEdit(row)}
                       >
-                        <Edit />
+                        <IconEdit />
                       </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleOpenDialog(row)}
                       >
-                        <Delete sx={{ color: "red" }} />
+                        <IconTrash style={{ color: "red" }} />
                       </IconButton>
                     </TableCell>
                   </TableRow>

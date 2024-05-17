@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense, getExpense } from "store/Expense/expenseAction";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
 import Loader from "ui-component/Loader";
@@ -130,13 +131,13 @@ const Expensemain = () => {
                         color="primary"
                         onClick={() => handleEdit(expense)}
                       >
-                        <Edit />
+                        <IconEdit />
                       </IconButton>
                       <IconButton
                         style={{ color: "red" }}
                         onClick={() => handleOpenDialog(expense)}
                       >
-                        <Delete />
+                        <IconTrash />
                       </IconButton>
                     </TableCell>
                   </TableRow>

@@ -17,6 +17,7 @@ import { deleteMATERIAL, getMaterial } from "store/Material/materialAction";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
 import Loader from "ui-component/Loader";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 function Materialmain() {
   const materials = useSelector((state) => state.material.materials);
@@ -124,13 +125,14 @@ function Materialmain() {
                         color="primary"
                         onClick={() => handleEdit(material)}
                       >
-                        <Edit />
+                        <IconEdit />
                       </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleOpenDialog(material)}
                       >
-                        <Delete sx={{ color: "red" }} />
+                        {/* <IconTrash style={{ color: "red" }} /> */}
+                        <IconTrash style={{ color: "red" }} />
                       </IconButton>
                     </TableCell>
                   </TableRow>

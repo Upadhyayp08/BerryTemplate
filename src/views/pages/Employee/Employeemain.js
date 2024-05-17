@@ -127,6 +127,7 @@ import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { deleteEmployee, getEmployee } from "store/Employee/employeeAction";
 import { useDispatch, useSelector } from "react-redux";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 import DeleteConfirmationDialog from "ui-component/DeleteConfirmationDialog";
 import NoDataImage from "../../../assets/images/NoData.png";
 import Loader from "ui-component/Loader";
@@ -245,13 +246,13 @@ function Employeemain() {
                         color="primary"
                         onClick={() => handleEdit(employee)}
                       >
-                        <Edit />
+                        <IconEdit />
                       </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleOpenDialog(employee)}
                       >
-                        <Delete sx={{ color: "red" }} />
+                        <IconTrash style={{ color: "red" }} />
                       </IconButton>
                     </TableCell>
                   </TableRow>
