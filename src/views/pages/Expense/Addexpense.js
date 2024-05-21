@@ -361,7 +361,7 @@ function AddExpense() {
                 >
                   <MenuItem value="">Select Unit</MenuItem>
                   <MenuItem value="kg">Kg</MenuItem>
-                  <MenuItem value="g">Gram</MenuItem>
+                  <MenuItem value="gm">Gram</MenuItem>
                   <MenuItem value="l">litre</MenuItem>
                   <MenuItem value="ml">MilliLitre</MenuItem>
                 </Field>

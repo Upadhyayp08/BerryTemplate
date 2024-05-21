@@ -355,7 +355,7 @@ function AddPurchase() {
                 >
                   <MenuItem value="">Select Unit</MenuItem>
                   <MenuItem value="kg">Kg</MenuItem>
-                  <MenuItem value="g">Gram</MenuItem>
+                  <MenuItem value="gm">Gram</MenuItem>
                   <MenuItem value="l">Litre</MenuItem>
                   <MenuItem value="ml">Millilitre</MenuItem>
                   <MenuItem value="pcs">Pieces</MenuItem>
