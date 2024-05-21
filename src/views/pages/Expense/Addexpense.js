@@ -271,6 +271,7 @@ function AddExpense() {
     <MainCard title={id ? "Edit Expense" : "Add Expense"}>
       <Formik
         initialValues={{
+          id: id ? id : "",
           name: id ? expense.name : "",
           employee_id: id ? expense.employee_id : "",
           quantity: id ? expense.quantity : "",
@@ -281,6 +282,7 @@ function AddExpense() {
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        enableReinitialize
       >
         {({ isSubmitting, touched, errors }) => (
           <Form>

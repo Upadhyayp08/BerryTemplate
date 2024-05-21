@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Button, TextField, Grid, Box } from "@mui/material";
+import { Button, TextField, Grid, Box, InputAdornment } from "@mui/material";
 import MainCard from "ui-component/cards/MainCard";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,7 +66,13 @@ function AddProduct() {
       .email("Invalid email")
       .required("Customer Email is required"),
     address: Yup.string().required("Customer Address is required"),
-    website: Yup.string().required("URL Is Required"),
+    // website: Yup.string().required("URL Is Required"),
+    website: Yup.string()
+      .required("URL Is Required")
+      .matches(
+        /^(ftp|http|https):\/\/[^ "]+$/,
+        "Invalid URL format. Please enter a valid URL."
+      ),
   });
 
   if (loading) {
@@ -118,6 +124,11 @@ function AddProduct() {
                   fullWidth
                   onChange={handleChange}
                   variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">+961</InputAdornment>
+                    ),
+                  }}
                 />
                 <div style={{ color: "red" }}>
                   <ErrorMessage name="poc_phone" />
@@ -170,6 +181,11 @@ function AddProduct() {
                   onChange={handleChange}
                   fullWidth
                   variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">+961</InputAdornment>
+                    ),
+                  }}
                 />
                 <div style={{ color: "red" }}>
                   <ErrorMessage name="phone" />
