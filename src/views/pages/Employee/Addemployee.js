@@ -240,9 +240,9 @@ function AddEmployee() {
     email: Yup.string()
       .email("Invalid email format")
       .required("Email is Required"),
-    experience: Yup.number()
-      .typeError("You must specify a number")
-      .min(0, "Minimum value 0")
+    experience: Yup.string()
+      // .typeError("You must specify a number")
+      // .min(0, "Minimum value 0")
       .required("Experience is Required"),
     salary: Yup.number()
       .typeError("You must specify a number")
