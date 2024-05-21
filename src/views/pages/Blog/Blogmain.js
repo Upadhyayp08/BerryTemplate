@@ -392,7 +392,7 @@ import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteBlog, getBlog } from "store/Blog/blogActions";
-import DeleteConfirmationDialog from "../../../ui-component/DeleteConfirmationDialog";
+import DeleteConfirmationDialog from "../../../ui-component/DeleteConfirmationDialog"; // Import the confirmation dialog component
 import NoDataImage from "../../../assets/images/NoData.png";
 import Loader from "ui-component/Loader";
 
@@ -459,7 +459,7 @@ const Blogmain = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "50vh",
-            flexDirection: "column",
+            flexDirection: "column", // Added to stack elements vertically
           }}
         >
           <div>
@@ -470,13 +470,17 @@ const Blogmain = () => {
           </div>
         </div>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {blogs.map((blog) => (
             <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
               <Card
                 sx={{
-                  width: "100%",
-                  height: "100%",
+                  width: "100%", // Set width to 100% to avoid fixed width
+                  height: 300, // Set fixed height
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  m: 2,
                   boxShadow: 5,
                   borderRadius: 2,
                   transition: "0.3s",
