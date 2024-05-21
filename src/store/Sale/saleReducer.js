@@ -12,7 +12,7 @@ const saleReducer = (state = initialState, action) => {
     case actionTypes.CREATE_SALE:
       return {
         ...state,
-        sales: [...state.sales, action.payload],
+        sales: action.payload,
       };
     case actionTypes.GET_SALE:
       // You can implement logic to read a specific customer if needed

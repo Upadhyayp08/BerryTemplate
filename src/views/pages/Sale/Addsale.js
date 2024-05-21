@@ -97,11 +97,39 @@ const Addsale = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
+        // onSubmit={(values, { setSubmitting }) => {
+        //   if (id) {
+        //     dispatch(updateSale(values))
+        //       .then((res) => navigate("/sale"))
+        //       .catch((err) => console.log(err));
+        //   } else {
+        //     dispatch(createSale(values))
+        //       .then((res) => console.log(res), navigate("/sale"))
+        //       .catch((err) => console.log(err));
+        //   }
+        // }}
         onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true); // Optional: Set submitting state
           if (id) {
-            dispatch(updateSale(values)).then((res) => navigate("/sale"));
+            dispatch(updateSale(values))
+              .then((res) => {
+                setSubmitting(false);
+                navigate("/sale");
+              })
+              .catch((err) => {
+                setSubmitting(false);
+                console.log(err);
+              });
           } else {
-            dispatch(createSale(values)).then((Res) => navigate("/sale"));
+            dispatch(createSale(values))
+              .then((res) => {
+                setSubmitting(false);
+                navigate("/sale");
+              })
+              .catch((err) => {
+                setSubmitting(false);
+                console.log(err);
+              });
           }
         }}
       >

@@ -3,19 +3,52 @@ import API from "helper/API";
 import Notification from "helper/Notification";
 import * as actionTypes from "./saleActionType";
 
+// export const createSale = (customerData) => async (dispatch) => {
+//   try {
+//     const response = await API.post(`/sells/store`, customerData);
+//     const {
+//       status,
+//       data: { message },
+//     } = response;
+//     console.log(status);
+//     if (status === 200) {
+//       Notification("success", message);
+//       dispatch({
+//         type: actionTypes.CREATE_SALE,
+//         payload: response.data,
+//       });
+//       return response;
+//     } else {
+//       Notification("error", message);
+//     }
+//   } catch (error) {
+//     // console.log(error);
+//     Notification("error", "Something Went Wrong");
+//   }
+// };
+
 export const createSale = (customerData) => async (dispatch) => {
   try {
     const response = await API.post(`/sells/store`, customerData);
     const {
+      status,
       data: { message },
     } = response;
-    Notification("success", message);
-    dispatch({
-      type: actionTypes.CREATE_SALE,
-      payload: response.data,
-    });
+    console.log(status);
+    if (status === 200) {
+      Notification("success", message);
+      dispatch({
+        type: actionTypes.CREATE_SALE,
+        payload: response.data,
+      });
+      return response;
+    } else {
+      Notification("error", message);
+      throw new Error(message);
+    }
   } catch (error) {
-    Notification("error", "Something Went Wrong");
+    // Notification("error", "Something Went Wrong");
+    throw error;
   }
 };
 
