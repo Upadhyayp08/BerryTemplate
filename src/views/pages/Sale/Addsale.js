@@ -11,6 +11,7 @@ import {
   IconButton,
   Grid,
   FormHelperText,
+  Typography,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MainCard from "ui-component/cards/MainCard";
@@ -96,6 +97,7 @@ const Addsale = () => {
     <MainCard title={id ? "Edit Sale" : "Add Sale"}>
       <Formik
         initialValues={initialValues}
+        enableReinitialize
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
@@ -136,6 +138,7 @@ const Addsale = () => {
             const selectedItem = items.find(
               (item) => item.id === event.target.value
             );
+            console.log(selectedItem);
             setSelectedItemQuantities((prevState) => ({
               ...prevState,
               [index]: selectedItem ? selectedItem.quantity : 0,
@@ -215,16 +218,23 @@ const Addsale = () => {
                                   </MenuItem>
                                 ))}
                             </Field>
+                            {/* <FormHelperText sx={{ color: "red" }}>
+                              {selectedItemQuantities[index] !== undefined
+                                ? `Available Quantity: ${selectedItemQuantities[index]}`
+                                : "Available Quantity: N/A"}
+                            </FormHelperText> */}
+                            <FormHelperText sx={{ color: "red" }}>
+                              <Typography variant="body1" fontWeight="bold">
+                                {selectedItemQuantities[index] !== undefined
+                                  ? `Available Quantity: ${selectedItemQuantities[index]}`
+                                  : "Available Quantity: N/A"}
+                              </Typography>
+                            </FormHelperText>
                             <FormHelperText>
                               {touched.item?.[index]?.item &&
                               errors.item?.[index]?.item
                                 ? errors.item?.[index]?.item
                                 : " "}
-                            </FormHelperText>
-                            <FormHelperText>
-                              {selectedItemQuantities[index] !== undefined
-                                ? `Available Quantity: ${selectedItemQuantities[index]}`
-                                : "Available Quantity: N/A"}
                             </FormHelperText>
                           </FormControl>
                         </Grid>
