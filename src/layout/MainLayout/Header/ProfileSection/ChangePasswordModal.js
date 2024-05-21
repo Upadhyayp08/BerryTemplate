@@ -261,8 +261,8 @@ const ChangePasswordModal = ({ open, onClose }) => {
 
         if (statusCode === 200) {
           Notification("success", message);
-          localStorage.clear();
-          navigate("/pages/login/login3");
+          // localStorage.clear();
+          // navigate("/pages/login/login3");
           onClose();
         } else {
           Notification("error", response[0]);

@@ -253,8 +253,8 @@ function AddPurchase() {
 
   useEffect(() => {
     // Fetch purchase by ID if id is present
-
-    fetchPurchaseById();
+    setLoading(true);
+    fetchPurchaseById().then((res) => setLoading(false));
   }, [id, dispatch]);
 
   // Validation Schema
@@ -301,6 +301,7 @@ function AddPurchase() {
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        enableReinitialize
       >
         {({ isSubmitting, errors, touched, handleChange }) => (
           <Form>

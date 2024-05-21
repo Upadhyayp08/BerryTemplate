@@ -241,7 +241,7 @@ function Employeemain() {
                   <TableRow key={employee.id}>
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{employee.name}</TableCell>
-                    <TableCell align="center">{employee.phone}</TableCell>
+                    <TableCell align="center">+961 {employee.phone}</TableCell>
                     <TableCell align="center">{employee.email}</TableCell>
                     <TableCell align="center">{employee.designation}</TableCell>
                     <TableCell align="center">

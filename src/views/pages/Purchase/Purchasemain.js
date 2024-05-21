@@ -141,8 +141,8 @@ function Purchasemain() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    dispatch(getPurchase({ page, page_size: rowsPerPage })).then((res) =>
-      setLoading(false)
+    dispatch(getPurchase({ page: page + 1, page_size: rowsPerPage })).then(
+      (res) => setLoading(false)
     );
   }, [dispatch, page, rowsPerPage]);
 
