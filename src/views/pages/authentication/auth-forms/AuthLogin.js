@@ -320,6 +320,7 @@ const FirebaseLogin = ({ ...others }) => {
                   disabled={isSubmitting}
                   fullWidth
                   size="large"
+                  sx={{ color: "white" }}
                   type="submit"
                   variant="contained"
                   color="secondary"
