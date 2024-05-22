@@ -360,10 +360,10 @@ function AddExpense() {
                   error={touched.unit && Boolean(errors.unit)}
                 >
                   <MenuItem value="">Select Unit</MenuItem>
-                  <MenuItem value="kg">Kg</MenuItem>
+                  <MenuItem value="kg">Kilogram</MenuItem>
                   <MenuItem value="gm">Gram</MenuItem>
                   <MenuItem value="l">litre</MenuItem>
-                  <MenuItem value="ml">MilliLitre</MenuItem>
+                  <MenuItem value="ml">MilliLiter</MenuItem>
                 </Field>
               </Grid>
               <Grid item xs={12} sm={4}>

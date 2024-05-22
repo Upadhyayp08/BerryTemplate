@@ -354,10 +354,10 @@ function AddPurchase() {
                   helperText={touched.unit && errors.unit}
                 >
                   <MenuItem value="">Select Unit</MenuItem>
-                  <MenuItem value="kg">Kg</MenuItem>
+                  <MenuItem value="kg">Kilogram</MenuItem>
                   <MenuItem value="gm">Gram</MenuItem>
                   <MenuItem value="l">Litre</MenuItem>
-                  <MenuItem value="ml">Millilitre</MenuItem>
+                  <MenuItem value="ml">Milliliter</MenuItem>
                   <MenuItem value="pcs">Pieces</MenuItem>
                   {/* Additional units can be added here */}
                 </Field>

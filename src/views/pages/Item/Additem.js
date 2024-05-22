@@ -147,10 +147,10 @@ function Additem() {
                   <MenuItem value="">
                     <em>Select Unit</em>
                   </MenuItem>
-                  <MenuItem value="kg">Kg</MenuItem>
+                  <MenuItem value="kg">Kilogram</MenuItem>
                   <MenuItem value="gm">Gram</MenuItem>
                   <MenuItem value="l">litre</MenuItem>
-                  <MenuItem value="ml">MilliLitre</MenuItem>
+                  <MenuItem value="ml">MilliLiter</MenuItem>
                   <MenuItem value="pcs">Pieces</MenuItem>
                 </Select>
                 <FormHelperText>
