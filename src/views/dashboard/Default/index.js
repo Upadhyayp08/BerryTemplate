@@ -109,7 +109,7 @@ const Dashboard = () => {
               <Grid item xs={12} marginBottom={3}>
                 <TotalIncomeDarkCard
                   total={total?.monthly_sell}
-                  Header={"Monthly Sell"}
+                  Header={"Monthly Sale"}
                 />
               </Grid>
               <Grid item xs={12}>
