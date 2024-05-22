@@ -76,13 +76,14 @@ export const updateEmployee = (updatedData) => async (dispatch) => {
     const {
       data: { message },
     } = response;
-    Notification("success", message);
+    // Notification("success", message);
     dispatch({
       type: actionTypes.UPDATE_EMPLOYEE,
       payload: response.data,
     });
+    return response;
   } catch (error) {
-    Notification("error", error.response.data.message);
+    // Notification("error", error.response);
     throw error; // Rethrow error to be caught in handleSubmit
   }
 };

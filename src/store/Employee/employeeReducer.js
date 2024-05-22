@@ -29,11 +29,12 @@ const employeeReducer = (state = initialState, action) => {
     case actionTypes.UPDATE_EMPLOYEE:
       return {
         ...state,
-        employees: state.employees.map((customer) =>
-          customer.id === action.payload.customerId
-            ? { ...customer, ...action.payload.updatedData }
-            : customer
-        ),
+        employees: action.payload,
+        //  state.employees.map((customer) =>
+        //   customer.id === action.payload.customerId
+        //     ? { ...customer, ...action.payload.updatedData }
+        //     : customer
+        // ),
       };
     case actionTypes.DELETE_EMPLOYEE:
       return {
