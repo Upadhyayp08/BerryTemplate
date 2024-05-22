@@ -29,6 +29,7 @@
 //   const dispatch = useDispatch();
 //   const navigate = useNavigate();
 //   const [loading, setLoading] = useState(true);
+//   const [dataLoaded, setDataLoaded] = useState(false); // New state for tracking data load
 //   const [selectedItemQuantities, setSelectedItemQuantities] = useState({});
 //   const customers = useSelector((state) => state.customer.customers);
 //   const materials = useSelector((state) => state.material.materials);
@@ -41,19 +42,18 @@
 //   const { id } = useParams();
 
 //   useEffect(() => {
-//     if (id) {
-//       dispatch(SaleById(id)).then((res) => setLoading(false));
-//     } else {
+//     const fetchData = async () => {
+//       if (id) {
+//         await dispatch(SaleById(id));
+//       }
+//       await dispatch(readCustomer());
+//       await dispatch(getMaterial());
+//       await dispatch(getItem());
 //       setLoading(false);
-//     }
+//       setDataLoaded(true); // Set dataLoaded to true after data is fetched
+//     };
 
-//     setLoading(true);
-//     dispatch(readCustomer()).then((res) => setLoading(false));
-//     setLoading(true);
-//     dispatch(getMaterial()).then((res) => setLoading(false));
-//     setLoading(true);
-//     dispatch(getItem()).then((res) => setLoading(false));
-//     // setLoading(false);
+//     fetchData();
 //   }, [dispatch, id]);
 
 //   const currentDate = new Date().toISOString().split("T")[0];
@@ -98,287 +98,291 @@
 
 //   return (
 //     <MainCard title={id ? "Edit Sale" : "Add Sale"}>
-//       <Formik
-//         initialValues={initialValues}
-//         enableReinitialize
-//         validationSchema={validationSchema}
-//         onSubmit={(values, { setSubmitting }) => {
-//           setSubmitting(true);
-//           if (id) {
-//             dispatch(updateSale(values))
-//               .then((res) => {
-//                 setSubmitting(false);
-//                 navigate("/sale");
-//               })
-//               .catch((err) => {
-//                 setSubmitting(false);
-//                 console.log(err);
-//               });
-//           } else {
-//             dispatch(createSale(values))
-//               .then((res) => {
-//                 setSubmitting(false);
-//                 navigate("/sale");
-//               })
-//               .catch((err) => {
-//                 setSubmitting(false);
-//                 console.log(err);
-//               });
-//           }
-//         }}
-//       >
-//         {({
-//           values,
-//           handleChange,
-//           setFieldValue,
-//           errors,
-//           touched,
-//           handleSubmit,
-//           isSubmitting,
-//         }) => {
-//           // Define handleItemChange inside the render props
-//           const handleItemChange = (event, index) => {
-//             const selectedItem = items.find(
-//               (item) => item.id === event.target.value
-//             );
-//             console.log(selectedItem);
-//             setSelectedItemQuantities((prevState) => ({
-//               ...prevState,
-//               [index]: selectedItem ? selectedItem.stock : 0,
-//             }));
-//             handleChange(event); // Ensure this line is also called to update Formik's state
-//           };
+//       {dataLoaded && ( // Render form only when data is loaded
+//         <Formik
+//           initialValues={initialValues}
+//           enableReinitialize
+//           validationSchema={validationSchema}
+//           onSubmit={(values, { setSubmitting }) => {
+//             setSubmitting(true);
+//             if (id) {
+//               dispatch(updateSale(values))
+//                 .then((res) => {
+//                   setSubmitting(false);
+//                   navigate("/sale");
+//                 })
+//                 .catch((err) => {
+//                   setSubmitting(false);
+//                   console.log(err);
+//                 });
+//             } else {
+//               dispatch(createSale(values))
+//                 .then((res) => {
+//                   setSubmitting(false);
+//                   navigate("/sale");
+//                 })
+//                 .catch((err) => {
+//                   setSubmitting(false);
+//                   console.log(err);
+//                 });
+//             }
+//           }}
+//         >
+//           {({
+//             values,
+//             handleChange,
+//             setFieldValue,
+//             errors,
+//             touched,
+//             handleSubmit,
+//             isSubmitting,
+//           }) => {
+//             const handleItemChange = (event, index) => {
+//               const selectedItem = items.find(
+//                 (item) => item.id === event.target.value
+//               );
+//               setSelectedItemQuantities((prevState) => ({
+//                 ...prevState,
+//                 [index]: selectedItem ? selectedItem.stock : 0,
+//               }));
+//               handleChange(event);
+//             };
 
-//           return (
-//             <Form>
-//               <FormControl
-//                 fullWidth
-//                 disabled={!!id}
-//                 margin="normal"
-//                 style={formControlStyle}
-//                 error={touched.customer_id && !!errors.customer_id}
-//               >
-//                 <InputLabel>Customer Name*</InputLabel>
-//                 <Field
-//                   name="customer_id"
-//                   as={Select}
-//                   onChange={handleChange}
-//                   label="Customer Name"
+//             const handleRemove = (remove, index) => {
+//               remove(index);
+//               setSelectedItemQuantities((prevState) => {
+//                 const newQuantities = { ...prevState };
+//                 delete newQuantities[index];
+//                 return newQuantities;
+//               });
+//             };
+
+//             return (
+//               <Form>
+//                 <FormControl
+//                   fullWidth
+//                   disabled={!!id}
+//                   margin="normal"
+//                   style={formControlStyle}
+//                   error={touched.customer_id && !!errors.customer_id}
 //                 >
-//                   <MenuItem selected value={""}>
-//                     Select a Customer
-//                   </MenuItem>
-//                   {customers.length > 0 &&
-//                     customers.map((option, index) => (
-//                       <MenuItem key={index} value={option.id}>
-//                         {option.name}
-//                       </MenuItem>
-//                     ))}
-//                 </Field>
-//                 <FormHelperText>
-//                   {touched.customer_id && errors.customer_id
-//                     ? errors.customer_id
-//                     : " "}
-//                 </FormHelperText>
-//               </FormControl>
-
-//               <Divider style={{ margin: "20px 0" }} />
-
-//               <FieldArray name="item">
-//                 {({ push, remove }) => (
-//                   <div>
-//                     {values?.item?.map((item, index) => (
-//                       <Grid
-//                         container
-//                         spacing={1}
-//                         key={index}
-//                         alignItems="center"
-//                       >
-//                         <Grid item xs={12} sm={5} lg={6}>
-//                           <FormControl
-//                             fullWidth
-//                             disabled={!!id}
-//                             margin="normal"
-//                             error={
-//                               touched.item?.[index]?.item &&
-//                               !!errors.item?.[index]?.item
-//                             }
-//                             style={formControlStyle}
-//                           >
-//                             <InputLabel>Item*</InputLabel>
-//                             <Field
-//                               name={`item.${index}.item`}
-//                               as={Select}
-//                               onChange={(event) =>
-//                                 handleItemChange(event, index)
-//                               }
-//                               label="Item"
-//                             >
-//                               {items.length > 0 &&
-//                                 items?.map((option, i) => (
-//                                   <MenuItem key={i} value={option.id}>
-//                                     {option.name}
-//                                   </MenuItem>
-//                                 ))}
-//                             </Field>
-//                             {/* <FormHelperText sx={{ color: "red" }}>
-//                               {selectedItemQuantities[index] !== undefined
-//                                 ? `Available Quantity: ${selectedItemQuantities[index]}`
-//                                 : "Available Quantity: N/A"}
-//                             </FormHelperText> */}
-//                             <FormHelperText sx={{ color: "red" }}>
-//                               <Typography>
-//                                 {selectedItemQuantities[index] !== undefined
-//                                   ? `Available Quantity: ${selectedItemQuantities[index]}`
-//                                   : "Available Quantity: N/A"}
-//                               </Typography>
-//                             </FormHelperText>
-//                             <FormHelperText>
-//                               {touched.item?.[index]?.item &&
-//                               errors.item?.[index]?.item
-//                                 ? errors.item?.[index]?.item
-//                                 : " "}
-//                             </FormHelperText>
-//                           </FormControl>
-//                         </Grid>
-//                         <Grid item xs={12} sm={5} lg={5} sx={{ mb: 3 }}>
-//                           <TextField
-//                             fullWidth
-//                             disabled={!!id}
-//                             name={`item.${index}.qty`}
-//                             value={item.qty}
-//                             onChange={handleChange}
-//                             type="number"
-//                             label="Quantity*"
-//                             error={
-//                               touched.item?.[index]?.qty &&
-//                               !!errors.item?.[index]?.qty
-//                             }
-//                             helperText={
-//                               touched.item?.[index]?.qty
-//                                 ? errors.item?.[index]?.qty
-//                                 : " "
-//                             }
-//                           />
-//                         </Grid>
-//                         {index !== 0 ? (
-//                           <Grid item xs={12} sm={2} lg={1}>
-//                             <IconButton
-//                               onClick={() => remove(index)}
-//                               color="error"
-//                               sx={{ marginBottom: "25px" }}
-//                             >
-//                               <DeleteRounded />
-//                             </IconButton>
-//                           </Grid>
-//                         ) : (
-//                           ""
-//                         )}
-//                       </Grid>
-//                     ))}
-//                     <Button
-//                       disabled={!!id}
-//                       startIcon={<AddCircleOutlineIcon />}
-//                       onClick={() => push({ item: "", qty: "" })}
-//                     >
-//                       Add Item
-//                     </Button>
-//                   </div>
-//                 )}
-//               </FieldArray>
-//               <Divider style={{ margin: "20px 0" }} />
-
-//               <Grid container spacing={3}>
-//                 <Grid item lg={6}>
-//                   <TextField
-//                     fullWidth
-//                     disabled={!!id}
-//                     name="invoice_no"
-//                     value={values.invoice_no}
+//                   <InputLabel>Customer Name*</InputLabel>
+//                   <Field
+//                     name="customer_id"
+//                     as={Select}
 //                     onChange={handleChange}
-//                     label="Invoice No*"
-//                     error={touched.invoice_no && !!errors.invoice_no}
-//                     helperText={touched.invoice_no ? errors.invoice_no : " "}
-//                     margin="normal"
-//                   />
-//                 </Grid>
-//                 <Grid item lg={6}>
-//                   <TextField
-//                     fullWidth
-//                     disabled={!!id}
-//                     name="date"
-//                     value={values.date}
-//                     onChange={handleChange}
-//                     type="date"
-//                     label="Date"
-//                     InputLabelProps={{ shrink: true }}
-//                     error={touched.date && !!errors.date}
-//                     helperText={touched.date ? errors.date : " "}
-//                     margin="normal"
-//                   />
-//                 </Grid>
-//               </Grid>
-
-//               <Grid container spacing={3} alignitem="center">
-//                 <Grid item lg={6}>
-//                   <TextField
-//                     fullWidth
-//                     name="amount"
-//                     value={values.amount}
-//                     disabled={!!id}
-//                     onChange={handleChange}
-//                     type="number"
-//                     label="Amount*"
-//                     error={touched.amount && !!errors.amount}
-//                     helperText={touched.amount ? errors.amount : " "}
-//                     margin="normal"
-//                   />
-//                 </Grid>
-//                 <Grid item lg={6} sx={{ mt: 1 }}>
-//                   <FormControl
-//                     fullWidth
-//                     disabled={!!id && values.paid_status === 1}
-//                     margin="normal"
-//                     error={touched.paid_status && !!errors.paid_status}
-//                     style={formControlStyle}
+//                     label="Customer Name"
 //                   >
-//                     <InputLabel>Status*</InputLabel>
-//                     <Field
-//                       name="paid_status"
-//                       as={Select}
-//                       onChange={handleChange}
-//                       label="Status"
-//                     >
-//                       {statusOptions.map((option, index) => (
+//                     <MenuItem selected value={""}>
+//                       Select a Customer
+//                     </MenuItem>
+//                     {customers.length > 0 &&
+//                       customers.map((option, index) => (
 //                         <MenuItem key={index} value={option.id}>
 //                           {option.name}
 //                         </MenuItem>
 //                       ))}
-//                     </Field>
-//                     <FormHelperText>
-//                       {touched.paid_status && errors.paid_status
-//                         ? errors.paid_status
-//                         : " "}
-//                     </FormHelperText>
-//                   </FormControl>
-//                 </Grid>
-//               </Grid>
+//                   </Field>
+//                   <FormHelperText>
+//                     {touched.customer_id && errors.customer_id
+//                       ? errors.customer_id
+//                       : " "}
+//                   </FormHelperText>
+//                 </FormControl>
 
-//               <Button
-//                 type="submit"
-//                 variant="contained"
-//                 sx={{
-//                   color: "white",
-//                 }}
-//                 color="primary"
-//                 disabled={isSubmitting}
-//               >
-//                 Submit
-//               </Button>
-//             </Form>
-//           );
-//         }}
-//       </Formik>
+//                 <Divider style={{ margin: "20px 0" }} />
+
+//                 <FieldArray name="item">
+//                   {({ push, remove }) => (
+//                     <div>
+//                       {values?.item?.map((item, index) => (
+//                         <Grid
+//                           container
+//                           spacing={1}
+//                           key={index}
+//                           alignItems="center"
+//                         >
+//                           <Grid item xs={12} sm={5} lg={6}>
+//                             <FormControl
+//                               fullWidth
+//                               disabled={!!id}
+//                               margin="normal"
+//                               error={
+//                                 touched.item?.[index]?.item &&
+//                                 !!errors.item?.[index]?.item
+//                               }
+//                               style={formControlStyle}
+//                             >
+//                               <InputLabel>Item*</InputLabel>
+//                               <Field
+//                                 name={`item.${index}.item`}
+//                                 as={Select}
+//                                 onChange={(event) =>
+//                                   handleItemChange(event, index)
+//                                 }
+//                                 label="Item"
+//                               >
+//                                 {items.length > 0 &&
+//                                   items?.map((option, i) => (
+//                                     <MenuItem key={i} value={option.id}>
+//                                       {option.name}
+//                                     </MenuItem>
+//                                   ))}
+//                               </Field>
+//                               <FormHelperText sx={{ color: "red" }}>
+//                                 <Typography fontWeight="bold">
+//                                   {selectedItemQuantities[index] !== undefined
+//                                     ? `Available Quantity: ${selectedItemQuantities[index]}`
+//                                     : "Available Quantity: N/A"}
+//                                 </Typography>
+//                               </FormHelperText>
+//                               <FormHelperText>
+//                                 {touched.item?.[index]?.item &&
+//                                 errors.item?.[index]?.item
+//                                   ? errors.item?.[index]?.item
+//                                   : " "}
+//                               </FormHelperText>
+//                             </FormControl>
+//                           </Grid>
+//                           <Grid item xs={12} sm={5} lg={5} sx={{ mb: 3 }}>
+//                             <TextField
+//                               fullWidth
+//                               disabled={!!id}
+//                               name={`item.${index}.qty`}
+//                               value={item.qty}
+//                               onChange={handleChange}
+//                               type="number"
+//                               label="Quantity*"
+//                               error={
+//                                 touched.item?.[index]?.qty &&
+//                                 !!errors.item?.[index]?.qty
+//                               }
+//                               helperText={
+//                                 touched.item?.[index]?.qty
+//                                   ? errors.item?.[index]?.qty
+//                                   : " "
+//                               }
+//                             />
+//                           </Grid>
+//                           {index !== 0 ? (
+//                             <Grid item xs={12} sm={2} lg={1}>
+//                               <IconButton
+//                                 onClick={() => handleRemove(remove, index)}
+//                                 color="error"
+//                                 sx={{ marginBottom: "25px" }}
+//                               >
+//                                 <DeleteRounded />
+//                               </IconButton>
+//                             </Grid>
+//                           ) : (
+//                             ""
+//                           )}
+//                         </Grid>
+//                       ))}
+//                       <Button
+//                         disabled={!!id}
+//                         startIcon={<AddCircleOutlineIcon />}
+//                         onClick={() => push({ item: "", qty: "" })}
+//                       >
+//                         Add Item
+//                       </Button>
+//                     </div>
+//                   )}
+//                 </FieldArray>
+//                 <Divider style={{ margin: "20px 0" }} />
+
+//                 <Grid container spacing={3}>
+//                   <Grid item lg={6}>
+//                     <TextField
+//                       fullWidth
+//                       disabled={!!id}
+//                       name="invoice_no"
+//                       value={values.invoice_no}
+//                       onChange={handleChange}
+//                       label="Invoice No*"
+//                       error={touched.invoice_no && !!errors.invoice_no}
+//                       helperText={touched.invoice_no ? errors.invoice_no : " "}
+//                       margin="normal"
+//                     />
+//                   </Grid>
+//                   <Grid item lg={6}>
+//                     <TextField
+//                       fullWidth
+//                       disabled={!!id}
+//                       name="date"
+//                       value={values.date}
+//                       onChange={handleChange}
+//                       type="date"
+//                       label="Date"
+//                       InputLabelProps={{ shrink: true }}
+//                       error={touched.date && !!errors.date}
+//                       helperText={touched.date ? errors.date : " "}
+//                       margin="normal"
+//                     />
+//                   </Grid>
+//                 </Grid>
+
+//                 <Grid container spacing={3} alignitem="center">
+//                   <Grid item lg={6}>
+//                     <TextField
+//                       fullWidth
+//                       name="amount"
+//                       value={values.amount}
+//                       disabled={!!id}
+//                       onChange={handleChange}
+//                       type="number"
+//                       label="Amount*"
+//                       error={touched.amount && !!errors.amount}
+//                       helperText={touched.amount ? errors.amount : " "}
+//                       margin="normal"
+//                     />
+//                   </Grid>
+//                   <Grid item lg={6} sx={{ mt: 1 }}>
+//                     <FormControl
+//                       fullWidth
+//                       disabled={!!id && values.paid_status === 1}
+//                       margin="normal"
+//                       error={touched.paid_status && !!errors.paid_status}
+//                       style={formControlStyle}
+//                     >
+//                       <InputLabel>Status*</InputLabel>
+//                       <Field
+//                         name="paid_status"
+//                         as={Select}
+//                         onChange={handleChange}
+//                         label="Status"
+//                       >
+//                         {statusOptions.map((option, index) => (
+//                           <MenuItem key={index} value={option.id}>
+//                             {option.name}
+//                           </MenuItem>
+//                         ))}
+//                       </Field>
+//                       <FormHelperText>
+//                         {touched.paid_status && errors.paid_status
+//                           ? errors.paid_status
+//                           : " "}
+//                       </FormHelperText>
+//                     </FormControl>
+//                   </Grid>
+//                 </Grid>
+
+//                 <Button
+//                   type="submit"
+//                   variant="contained"
+//                   sx={{
+//                     color: "white",
+//                   }}
+//                   color="primary"
+//                   disabled={isSubmitting}
+//                 >
+//                   Submit
+//                 </Button>
+//               </Form>
+//             );
+//           }}
+//         </Formik>
+//       )}
 //     </MainCard>
 //   );
 // };
@@ -416,7 +420,7 @@ const Addsale = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [dataLoaded, setDataLoaded] = useState(false); // New state for tracking data load
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [selectedItemQuantities, setSelectedItemQuantities] = useState({});
   const customers = useSelector((state) => state.customer.customers);
   const materials = useSelector((state) => state.material.materials);
@@ -437,7 +441,7 @@ const Addsale = () => {
       await dispatch(getMaterial());
       await dispatch(getItem());
       setLoading(false);
-      setDataLoaded(true); // Set dataLoaded to true after data is fetched
+      setDataLoaded(true);
     };
 
     fetchData();
@@ -485,7 +489,7 @@ const Addsale = () => {
 
   return (
     <MainCard title={id ? "Edit Sale" : "Add Sale"}>
-      {dataLoaded && ( // Render form only when data is loaded
+      {dataLoaded && (
         <Formik
           initialValues={initialValues}
           enableReinitialize
@@ -542,6 +546,13 @@ const Addsale = () => {
                 delete newQuantities[index];
                 return newQuantities;
               });
+            };
+
+            const getAvailableItems = (index) => {
+              const selectedIds = values.item.map((item, i) =>
+                i === index ? null : item.item
+              );
+              return items.filter((item) => !selectedIds.includes(item.id));
             };
 
             return (
@@ -609,15 +620,14 @@ const Addsale = () => {
                                 }
                                 label="Item"
                               >
-                                {items.length > 0 &&
-                                  items?.map((option, i) => (
-                                    <MenuItem key={i} value={option.id}>
-                                      {option.name}
-                                    </MenuItem>
-                                  ))}
+                                {getAvailableItems(index).map((option, i) => (
+                                  <MenuItem key={i} value={option.id}>
+                                    {option.name}
+                                  </MenuItem>
+                                ))}
                               </Field>
                               <FormHelperText sx={{ color: "red" }}>
-                                <Typography fontWeight="bold">
+                                <Typography>
                                   {selectedItemQuantities[index] !== undefined
                                     ? `Available Quantity: ${selectedItemQuantities[index]}`
                                     : "Available Quantity: N/A"}
