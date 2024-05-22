@@ -2,7 +2,7 @@
 // import { useNavigate, useParams } from "react-router-dom";
 // import { Formik, Form, Field, ErrorMessage } from "formik";
 // import * as Yup from "yup"; // Import Yup
-// import { Button, TextField, Grid, Box } from "@mui/material";
+// import { Button, TextField, Grid, Box, InputAdornment } from "@mui/material";
 // import MainCard from "ui-component/cards/MainCard";
 // import { useDispatch, useSelector } from "react-redux";
 // import {
@@ -25,16 +25,16 @@
 //     emp_id: Yup.string().required("Employee ID is Required"),
 //     designation: Yup.string().required("Designation is Required"),
 //     phone: Yup.string()
-//       // .matches(/^[0-9]+$/, "Must be only digits")
+//       .matches(/^[0-9]+$/, "Must be only digits")
 //       .min(9, "Must be exactly 9 digits")
 //       .max(9, "Must be exactly 9 digits")
 //       .required("Phone Number is Required"),
 //     email: Yup.string()
 //       .email("Invalid email format")
 //       .required("Email is Required"),
-//     experience: Yup.number()
-//       .typeError("You must specify a number")
-//       .min(0, "Minimum value 0")
+//     experience: Yup.string()
+//       // .typeError("You must specify a number")
+//       // .min(0, "Minimum value 0")
 //       .required("Experience is Required"),
 //     salary: Yup.number()
 //       .typeError("You must specify a number")
@@ -89,7 +89,7 @@
 //           name: id ? employeebyid.name : "",
 //           emp_id: id ? employeebyid.emp_id : "",
 //           designation: id ? employeebyid.designation : "",
-//           phone: id ? employeebyid.phone : "+961",
+//           phone: id ? employeebyid.phone : "",
 //           email: id ? employeebyid.email : "",
 //           experience: id ? employeebyid.experience : "",
 //           salary: id ? employeebyid.salary : "",
@@ -144,6 +144,12 @@
 //                   variant="outlined"
 //                   error={touched.phone && Boolean(errors.phone)}
 //                   helperText={<ErrorMessage name="phone" />}
+//                   InputProps={{
+//                     startAdornment: (
+//                       <InputAdornment position="start">+961</InputAdornment>
+//                     ),
+//                   }}
+//                   // disabled // Disable editing
 //                 />
 //               </Grid>
 //               <Grid item xs={12} sm={6}>
@@ -209,7 +215,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup"; // Import Yup
+import * as Yup from "yup";
 import { Button, TextField, Grid, Box, InputAdornment } from "@mui/material";
 import MainCard from "ui-component/cards/MainCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -219,15 +225,15 @@ import {
   updateEmployee,
 } from "store/Employee/employeeAction";
 import Loader from "ui-component/Loader";
+import Notification from "helper/Notification";
 
 function AddEmployee() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const employeebyid = useSelector((state) => state.employee.employeebyid);
   const { id } = useParams();
 
-  // Validation schema
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is Required"),
     emp_id: Yup.string().required("Employee ID is Required"),
@@ -240,10 +246,7 @@ function AddEmployee() {
     email: Yup.string()
       .email("Invalid email format")
       .required("Email is Required"),
-    experience: Yup.string()
-      // .typeError("You must specify a number")
-      // .min(0, "Minimum value 0")
-      .required("Experience is Required"),
+    experience: Yup.string().required("Experience is Required"),
     salary: Yup.number()
       .typeError("You must specify a number")
       .required("Salary is Required"),
@@ -252,33 +255,36 @@ function AddEmployee() {
   useEffect(() => {
     if (id) {
       dispatch(EmployeeById(id)).then(() => {
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false);
       });
     } else {
-      setLoading(false); // Set loading to false if no id is present
+      setLoading(false);
     }
-  }, [id]); // Make sure to include id in the dependency array
+  }, [id]);
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    if (id) {
-      dispatch(updateEmployee(values))
-        .then((res) => {
+  const handleSubmit = (values, { setSubmitting, setErrors }) => {
+    const action = id ? updateEmployee : createEmployee;
+    dispatch(action(values))
+      .then((res) => {
+        console.log(res);
+        const {
+          data: { message },
+          status,
+        } = res;
+        if (status === 200) {
+          Notification("success", message);
           navigate("/employee");
           setSubmitting(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      dispatch(createEmployee(values))
-        .then((res) => {
-          navigate("/employee");
+        } else {
+          Notification("error", message);
           setSubmitting(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setSubmitting(false);
+        // setErrors(err.response.data.errors || { form: "An error occurred" });
+      });
   };
 
   if (loading) {
@@ -286,7 +292,7 @@ function AddEmployee() {
       <div>
         <Loader />
       </div>
-    ); // Display a loading indicator while data is being fetched
+    );
   }
 
   return (
@@ -308,7 +314,6 @@ function AddEmployee() {
         {({ isSubmitting, errors, touched }) => (
           <Form>
             <Grid container spacing={2}>
-              {/* Input fields with error messages */}
               <Grid item xs={12} sm={4}>
                 <Field
                   name="name"
@@ -342,7 +347,6 @@ function AddEmployee() {
                   helperText={<ErrorMessage name="designation" />}
                 />
               </Grid>
-
               <Grid item xs={12} sm={6}>
                 <Field
                   name="phone"
@@ -357,7 +361,6 @@ function AddEmployee() {
                       <InputAdornment position="start">+961</InputAdornment>
                     ),
                   }}
-                  // disabled // Disable editing
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -371,7 +374,6 @@ function AddEmployee() {
                   helperText={<ErrorMessage name="email" />}
                 />
               </Grid>
-
               <Grid item xs={12} sm={6}>
                 <Field
                   name="experience"
@@ -394,13 +396,12 @@ function AddEmployee() {
                   helperText={<ErrorMessage name="salary" />}
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <Box mt={2}>
                   <Button
                     type="submit"
                     sx={{
-                      color: "white", // Set font color to white
+                      color: "white",
                     }}
                     variant="contained"
                     color="primary"

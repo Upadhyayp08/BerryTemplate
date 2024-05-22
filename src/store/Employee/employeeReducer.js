@@ -12,7 +12,7 @@ const employeeReducer = (state = initialState, action) => {
     case actionTypes.CREATE_EMPLOYEE:
       return {
         ...state,
-        employees: [...state.employees, action.payload],
+        employees: action.payload,
       };
     case actionTypes.GET_EMPLOYEE:
       // You can implement logic to read a specific customer if needed

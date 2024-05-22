@@ -181,6 +181,7 @@ const FirebaseRegister = ({ ...others }) => {
                   type="submit"
                   variant="contained"
                   color="secondary"
+                  sx={{ color: "white" }}
                 >
                   Submit
                 </Button>

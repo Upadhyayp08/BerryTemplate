@@ -3,19 +3,41 @@ import * as actionTypes from "./employeeActionType";
 import API from "../../helper/API";
 import Notification from "helper/Notification";
 
+// export const createEmployee = (customerData) => async (dispatch) => {
+//   try {
+//     const response = await API.post(`/employees/store`, customerData);
+//     const {
+//       data: { message },
+//     } = response;
+//     Notification("success", message);
+//     dispatch({
+//       type: actionTypes.CREATE_EMPLOYEE,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     // Handle error
+//   }
+// };
 export const createEmployee = (customerData) => async (dispatch) => {
   try {
     const response = await API.post(`/employees/store`, customerData);
     const {
+      status,
       data: { message },
     } = response;
-    Notification("success", message);
+    // if (status === 200) {
+    // Notification("success", message);
     dispatch({
       type: actionTypes.CREATE_EMPLOYEE,
       payload: response.data,
     });
+    // } else {
+    //   Notification("error", message);
+    // }
+    return response;
   } catch (error) {
-    // Handle error
+    // Notification("error", error.response);
+    throw error; // Rethrow error to be caught in handleSubmit
   }
 };
 
@@ -33,6 +55,21 @@ export const getEmployee = (data) => async (dispatch) => {
   }
 };
 
+// export const updateEmployee = (updatedData) => async (dispatch) => {
+//   try {
+//     const response = await API.post(`/employees/update`, updatedData);
+//     const {
+//       data: { message },
+//     } = response;
+//     Notification("success", message);
+//     dispatch({
+//       type: actionTypes.UPDATE_EMPLOYEE,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     // Handle error
+//   }
+// };
 export const updateEmployee = (updatedData) => async (dispatch) => {
   try {
     const response = await API.post(`/employees/update`, updatedData);
@@ -45,7 +82,8 @@ export const updateEmployee = (updatedData) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    // Handle error
+    Notification("error", error.response.data.message);
+    throw error; // Rethrow error to be caught in handleSubmit
   }
 };
 
